@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 
 
 
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
+// tells autosuggest how to read suggestions for user from redux store
 const getSuggestionValue = suggestion => suggestion.name;
 
 // Use your imagination to render suggestions.
@@ -19,15 +17,11 @@ const renderSuggestion = suggestion => (
 class FoodSearchBar extends Component {
     constructor() {
         super();
-
         // Autosuggest is a controlled component.
         // This means that you need to provide an input value
         // and an onChange handler that updates this value (see below).
-        // Suggestions also need to be provided to the Autosuggest,
-        // and they are initially empty because the Autosuggest is closed.
         this.state = {
             value: '',
-            suggestions: []
         };
     }
 
@@ -41,10 +35,6 @@ class FoodSearchBar extends Component {
         let foodResults = [];
         if (inputLength > 1) {
             this.props.dispatch({ type: 'FETCH_FOODS', payload: inputValue })
-
-            foodResults = this.props.suggestions.map(food => {
-                return { name: food }
-            });
             return foodResults;
         } else {
             return foodResults
@@ -68,9 +58,7 @@ class FoodSearchBar extends Component {
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {
-        this.setState({
-            suggestions: []
-        });
+        this.props.dispatch({type: 'CLEAR_SUGGESTIONS'});
     };
 
     handleSubmit = (event) => {
@@ -80,11 +68,14 @@ class FoodSearchBar extends Component {
     }
 
     render() {
-        const { value, suggestions } = this.state;
-
+        const value = this.state.value;
+         // Suggestions also need to be provided to the Autosuggest,
+        // and they are initially empty because the Autosuggest is closed.
+        const suggestions = this.props.suggestions.map(food => {
+        return { name: food } });
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
-            placeholder: 'Type 3 letters to view list of matching foods',
+            placeholder: `eg 'ba'`,
             value,
             onChange: this.onChange
         };
@@ -94,6 +85,8 @@ class FoodSearchBar extends Component {
         return (
 
             <form onSubmit={this.handleSubmit}>
+            <p>Type two letters to use the autocompleting search bar to quickly add foods in your pantry.</p>
+            <label htmlFor='foods-search-bar'>Search Bar for Foods</label>
                 <Autosuggest
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -101,6 +94,7 @@ class FoodSearchBar extends Component {
                     getSuggestionValue={getSuggestionValue}
                     renderSuggestion={renderSuggestion}
                     inputProps={inputProps}
+                    id='foods-search-bar'
                 />
                 <button type="submit">Add To Pantry</button>
             </form>
