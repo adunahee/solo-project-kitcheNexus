@@ -12,7 +12,18 @@ CREATE TABLE "pantry_tags" (
   OIDS=FALSE
 );
 
+-- used as default tag for pantry_tags_food
+INSERT INTO pantry_tags ("name", "id")
+	VALUES ('Unlabeled', 99999);
 
+INSERT INTO pantry_tags ("name")
+	VALUES ('Perishable'),
+			('Dry Goods'),
+			('Dairy'),
+			('Produce'),
+			('Freezer'),
+			('Refrigerator'),
+			('Treats');
 
 CREATE TABLE "pantry_tags_food" (
 	"id" serial NOT NULL,
@@ -23,8 +34,6 @@ CREATE TABLE "pantry_tags_food" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "food" (
 	"id" serial NOT NULL,
 	"name" varchar(100) NOT NULL,
@@ -32,8 +41,6 @@ CREATE TABLE "food" (
 ) WITH (
   OIDS=FALSE
 );
-
-
 
 CREATE TABLE "grocery_lists" (
 	"list_name" varchar(100) NOT NULL,
@@ -44,8 +51,6 @@ CREATE TABLE "grocery_lists" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "foods_grocery_lists" (
 	"id" serial NOT NULL,
 	"food_id" integer NOT NULL,
@@ -55,25 +60,18 @@ CREATE TABLE "foods_grocery_lists" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "persons_food" (
 	"id" serial NOT NULL,
 	"persons_id" integer NOT NULL,
 	"food_id" integer NOT NULL,
-	"pantry_tags_id" integer NOT NULL,
+	"pantry_tags_id" integer NOT NULL default 99999,
 	CONSTRAINT persons_food_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
 
-
-
-
-
 ALTER TABLE "pantry_tags_food" ADD CONSTRAINT "pantry_tags_food_fk0" FOREIGN KEY ("person_id") REFERENCES "person"("id");
 ALTER TABLE "pantry_tags_food" ADD CONSTRAINT "pantry_tags_food_fk1" FOREIGN KEY ("pantry_tags_id") REFERENCES "pantry_tags"("id");
-
 
 ALTER TABLE "grocery_lists" ADD CONSTRAINT "grocery_lists_fk0" FOREIGN KEY ("person_id") REFERENCES "person"("id");
 

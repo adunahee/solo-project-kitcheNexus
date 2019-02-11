@@ -11,17 +11,31 @@ function* fetchFoods(action) {
     }
 }
 
-// function* addToPantry(action) {
-//     try{
+function* addToPantry(action) {
+    try{
+        yield axios.post(`/api/food/${action.payload}`);
+        yield put({type: 'FETCH_PANTRY'});
+    } catch(err) {
+        console.log('Error with addToPantry saga', err);
+        yield alert('Unable to add food to pantry at this time.');
+    }
+}
 
-//     } catch(err) {
-//         console.log('Error with addToPantry saga', error);
-        
-//     }
-// }
+function* fetchPantry() {
+    try{
+        const response = yield axios.get('/api/food');
+        yield put({type: 'SET_PANTRY', payload: response.data})
+    }
+    catch(err){
+        console.log('error with fetchPantry saga', err);
+        yield alert('Unable to fetch pantry at this time.');
+    }
+}
 
 function* foodSaga() {
     yield takeLatest('FETCH_FOODS', fetchFoods);
+    yield takeLatest('ADD_FOOD_TO_PANTRY', addToPantry);
+    yield takeLatest('FETCH_PANTRY', fetchPantry);
 }
 
 export default foodSaga;

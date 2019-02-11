@@ -11,6 +11,16 @@ const searchResults = (state = [], action) => {
     }
 };
 
+const pantry = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PANTRY':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     searchResults,
+    pantry,
 });
