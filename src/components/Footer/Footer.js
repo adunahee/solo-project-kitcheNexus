@@ -8,7 +8,14 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Prime Digital Academy
+    <h2>Created By Anthony Dunahee </h2>
+    
+    <a href="https://www.edamam.com/"
+      target="_blank"
+      rel="noopener noreferrer">
+      <img src="https://www.edamam.com/assets/img/small-logo.png"></img>
+      Powered By Edamam 
+       </a>
   </footer>
 );
 
