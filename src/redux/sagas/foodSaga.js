@@ -23,7 +23,7 @@ function* addToPantry(action) {
 
 function* fetchPantry() {
     try{
-        const response = yield axios.get('/api/food');
+        const response = yield axios.get('/api/pantry');
         yield put({type: 'SET_PANTRY', payload: response.data})
     }
     catch(err){

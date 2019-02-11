@@ -39,9 +39,9 @@ router.post('/:food', (req, res) => {
                 let foodToAddID = 0;
                 //tries to grab food id from db
                 const response = await client.query(queryText, value);
-                console.log(response.rows);
-                
-                
+                // console.log(response.rows);
+
+
                 //gets foodId if one was not found and stores in insertRes
                 if (response.rows.length === 0) {
                     queryText = `INSERT INTO "food" (name) 
