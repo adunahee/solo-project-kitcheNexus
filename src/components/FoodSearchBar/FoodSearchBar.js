@@ -1,19 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
+import { connect } from 'react-redux';
 
-// Imagine you have a list of languages that you'd like to autosuggest.
-const foodResults = [ {name: 'bananan'}, {name: 'apple'}, {name: 'potato'}];
 
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = value => {
-    //removes white space and capitals
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-
-    return inputLength === 1 ? [] : foodResults.filter(food =>
-        food.name.toLowerCase().slice(0, inputLength) === inputValue
-    );
-};
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -42,6 +31,27 @@ class FoodSearchBar extends Component {
         };
     }
 
+    // Teach Autosuggest how to calculate suggestions for any given input value.
+    getSuggestions = value => {
+        //removes white space and capitals
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+
+        // Imagine you have a list of languages that you'd like to autosuggest.
+        let foodResults = [];
+        if (inputLength > 1) {
+            this.props.dispatch({ type: 'FETCH_FOODS', payload: inputValue })
+
+            foodResults = this.props.suggestions.map(food => {
+                return { name: food }
+            });
+            return foodResults;
+        } else {
+            return foodResults
+        }
+
+    };
+
     onChange = (event, { newValue }) => {
         this.setState({
             value: newValue
@@ -52,7 +62,7 @@ class FoodSearchBar extends Component {
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({ value }) => {
         this.setState({
-            suggestions: getSuggestions(value)
+            suggestions: this.getSuggestions(value)
         });
     };
 
@@ -63,28 +73,44 @@ class FoodSearchBar extends Component {
         });
     };
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state.value);
+        this.props.dispatch({type: 'ADD_FOOD_TO_PANTRY', payload: this.state.value})
+    }
+
     render() {
         const { value, suggestions } = this.state;
 
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
-            placeholder: 'Type 2 letters to view list of matching foods',
+            placeholder: 'Type 3 letters to view list of matching foods',
             value,
             onChange: this.onChange
         };
 
+        console.log(this.state);
         // Finally, render it!
         return (
-            <Autosuggest
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-            />
+
+            <form onSubmit={this.handleSubmit}>
+                <Autosuggest
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
+                />
+                <button type="submit">Add To Pantry</button>
+            </form>
+
         );
     }
 }
 
-export default FoodSearchBar;
+const mapRStoProps = (rs) => {
+    return ({ suggestions: rs.food.searchResults })
+}
+
+export default connect(mapRStoProps)(FoodSearchBar);
