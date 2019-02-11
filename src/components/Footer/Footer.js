@@ -9,10 +9,12 @@ import './Footer.css'
 const Footer = () => (
   <footer>
     <h2>Created By Anthony Dunahee </h2>
+    
     <a href="https://www.edamam.com/"
       target="_blank"
       rel="noopener noreferrer">
-      Powered By Edamam API
+      <img src="https://www.edamam.com/assets/img/small-logo.png"></img>
+      Powered By Edamam 
        </a>
   </footer>
 );
