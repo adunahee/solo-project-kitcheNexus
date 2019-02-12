@@ -62,7 +62,25 @@ const pendingGroceryItems = (state = [], action) => {
     }
 }
 
+const recipeHits = ( state = [], action) => {
+    switch(action.type) {
+        case 'SET_RECIPE_HITS':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
+const recipeSearchValue = (state = '', action ) => {
+    switch(action.type) {
+        case 'RECIPE_SEARCH_VALUE':
+            return action.payload;
+        case 'CLEAR_SEARCH_VALUE':
+            return '';
+        default:
+            return state;
+    }
+}
 
 export default combineReducers({
     searchResults,
@@ -71,4 +89,6 @@ export default combineReducers({
     pendingPantryItems,
     grocery,
     pendingGroceryItems,
+    recipeHits,
+    recipeSearchValue,
 });

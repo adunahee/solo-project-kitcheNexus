@@ -24,7 +24,12 @@ class FoodSearchBar extends Component {
     }
 
     onChange = (event, { newValue }) => {
-        this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
+        if(this.props.pantryView === 'GROCERY' || this.props.pantryView === 'PANTRY'){
+            this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
+        } else {
+            this.props.dispatch({ type: 'RECIPE_SEARCH_VALUE', payload: newValue });
+        }
+        
     };
 
     // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -51,7 +56,7 @@ class FoodSearchBar extends Component {
     //dispatches food item to pendingPantry reducer for storage until all items added
     handleAdd = () => {
         this.props.dispatch({ type: `ADD_TO_PENDING_${this.props.pageView}`, payload: this.props.foodSearchValue })
-        this.props.dispatch({type: 'CLEAR_VALUE'});
+        this.props.dispatch({ type: 'CLEAR_VALUE' });
     }
 
     handleClear = () => {
@@ -61,8 +66,11 @@ class FoodSearchBar extends Component {
     render() {
         // console.log(this.props);
         // console.log(this.state);
-        
-        const value = this.props.foodSearchValue;
+        let value;
+        //logic to determine what store value is connected to based on pantryView
+        this.props.pantryView === 'RECIPE' ? 
+        value = this.props.recipeSearchValue : 
+        value = this.props.foodSearchValue;
         // Suggestions also need to be provided to the Autosuggest,
         // and they are initially empty because the Autosuggest is closed.
         const suggestions = this.props.suggestions.map(food => {
@@ -75,7 +83,7 @@ class FoodSearchBar extends Component {
             onChange: this.onChange
         };
 
-        
+
         // Finally, render it!
         return (
 
@@ -91,8 +99,12 @@ class FoodSearchBar extends Component {
                     inputProps={inputProps}
                     id='foods-search-bar'
                 />
-                <button type='button' onClick={this.handleAdd}>Add</button>
-                <button type='button' onClick={this.handleClear}>Clear</button>
+                {this.props.pantryView === "RECIPE" ? null :
+                    <div>
+                        <button type='button' onClick={this.handleAdd}>Add</button>
+                        <button type='button' onClick={this.handleClear}>Clear</button>
+                    </div>
+                }
             </div>
 
         );
@@ -103,6 +115,7 @@ const mapRStoProps = (rs) => {
     return ({
         suggestions: rs.food.searchResults,
         foodSearchValue: rs.food.foodSearchValue,
+        recipeSearchValue: rs.food.recipeSearchValue,
     })
 }
 
