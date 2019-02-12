@@ -27,7 +27,7 @@ class Pantry extends Component {
         <form onSubmit={this.handleSubmit}>
           <p>Find Foods</p>
           <FoodSearchBar pageView='PANTRY' />
-          {this.props.pendingPantryItems.length > 1 &&
+          {this.props.pendingPantryItems.length > 0 &&
           <div>
             <h2>Items to Add</h2>
             <ul>
