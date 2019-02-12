@@ -12,9 +12,9 @@ function* fetchGrocery() {
     }
 }
 
-function* addToList() {
+function* addToList(action) {
     try {
-        yield axios.put('/api/grocery');
+        yield axios.post(`/api/grocery/${action.payload}`);
         yield put({ type: 'FETCH_GROCERY' })
     } catch (err) {
         console.log('error in addToList saga:', err);
