@@ -5,8 +5,24 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-
+router.get('/groceries', (req, res) => {
+    if(req.isAuthenticated()){
+        const queryText = `SELECT * FROM grocery_lists 
+	    JOIN foods_grocery_lists ON foods_grocery_lists.grocery_list_id = grocery_lists.id
+        JOIN food ON food.id = foods_grocery_lists.food_id
+	    WHERE grocery_lists.person_id = $1
+	    GROUP BY grocery_lists.list_name, grocery_lists.person_id, grocery_lists.id, foods_grocery_lists.id, food.id;`;
+        pool.query(queryText, [req.user.id])
+            .then(response => {
+                // console.log(response.rows);
+                res.send(response.rows);
+            }).catch(error => {
+                console.log('error getting groceries:', error);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 //add items to user grocery list
