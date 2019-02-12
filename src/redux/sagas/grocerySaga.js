@@ -14,7 +14,7 @@ function* fetchGrocery() {
 
 function* addToList(action) {
     try {
-        yield axios.post(`/api/grocery/${action.payload}`);
+        yield axios.post(`/api/grocery`, action.payload);
         yield put({ type: 'FETCH_GROCERY' })
     } catch (err) {
         console.log('error in addToList saga:', err);
@@ -24,7 +24,7 @@ function* addToList(action) {
 
 function* grocerySaga() {
     yield takeEvery('FETCH_GROCERY', fetchGrocery);
-    yield takeLatest('ADD_TO_LIST', addToList);
+    yield takeLatest('ADD_FOOD_TO_GROCERY', addToList);
 }
 
 export default grocerySaga;

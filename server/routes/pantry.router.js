@@ -30,11 +30,8 @@ router.get('/', (req, res) => {
 //posts authenticated users food item to their pantry, checks for repeat entries in food table
 router.post('/', (req, res) => {
     if (req.isAuthenticated()) {
-        console.log(req.body);
-
+        // console.log(req.body);
         const foodToAddArr = req.body;
-
-
         (async () => {
             const client = await pool.connect();
 
@@ -62,7 +59,7 @@ router.post('/', (req, res) => {
                     queryText = 'INSERT INTO "persons_food" ("persons_id", "food_id") VALUES ($1, $2);';
                     const result = await client.query(queryText, [req.user.id, foodToAddID]);
                 }
-                
+
                 await client.query('COMMIT');
                 res.sendStatus(201);
             } catch (e) {

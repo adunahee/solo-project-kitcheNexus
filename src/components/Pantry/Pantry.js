@@ -37,7 +37,7 @@ class Pantry extends Component {
             </ul>
           </div>}
               <br />
-          <button type='submit'>Submit</button>
+          <button type='submit'>Finalize Pantry</button>
         </form>
         <p>Filterable lists</p>
         <ul>

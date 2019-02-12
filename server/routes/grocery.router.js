@@ -26,13 +26,14 @@ router.get('/groceries', (req, res) => {
 });
 
 //add items to user grocery list
-router.post('/:food_id', (req, res) => {
+router.post('/', (req, res) => {
     if (req.isAuthenticated()) {
+        const foodToAddArr = req.body;
         (async () => {
             const client = await pool.connect();
             try {
                 await client.query('BEGIN');
-                //first checks to see if user has default list to 
+                //determines listID
                 let queryText = `SELECT id FROM grocery_lists 
                                     WHERE person_id = ${req.user.id}
                                     AND "list_name" = 'Shopping List';`;
@@ -53,9 +54,30 @@ router.post('/:food_id', (req, res) => {
                     listID = response.rows[0].id;
                 }
 
+                for (foodToAdd of foodToAddArr) {
+                //first checks to see if user has default list to 
+                    let queryText = 'SELECT id FROM "food" WHERE food.name ILIKE $1;';
+                    const value = [foodToAdd];
+                    let foodToAddID = 0;
+                    //tries to grab food id from db
+                    const response = await client.query(queryText, value);
+                    // console.log(response.rows);
+                    //gets foodId if one was not found and stores in insertRes
+                    if (response.rows.length === 0) {
+                        queryText = `INSERT INTO "food" (name) 
+                                        VALUES ($1)
+                                        RETURNING "id";`;
+                        const value = [foodToAdd];
+                        const insertRes = await client.query(queryText, value);
+                        foodToAddID = insertRes.rows[0].id;
+                    } else {
+                        foodToAddID = response.rows[0].id
+                    }
+
                 //after determining food id, inserts into persons food
                 queryText = `INSERT INTO "foods_grocery_lists" ("food_id", "grocery_list_id") VALUES ($1, ${listID});`;
-                const result = await client.query(queryText, [req.params.food_id]);
+                const result = await client.query(queryText, [foodToAddID]);
+            }
                 await client.query('COMMIT');
                 res.sendStatus(201);
             } catch (e) {

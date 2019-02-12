@@ -51,6 +51,17 @@ const grocery = (state = [], action) => {
     }
 }
 
+const pendingGroceryItems = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_TO_PENDING_GROCERY':
+            return [...state, action.payload];
+        case 'CLEAR_PENDING_GROCERY':
+            return [];
+        default:
+            return state;
+    }
+}
+
 
 
 export default combineReducers({
@@ -59,4 +70,5 @@ export default combineReducers({
     pantry,
     pendingPantryItems,
     grocery,
+    pendingGroceryItems,
 });
