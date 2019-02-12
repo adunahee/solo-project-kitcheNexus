@@ -6,7 +6,7 @@ const router = express.Router();
  * GET route template
  */
 router.get('/groceries', (req, res) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         const queryText = `SELECT * FROM grocery_lists 
 	    JOIN foods_grocery_lists ON foods_grocery_lists.grocery_list_id = grocery_lists.id
         JOIN food ON food.id = foods_grocery_lists.food_id

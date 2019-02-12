@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import GroceryForm from '../Grocery/GroceryForm';
 import GroceryLists from '../Grocery/GroceryLists';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class Grocery extends Component {
 
   componentDidMount() {
-    this.props.dispatch({type: "FETCH_GROCERY"})
+    this.props.dispatch({ type: "FETCH_GROCERY" })
   }
 
   render() {
