@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
+import { connect } from 'react-redux';
+import PantryListItem from '../Pantry/PantryListItem';
 
-export default class Pantry extends Component {
+class Pantry extends Component {
 
 buildPantryListItems = () => {
+  return this.props.pantry.map( (foodObj, i) => {
+    return <PantryListItem key={i} foodObj={foodObj}/>
+  })
+}
 
+componentDidMount() {
+  this.props.dispatch({type: "FETCH_PANTRY"})
 }
 
   render() {
@@ -21,3 +29,9 @@ buildPantryListItems = () => {
     )
   }
 }
+
+const mapRStoProps = (rs) => {
+  return {pantry: rs.food.pantry}
+}
+
+export default connect(mapRStoProps)(Pantry);

@@ -1,0 +1,30 @@
+import { put, takeLatest } from 'redux-saga/effects';
+import axios from 'axios';
+
+function* fetchGrocery() {
+    try {
+        const response = yield axios.get('/api/grocery');
+        yield put({ type: 'SET_GROCERY', payload: response.data })
+    }
+    catch (err) {
+        console.log('error in fetchGrocery saga:', err);
+        yield alert('Unable to fetch grocery list at this time.');
+    }
+}
+
+function* addToList() {
+    try {
+        yield axios.put('/api/grocery');
+        yield put({ type: 'FETCH_GROCERY' })
+    } catch (err) {
+        console.log('error in addToList saga:', err);
+        yield alert('Unable to add to grocery list at this time.');
+    }
+}
+
+function* grocerySaga() {
+    yield takeLatest('FETCH_GROCERY', fetchGrocery);
+    yield takeLatest('ADD_TO_LIST', addToList);
+}
+
+export default grocerySaga;
