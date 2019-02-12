@@ -1,9 +1,9 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchGrocery() {
     try {
-        const response = yield axios.get('/api/grocery');
+        const response = yield axios.get('/api/grocery/groceries');
         yield put({ type: 'SET_GROCERY', payload: response.data })
     }
     catch (err) {
@@ -23,7 +23,7 @@ function* addToList(action) {
 }
 
 function* grocerySaga() {
-    yield takeLatest('FETCH_GROCERY', fetchGrocery);
+    yield takeEvery('FETCH_GROCERY', fetchGrocery);
     yield takeLatest('ADD_TO_LIST', addToList);
 }
 

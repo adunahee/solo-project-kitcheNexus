@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
@@ -43,22 +43,11 @@ function* fetchPantry() {
     }
 }
 
-function* addToList() {
-    try{
-        yield axios.put('/api/grocery');
-        yield axios.put({type: 'FETCH_GROCERY'})
-    } catch(err){
-        console.log('error in addToList saga:', err);
-        yield alert('Unable to add to grocery list at this time.');
-    }
-}
-
 function* foodSaga() {
     yield takeLatest('FETCH_FOODS', fetchFoods);
     yield takeLatest('ADD_FOOD_TO_PANTRY', addToPantry);
-    yield takeLatest('FETCH_PANTRY', fetchPantry);
+    yield takeEvery('FETCH_PANTRY', fetchPantry);
     yield takeLatest('REMOVE_FROM_PANTRY', removeFromPantry);
-    yield takeLatest('ADD_TO_LIST', addToList);
 }
 
 export default foodSaga;

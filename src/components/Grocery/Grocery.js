@@ -1,12 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import GroceryForm from '../Grocery/GroceryForm';
+import GroceryLists from '../Grocery/GroceryLists';
+import { connect } from 'react-redux';
 
-export default class Grocery extends Component {
+class Grocery extends Component {
+
+  componentDidMount() {
+    this.props.dispatch({ type: "FETCH_GROCERY" })
+  }
+
   render() {
     return (
       <div>
         <h1>Grocery</h1>
-        <p>lists, search bars, and forms oh my!</p>
+        <GroceryForm />
+        <GroceryLists />
       </div>
     )
   }
 }
+
+export default connect()(Grocery);
