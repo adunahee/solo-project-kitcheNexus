@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchGrocery() {
@@ -23,7 +23,7 @@ function* addToList(action) {
 }
 
 function* grocerySaga() {
-    yield takeLatest('FETCH_GROCERY', fetchGrocery);
+    yield takeEvery('FETCH_GROCERY', fetchGrocery);
     yield takeLatest('ADD_TO_LIST', addToList);
 }
 

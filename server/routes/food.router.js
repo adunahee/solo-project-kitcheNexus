@@ -10,7 +10,7 @@ router.get('/:str', (req, res) => {
         const queryURL = `${AUTOCOMPLETE_FOOD_URL}?q=${req.params.str}&limit=10&app_id=${process.env.FOOD_APP_ID}&app_key=${process.env.FOOD_API_KEY}`;
         axios.get(queryURL)
             .then(response => {
-                console.log(`food api response:`, response.data);
+                // console.log(`food api response:`, response.data);
                 res.send(response.data);
             }).catch(error => {
                 console.log(`error from food api:`, error);

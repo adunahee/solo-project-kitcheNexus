@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
                             WHERE person.id = $1;`;
         pool.query(queryText, [req.user.id])
             .then(response => {
-                console.log(response.rows);
+                // console.log(response.rows);
                 res.send(response.rows);
             }).catch(error => {
                 res.sendStatus(500);
