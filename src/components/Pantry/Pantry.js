@@ -26,7 +26,17 @@ class Pantry extends Component {
         <h1>Pantry</h1>
         <form onSubmit={this.handleSubmit}>
           <p>Find Foods</p>
-          <FoodSearchBar pageView='PANTRY'/>
+          <FoodSearchBar pageView='PANTRY' />
+          {this.props.pendingPantryItems.length > 1 &&
+          <div>
+            <h2>Items to Add</h2>
+            <ul>
+              {this.props.pendingPantryItems.map((item, i) => {
+                return <li key={i}> {item} </li>
+              })}
+            </ul>
+          </div>}
+              <br />
           <button type='submit'>Submit</button>
         </form>
         <p>Filterable lists</p>
@@ -39,8 +49,10 @@ class Pantry extends Component {
 }
 
 const mapRStoProps = (rs) => {
-  return { pantry: rs.food.pantry,
-            pendingPantryItems: rs.food.pendingPantryItems }
+  return {
+    pantry: rs.food.pantry,
+    pendingPantryItems: rs.food.pendingPantryItems
+  }
 }
 
 export default connect(mapRStoProps)(Pantry);

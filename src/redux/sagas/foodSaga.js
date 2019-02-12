@@ -15,6 +15,7 @@ function* addToPantry(action) {
     try{
         yield axios.post(`/api/food/${action.payload}`);
         yield put({type: 'FETCH_PANTRY'});
+        yield put({type: "CLEAR_PENDING_PANTRY"})
     } catch(err) {
         console.log('Error with addToPantry saga', err);
         yield alert('Unable to add food to pantry at this time.');

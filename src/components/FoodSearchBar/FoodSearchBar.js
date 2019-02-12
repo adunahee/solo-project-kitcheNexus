@@ -55,6 +55,10 @@ class FoodSearchBar extends Component {
         this.props.dispatch({type: `ADD_TO_PENDING_${this.props.pageView}`, payload: this.state.value})
     }
 
+    handleClear = () => {
+        this.props.dispatch({type: `CLEAR_PENDING_${this.props.pageView}`})
+    }
+
     render() {
         console.log(this.state);
 
