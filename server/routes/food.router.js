@@ -23,6 +23,21 @@ router.get('/:str', (req, res) => {
     }
 });
 
+router.delete('/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        const queryText = `DELETE FROM persons_food WHERE id = $1 AND persons_id = $2;`;
+        pool.query(queryText, [req.params.id, req.user.id])
+            .then(response => {
+                res.sendStatus(200);
+            }).catch(error => {
+                console.log('error deleting from pantry:', error);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+})
+
 //posts authenticated users food item to their pantry, checks for repeat entries in food table
 router.post('/:food', (req, res) => {
     if (req.isAuthenticated()) {
