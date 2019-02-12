@@ -11,6 +11,17 @@ const searchResults = (state = [], action) => {
     }
 };
 
+const foodSearchValue = (state = '', action) => {
+    switch(action.type) {
+        case 'SET_VALUE':
+            return action.payload;
+        case 'CLEAR_VALUE':
+            return '';
+        default:
+            return state;
+    }
+}
+
 const pantry = (state = [], action) => {
     switch (action.type) {
         case 'SET_PANTRY':
@@ -44,6 +55,7 @@ const grocery = (state = [], action) => {
 
 export default combineReducers({
     searchResults,
+    foodSearchValue,
     pantry,
     pendingPantryItems,
     grocery,

@@ -24,9 +24,7 @@ class FoodSearchBar extends Component {
     }
 
     onChange = (event, { newValue }) => {
-        this.setState({
-            value: newValue
-        });
+        this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
     };
 
     // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -52,17 +50,19 @@ class FoodSearchBar extends Component {
 
     //dispatches food item to pendingPantry reducer for storage until all items added
     handleAdd = () => {
-        this.props.dispatch({type: `ADD_TO_PENDING_${this.props.pageView}`, payload: this.state.value})
+        this.props.dispatch({ type: `ADD_TO_PENDING_${this.props.pageView}`, payload: this.props.foodSearchValue })
+        this.props.dispatch({type: 'CLEAR_VALUE'});
     }
 
     handleClear = () => {
-        this.props.dispatch({type: `CLEAR_PENDING_${this.props.pageView}`})
+        this.props.dispatch({ type: `CLEAR_PENDING_${this.props.pageView}` })
     }
 
     render() {
-        console.log(this.state);
-
-        const value = this.state.value;
+        // console.log(this.props);
+        // console.log(this.state);
+        
+        const value = this.props.foodSearchValue;
         // Suggestions also need to be provided to the Autosuggest,
         // and they are initially empty because the Autosuggest is closed.
         const suggestions = this.props.suggestions.map(food => {
@@ -75,7 +75,7 @@ class FoodSearchBar extends Component {
             onChange: this.onChange
         };
 
-        console.log(this.state);
+        
         // Finally, render it!
         return (
 
@@ -100,7 +100,10 @@ class FoodSearchBar extends Component {
 }
 
 const mapRStoProps = (rs) => {
-    return ({ suggestions: rs.food.searchResults })
+    return ({
+        suggestions: rs.food.searchResults,
+        foodSearchValue: rs.food.foodSearchValue,
+    })
 }
 
 export default connect(mapRStoProps)(FoodSearchBar);
