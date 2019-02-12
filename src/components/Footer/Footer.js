@@ -13,7 +13,7 @@ const Footer = () => (
     <a href="https://www.edamam.com/"
       target="_blank"
       rel="noopener noreferrer">
-      <img src="https://www.edamam.com/assets/img/small-logo.png"></img>
+      <img src="https://www.edamam.com/assets/img/small-logo.png" alt='Edamam Logo'></img>
       Powered By Edamam 
        </a>
   </footer>
