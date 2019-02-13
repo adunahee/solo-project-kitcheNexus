@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
                         const insertRes = await client.query(queryText, value);
                         foodToAddID = insertRes.rows[0].id;
                     } else {
-                        foodToAddID = response.rows[0].id
+                        foodToAddID = response.rows[0].id;
                     }
                     //after determining food id, inserts into persons food
                     queryText = 'INSERT INTO "persons_food" ("persons_id", "food_id") VALUES ($1, $2);';
