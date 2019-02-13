@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import RecipesNav from './RecipesNav';
 import RecipeBrowse from './RecipeBrowse';
 import {Route} from 'react-router-dom';

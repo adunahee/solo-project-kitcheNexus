@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -26,46 +26,50 @@ class RecipeCard extends Component {
     }
 
     handleExpandClick = () => {
-        this.setState({expanded: !this.state.expanded});
+        this.setState({ expanded: !this.state.expanded });
     }
 
     handleLink = () => {
-        alert(`${this.props.recipe.url}`);
-        this.props.dispatch({type: 'ADD_RECENT_RECIPE', payload: this.props.recipe.uri})
+        this.props.dispatch({ type: 'ADD_RECENT_RECIPE', payload: this.props.recipe.uri })
     }
 
     render() {
         return (
             <div>
                 <Card>
-                    <CardHeader 
+                    <CardHeader
                         title={this.props.recipe.label}
-                        subheader={`Cook Time: ${this.props.recipe.totalTime}`}/>
-                    <CardMedia 
+                        subheader={`Cook Time: ${this.props.recipe.totalTime}`} />
+                    <CardMedia
                         image={this.props.recipe.image}
-                        className='recipe-image'/>
+                        className='recipe-image' />
                     <CardActions>
                         {/* <IconButton aria-label="Add to favorites">
                             <FavoriteIcon />
                         </IconButton> */}
-                        <IconButton 
-                        onClick={this.handleLink}
-                        aria-label="Link to Directions">
-                        <Typography>
-                            See Directions
+                        <a href={this.props.recipe.url}
+                            target='_blank'
+                            rel="noopener noreferrer"
+                            onClick={this.handleLink}>
+                            <IconButton
+                                aria-label="Link to Directions">
+                                <Typography>
+                                    See Directions
                         </Typography>
-                            <LinkIcon />
-                        </IconButton>
+                                <LinkIcon />
+                            </IconButton>
+                        </a>
+
                         <IconButton
                             onClick={this.handleExpandClick}
                             aria-expanded={this.state.expanded}
                             aria-label="Show Ingredients"
                         >
-                        <Typography>
-                            Ingredients
+                            <Typography>
+                                Ingredients
                         </Typography>
-                            <ExpandMoreIcon 
-                                className={ this.state.expanded ? 'expand-open' :''}/>
+                            <ExpandMoreIcon
+                                className={this.state.expanded ? 'expand-open' : ''} />
                         </IconButton>
                     </CardActions>
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
