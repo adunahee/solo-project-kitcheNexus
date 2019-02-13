@@ -60,17 +60,14 @@ class App extends Component {
               component={InfoPage}
             /> */}
             <ProtectedRoute
-              exact
               path="/pantry"
               component={Pantry}
             />
             <ProtectedRoute
-              exact
               path="/recipes"
               component={Recipes}
             />
             <ProtectedRoute
-              exact
               path="/grocery"
               component={Grocery}
             />
