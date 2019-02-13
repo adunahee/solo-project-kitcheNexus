@@ -70,6 +70,25 @@ CREATE TABLE "persons_food" (
   OIDS=FALSE
 );
 
+CREATE TABLE "recipe" (
+	"id" serial NOT NULL,
+	"encoded_uri" varchar(256) NOT NULL UNIQUE,
+	CONSTRAINT recipe_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE "person_recipe" (
+	"id" serial NOT NULL,
+	"person_id" serial NOT NULL,
+	"recipe_id" serial NOT NULL,
+	"favorite" BOOLEAN DEFAULT FALSE,
+	"last_viewed" DATE NOT NULL,
+	CONSTRAINT person_recipe_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
 ALTER TABLE "pantry_tags_food" ADD CONSTRAINT "pantry_tags_food_fk0" FOREIGN KEY ("person_id") REFERENCES "person"("id");
 ALTER TABLE "pantry_tags_food" ADD CONSTRAINT "pantry_tags_food_fk1" FOREIGN KEY ("pantry_tags_id") REFERENCES "pantry_tags"("id");
 
@@ -81,3 +100,6 @@ ALTER TABLE "foods_grocery_lists" ADD CONSTRAINT "foods_grocery_lists_fk1" FOREI
 ALTER TABLE "persons_food" ADD CONSTRAINT "persons_food_fk0" FOREIGN KEY ("persons_id") REFERENCES "person"("id");
 ALTER TABLE "persons_food" ADD CONSTRAINT "persons_food_fk1" FOREIGN KEY ("food_id") REFERENCES "food"("id");
 ALTER TABLE "persons_food" ADD CONSTRAINT "persons_food_fk2" FOREIGN KEY ("pantry_tags_id") REFERENCES "pantry_tags"("id");
+
+ALTER TABLE "person_recipe" ADD CONSTRAINT "person_recipe_fk0" FOREIGN KEY ("person_id") REFERENCES "person"("id");
+ALTER TABLE "person_recipe" ADD CONSTRAINT "person_recipe_fk1" FOREIGN KEY ("recipe_id") REFERENCES "recipe"("id");
