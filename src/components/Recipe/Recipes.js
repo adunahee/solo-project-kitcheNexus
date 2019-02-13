@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 import { connect } from 'react-redux';
 import RecipeCard from './RecipeCard';
+import RecipesNav from './RecipesNav';
 
 class Recipes extends Component {
 
@@ -22,6 +23,7 @@ class Recipes extends Component {
     
     return (
       <div>
+        <RecipesNav />
         <h1>Recipes</h1>
         <p>search bar, cards, and browse/favorites tabs</p>
         <form onSubmit={this.handleSubmit}>

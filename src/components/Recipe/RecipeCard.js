@@ -39,9 +39,9 @@ export default class RecipeCard extends Component {
                         image={this.props.recipe.image}
                         className='recipe-image'/>
                     <CardActions>
-                        <IconButton aria-label="Add to favorites">
+                        {/* <IconButton aria-label="Add to favorites">
                             <FavoriteIcon />
-                        </IconButton>
+                        </IconButton> */}
                         <IconButton aria-label="Share">
                             <ShareIcon />
                         </IconButton>
