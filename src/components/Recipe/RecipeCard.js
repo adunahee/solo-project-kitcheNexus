@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,14 +10,14 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import LinkIcon from '@material-ui/icons/Link';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 import './Recipe.css';
 
-export default class RecipeCard extends Component {
+class RecipeCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,6 +27,11 @@ export default class RecipeCard extends Component {
 
     handleExpandClick = () => {
         this.setState({expanded: !this.state.expanded});
+    }
+
+    handleLink = () => {
+        alert(`${this.props.recipe.url}`);
+        this.props.dispatch({type: 'ADD_RECENT_RECIPE', payload: this.props.recipe.uri})
     }
 
     render() {
@@ -42,8 +48,13 @@ export default class RecipeCard extends Component {
                         {/* <IconButton aria-label="Add to favorites">
                             <FavoriteIcon />
                         </IconButton> */}
-                        <IconButton aria-label="Share">
-                            <ShareIcon />
+                        <IconButton 
+                        onClick={this.handleLink}
+                        aria-label="Link to Directions">
+                        <Typography>
+                            See Directions
+                        </Typography>
+                            <LinkIcon />
                         </IconButton>
                         <IconButton
                             onClick={this.handleExpandClick}
@@ -71,3 +82,5 @@ export default class RecipeCard extends Component {
         )
     }
 }
+
+export default connect()(RecipeCard)
