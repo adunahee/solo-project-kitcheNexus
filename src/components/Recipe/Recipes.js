@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 import { connect } from 'react-redux';
+import RecipeCard from './RecipeCard';
 
 class Recipes extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch({ type: 'FETCH_RECIPES', payload: this.props.recipeSearchValue })
+  }
+
+  buildRecipeCards = () => {
+    // console.log(this.props.recipeHits);
+    return this.props.recipeHits.map( (recipe, i) => {
+      return <RecipeCard recipe={recipe} key={i} />
+    })
   }
 
   render() {
@@ -20,8 +28,8 @@ class Recipes extends Component {
           <FoodSearchBar pantryView='RECIPE' />
           <button type='submit'>Find Recipes</button>
         </form>
-        {this.props.recipeHits.length === 10 &&
-          JSON.stringify(this.props.recipeHits)
+        {this.props.recipeHits.length > 0 &&
+          this.buildRecipeCards()
         }
       </div>
     )

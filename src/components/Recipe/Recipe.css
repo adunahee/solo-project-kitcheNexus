@@ -1,0 +1,8 @@
+.recipe-image {
+    height: 300px;
+    width: 300px;
+}
+
+.expand-open {
+    transform: rotate(180deg);
+}
