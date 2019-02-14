@@ -27,7 +27,7 @@ class GroceryLists extends Component {
 }
 
 const mapRStoProps = (rs) => {
-    return { grocery: rs.food.grocery }
+    return { grocery: rs.grocery.grocery }
 }
 
 export default connect(mapRStoProps)(GroceryLists);

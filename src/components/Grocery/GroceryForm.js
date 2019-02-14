@@ -33,7 +33,7 @@ class GroceryForm extends Component {
 }
 
 const mapRStoProps = (rs) => {
-    return {pendingGroceryItems: rs.food.pendingGroceryItems}
+    return {pendingGroceryItems: rs.grocery.pendingGroceryItems}
 }
 
 export default connect(mapRStoProps)(GroceryForm);

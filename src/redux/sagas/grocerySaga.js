@@ -26,7 +26,7 @@ function* addToList(action) {
 function* createGroceryList(action) {
     try {
         yield axios.post(`/api/grocery/new-list/${action.payload}`);
-        // yield put({type: 'FETCH_LIST_NAMES'})
+        yield put({type: 'FETCH_LIST_NAMES'})
     }catch(err) {
         console.log('error in createGroceryList saga:', err);
         yield alert('Unable to create new grocery list at this time.')
@@ -35,8 +35,8 @@ function* createGroceryList(action) {
 
 function* fetchListNames(){
     try{
-        yield axios.get('/api/grocery/list/names');
-        yield put({type: 'SET_GROCERY_LIST_NAMES'});
+        const response = yield axios.get('/api/grocery/list/names');
+        yield put({type: 'SET_GROCERY_LIST_NAMES', payload: response.data});
     }catch(err){
         console.log('error in fetchListNames:', err);
         yield alert('Unable to fetch grocery list names at this time.');

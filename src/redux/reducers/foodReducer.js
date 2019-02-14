@@ -42,26 +42,6 @@ const pendingPantryItems = (state = [], action) => {
     }
 }
 
-const grocery = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_GROCERY':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-const pendingGroceryItems = (state = [], action) => {
-    switch (action.type) {
-        case 'ADD_TO_PENDING_GROCERY':
-            return [...state, action.payload];
-        case 'CLEAR_PENDING_GROCERY':
-            return [];
-        default:
-            return state;
-    }
-}
-
 const recipeHits = ( state = [], action) => {
     switch(action.type) {
         case 'SET_RECIPE_HITS':
@@ -105,8 +85,6 @@ export default combineReducers({
     foodSearchValue,
     pantry,
     pendingPantryItems,
-    grocery,
-    pendingGroceryItems,
     recipeHits,
     recipeSearchValue,
     recentRecipes,

@@ -96,6 +96,21 @@ router.post('/', (req, res) => {
     }
 });
 
+router.get('/list/names', (req, res) => {
+    if(req.isAuthenticated()){
+        const queryText = `SELECT list_name, id FROM "grocery_lists" WHERE person_id = ${req.user.id};`;
+        pool.query(queryText)
+        .then(response => {
+            res.send(response.rows)
+        }).catch(error => {
+            console.log('error getting list names', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+})
+
 //creates new list for given user in db
 router.post('/new-list/:listName', (req, res) => {
     if (req.isAuthenticated()) {
