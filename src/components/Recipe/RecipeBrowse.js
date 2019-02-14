@@ -21,7 +21,7 @@ class RecipeBrowse extends Component {
     return (
       <div>
             <form onSubmit={this.handleSubmit}>
-                <FoodSearchBar pantryView='RECIPE' />
+                <FoodSearchBar pageView='RECIPE' />
                 <button type='submit'>Find Recipes</button>
             </form>
             {this.props.recipeHits.length > 0 &&

@@ -24,7 +24,10 @@ class FoodSearchBar extends Component {
     }
 
     onChange = (event, { newValue }) => {
-        if(this.props.pantryView === 'GROCERY' || this.props.pantryView === 'PANTRY'){
+        // console.log(this.state);
+        console.log(this.props.recipeSearchValue);
+        
+        if (this.state.pageView === 'GROCERY' || this.state.pageView === 'PANTRY'){
             this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
         } else {
             this.props.dispatch({ type: 'RECIPE_SEARCH_VALUE', payload: newValue });
@@ -68,8 +71,8 @@ class FoodSearchBar extends Component {
         // console.log(this.state);
         let value;
         //logic to determine what store value is connected to based on pantryView
-        this.props.pantryView === 'RECIPE' ? 
-        value = this.props.recipeSearchValue : 
+        this.state.pageView === 'RECIPE' ? 
+        value = this.props.recipeSearchValue: 
         value = this.props.foodSearchValue;
         // Suggestions also need to be provided to the Autosuggest,
         // and they are initially empty because the Autosuggest is closed.
