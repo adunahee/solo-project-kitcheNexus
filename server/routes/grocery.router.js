@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
                 }
 
                 for (foodToAdd of foodToAddArr) {
-                //first checks to see if user has default list to 
+                    //first checks to see if user has default list to 
                     let queryText = 'SELECT id FROM "food" WHERE food.name ILIKE $1;';
                     const value = [foodToAdd];
                     let foodToAddID = 0;
@@ -74,10 +74,40 @@ router.post('/', (req, res) => {
                         foodToAddID = response.rows[0].id
                     }
 
-                //after determining food id, inserts into persons food
-                queryText = `INSERT INTO "foods_grocery_lists" ("food_id", "grocery_list_id") VALUES ($1, ${listID});`;
-                const result = await client.query(queryText, [foodToAddID]);
+                    //after determining food id, inserts into persons food
+                    queryText = `INSERT INTO "foods_grocery_lists" ("food_id", "grocery_list_id") VALUES ($1, ${listID});`;
+                    const result = await client.query(queryText, [foodToAddID]);
+                }
+                await client.query('COMMIT');
+                res.sendStatus(201);
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
             }
+        })().catch((error) => {
+            console.log('CATCH', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+//creates new list for given user in db
+router.post('/new-list/:listName', (req, res) => {
+    if (req.isAuthenticated()) {
+        const listName = req.params.listName;
+        (async () => {
+            const client = await pool.connect();
+            try {
+                await client.query('BEGIN');
+                let queryText = `INSERT INTO "grocery_lists" ("list_name", "person_id" ) 
+                                        VALUES ( $1, ${req.user.id} );`;
+                let value = [listName];
+                let response = await client.query(queryText, value);
                 await client.query('COMMIT');
                 res.sendStatus(201);
             } catch (e) {

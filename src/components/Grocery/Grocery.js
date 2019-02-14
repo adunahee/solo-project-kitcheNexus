@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import GroceryForm from '../Grocery/GroceryForm';
-import GroceryLists from '../Grocery/GroceryLists';
 import { connect } from 'react-redux';
 
-class Grocery extends Component {
+import GroceryForm from './GroceryForm';
+import GroceryLists from './GroceryLists';
+import NewGroceryList from './NewGroceryList';
 
-  componentDidMount() {
-    this.props.dispatch({ type: "FETCH_GROCERY" })
-  }
+
+class Grocery extends Component {
+  
 
   render() {
     return (
       <div>
         <h1>Grocery</h1>
+        <NewGroceryList />
         <GroceryForm />
         <GroceryLists />
       </div>
