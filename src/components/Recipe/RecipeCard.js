@@ -33,6 +33,10 @@ class RecipeCard extends Component {
         this.props.dispatch({ type: 'ADD_RECENT_RECIPE', payload: this.props.recipe.uri })
     }
 
+    handleFavorite = () => {
+        this.props.dispatch({ type: 'ADD_FAVORITE', payload: this.props.recipe.uri})
+    }
+
     render() {
         return (
             <div>
@@ -44,9 +48,11 @@ class RecipeCard extends Component {
                         image={this.props.recipe.image}
                         className='recipe-image' />
                     <CardActions>
-                        {/* <IconButton aria-label="Add to favorites">
+                        <IconButton 
+                        onClick={this.handleFavorite}
+                        aria-label="Add to favorites">
                             <FavoriteIcon />
-                        </IconButton> */}
+                        </IconButton>
                         <a href={this.props.recipe.url}
                             target='_blank'
                             rel="noopener noreferrer"

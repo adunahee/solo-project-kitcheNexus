@@ -34,10 +34,21 @@ function* addRecentRecipe(action) {
     }
 }
 
+function* addFavorite(action) {
+    try{
+        yield axios.post('/recipe/favorite', { uri: encodeURIComponent(action.payload)})
+        yield alert('Favorite Status Updated!');
+    } catch(err) {
+        console.log('error in addFavorite saga:', err);
+        yield alert('Unable to favorite recipe at this time.');
+    }
+}
+
 function* recipeSaga() {
     yield takeLatest('FETCH_RECIPES', fetchRecipes);
     yield takeLatest('ADD_RECENT_RECIPE', addRecentRecipe);
     yield takeLatest('FETCH_RECENT_RECIPES', fetchRecentRecipes);
+    yield takeLatest('ADD_FAVORITE', addFavorite)
 }
 
 export default recipeSaga;

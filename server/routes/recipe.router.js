@@ -36,7 +36,7 @@ router.post('/recent', (req, res) => {
     if (req.isAuthenticated()) {
         const recipeUri = req.body.url;
         const dateViewed = req.body.timeStamp;
-        console.log(dateViewed);
+        console.log('in recent post:', dateViewed);
 
         (async () => {
             const client = await pool.connect();
@@ -126,7 +126,7 @@ router.get('/recent', (req, res) => {
                     const queryURL = `${AUTOCOMPLETE_FOOD_URL}?r=${recent.encoded_uri}&app_id=${process.env.RECIPE_APP_ID}&app_key=${process.env.RECIPE_APP_KEY}`;
                     let response = await axios.get(queryURL);
                     // console.log(`recipe response:`, response.data);
-                    const cleanedResponse = response.data.map( recipe => {
+                    const cleanedResponse = response.data.map(recipe => {
                         delete recipe.ingredients;
                         delete recipe.totalWeight;
                         delete recipe.totalNutrients;
@@ -134,7 +134,7 @@ router.get('/recent', (req, res) => {
                         delete recipe.digest;
                         return recipe
                     });
-                    recentRecipes = [...recentRecipes, ...cleanedResponse]; 
+                    recentRecipes = [...recentRecipes, ...cleanedResponse];
                 }
                 // console.log(recentRecipes);
                 //sends finished recent recipe list to client
@@ -146,7 +146,52 @@ router.get('/recent', (req, res) => {
             } finally {
                 client.release();
             }
+        })().catch((error) => {
+            console.log('CATCH', error);
+            res.sendStatus(500);
+        })
+    }
+    else {
+        res.sendStatus(403);
+    }
+})
 
+router.post('/favorite', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('in favorite post');
+        
+        (async () => {
+            const client = await pool.connect();
+            try {
+                //checks to see if user has already interacted with recipe
+                const recipeURI = req.body.uri;
+                // console.log("favoriteURI", favoriteURI);
+                let queryText = `SELECT person_recipe.id, recipe.id as recipe_id FROM person_recipe
+	                        JOIN recipe ON recipe.id = person_recipe.recipe_id
+	                        WHERE person_recipe.person_id = $1
+                            AND recipe.encoded_uri = $2;`
+                let value = [req.user.id, recipeURI];
+                let response = await pool.query(queryText, value);
+                //if user has interacted with recipe, update favorite otherwise post
+                if(response.rows.length > 0){
+                    queryText = `UPDATE person_recipe SET favorite = NOT favorite
+                                WHERE person_id = $1 AND id = $2;`;
+                    value = [req.user.id, response.rows[0].id]
+                    response = await pool.query(queryText, value)
+                } else {
+                    queryText = `INSERT INTO person_recipe (person_id, recipe_id, favorite)
+                                VALUES( $1, $2, $3);`
+                    value = [req.user.id, response.rows[0].id, true]
+                }
+                //sends ok if updated or posted
+                res.sendStatus(200);
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+            }
         })().catch((error) => {
             console.log('CATCH', error);
             res.sendStatus(500);
