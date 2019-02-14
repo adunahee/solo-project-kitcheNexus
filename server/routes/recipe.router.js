@@ -114,6 +114,7 @@ router.get('/recent', (req, res) => {
 	                        JOIN recipe ON recipe.id = person_recipe.recipe_id
 	                        WHERE person_recipe.person_id = $1
                             AND last_viewed >= '${oneWeekAgo}'::date
+                            ORDER BY last_viewed DESC
                             LIMIT 5;`
                 let value = [req.user.id];
                 let response = await pool.query(queryText, value);
