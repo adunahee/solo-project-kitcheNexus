@@ -12,9 +12,19 @@ function* fetchRecipes(action) {
     }
 }
 
+function* fetchRecentRecipes() {
+    try{
+        const response = yield axios.get('/recipe/recent');
+        yield put({type: 'SET_RECENT_RECIPES', payload: response.data});
+    } catch(err) {
+        console.log('Error with fetchRecentRecipes:', err);
+        
+    }
+}
+
 function* addRecentRecipe(action) {
     try {
-        yield axios.post('/api/recipe/recent',
+        yield axios.post('/recipe/recent',
             {
                 timeStamp: moment().format(),
                 url: encodeURIComponent(action.payload)
@@ -27,6 +37,7 @@ function* addRecentRecipe(action) {
 function* recipeSaga() {
     yield takeLatest('FETCH_RECIPES', fetchRecipes);
     yield takeLatest('ADD_RECENT_RECIPE', addRecentRecipe);
+    yield takeLatest('FETCH_RECENT_RECIPES', fetchRecentRecipes);
 }
 
 export default recipeSaga;

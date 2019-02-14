@@ -82,6 +82,15 @@ const recipeSearchValue = (state = '', action ) => {
     }
 }
 
+const recentRecipes = (state = [], action) => {
+    switch(action.type) {
+        case 'SET_RECENT_RECIPES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     searchResults,
     foodSearchValue,
@@ -91,4 +100,5 @@ export default combineReducers({
     pendingGroceryItems,
     recipeHits,
     recipeSearchValue,
+    recentRecipes
 });

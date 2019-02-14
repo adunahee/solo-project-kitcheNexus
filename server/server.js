@@ -31,6 +31,7 @@ app.use('/api/food', foodRouter);
 app.use('/api/pantry', pantryRouter);
 app.use('/api/grocery', groceryRouter);
 app.use('/api/recipe', recipeRouter);
+app.use('/recipe', recipeRouter);
 
 // Serve static files
 app.use(express.static('build'));
