@@ -44,11 +44,22 @@ function* addFavorite(action) {
     }
 }
 
+function* fetchFavorites() {
+    try{
+        let response = yield axios.get('/recipe/favorites');
+        yield put({ type: 'SET_FAVORITES', payload: response.data });
+    }catch(err){
+        console.log('error in fetchFavorites saga');
+        yield alert('Unable to load favorites.')
+    }
+}
+
 function* recipeSaga() {
     yield takeLatest('FETCH_RECIPES', fetchRecipes);
     yield takeLatest('ADD_RECENT_RECIPE', addRecentRecipe);
     yield takeLatest('FETCH_RECENT_RECIPES', fetchRecentRecipes);
-    yield takeLatest('ADD_FAVORITE', addFavorite)
+    yield takeLatest('ADD_FAVORITE', addFavorite);
+    yield takeLatest('FETCH_FAVORITES', fetchFavorites);
 }
 
 export default recipeSaga;

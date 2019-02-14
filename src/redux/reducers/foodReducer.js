@@ -91,6 +91,15 @@ const recentRecipes = (state = [], action) => {
     }
 }
 
+const recipeFavorites = (state=[], action) => {
+    switch(action.type) {
+        case 'SET_FAVORITES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     searchResults,
     foodSearchValue,
@@ -100,5 +109,6 @@ export default combineReducers({
     pendingGroceryItems,
     recipeHits,
     recipeSearchValue,
-    recentRecipes
+    recentRecipes,
+    recipeFavorites
 });

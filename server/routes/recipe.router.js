@@ -159,32 +159,96 @@ router.get('/recent', (req, res) => {
 router.post('/favorite', (req, res) => {
     if (req.isAuthenticated()) {
         console.log('in favorite post');
-        
+
         (async () => {
             const client = await pool.connect();
             try {
                 //checks to see if user has already interacted with recipe
-                const recipeURI = req.body.uri;
+                const recipeUri = req.body.uri;
                 // console.log("favoriteURI", favoriteURI);
                 let queryText = `SELECT person_recipe.id, recipe.id as recipe_id FROM person_recipe
 	                        JOIN recipe ON recipe.id = person_recipe.recipe_id
 	                        WHERE person_recipe.person_id = $1
                             AND recipe.encoded_uri = $2;`
-                let value = [req.user.id, recipeURI];
+                let value = [req.user.id, recipeUri];
                 let response = await pool.query(queryText, value);
                 //if user has interacted with recipe, update favorite otherwise post
-                if(response.rows.length > 0){
+                if (response.rows.length > 0) {
                     queryText = `UPDATE person_recipe SET favorite = NOT favorite
                                 WHERE person_id = $1 AND id = $2;`;
                     value = [req.user.id, response.rows[0].id]
                     response = await pool.query(queryText, value)
                 } else {
+                    //insert recipe into db then favorite it
+                    queryText = `INSERT INTO "recipe" (encoded_uri) 
+                                        VALUES ($1)
+                                        RETURNING "id";`;
+                    value = [recipeUri];
+                    response = await client.query(queryText, value);
+                    //now add to person recipe table
+                    const recipeToAddID = response.rows[0].id;
                     queryText = `INSERT INTO person_recipe (person_id, recipe_id, favorite)
                                 VALUES( $1, $2, $3);`
-                    value = [req.user.id, response.rows[0].id, true]
+                    value = [req.user.id, recipeToAddID, true]
+                    response = await client.query(queryText, value);
                 }
                 //sends ok if updated or posted
                 res.sendStatus(200);
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+            }
+        })().catch((error) => {
+            console.log('CATCH', error);
+            res.sendStatus(500);
+        })
+    }
+    else {
+        res.sendStatus(403);
+    }
+})
+
+router.get('/favorites', (req, res) => {
+    console.log('in recipe/favorites get');
+    if (req.isAuthenticated()) {
+        //begin checking db favorites, then getting recipes from api, then sending back to client
+        (async () => {
+            const client = await pool.connect();
+
+            try {
+                let queryText = `SELECT recipe.encoded_uri FROM person_recipe
+	                        JOIN recipe ON recipe.id = person_recipe.recipe_id
+                            WHERE person_recipe.person_id = $1
+                            AND favorite = true;`
+                let value = [req.user.id];
+                let response = await pool.query(queryText, value);
+
+                //use recent recipes array to query api and build client response
+                let favoriteRecipes = [];
+
+                if (response.rows.length > 0) {
+                    for (favorite of response.rows) {
+
+                        const queryURL = `${AUTOCOMPLETE_FOOD_URL}?r=${favorite.encoded_uri}&app_id=${process.env.RECIPE_APP_ID}&app_key=${process.env.RECIPE_APP_KEY}`;
+                        let response = await axios.get(queryURL);
+                        // console.log(`recipe response:`, response.data);
+                        const cleanedResponse = response.data.map(recipe => {
+                            delete recipe.ingredients;
+                            delete recipe.totalWeight;
+                            delete recipe.totalNutrients;
+                            delete recipe.totalDaily;
+                            delete recipe.digest;
+                            return recipe
+                        });
+                        favoriteRecipes = [...favoriteRecipes, ...cleanedResponse];
+                    }
+                }
+                // console.log(favoriteRecipes);
+                //sends finished recent recipe list to client
+                res.send(favoriteRecipes);
             } catch (e) {
                 console.log('ROLLBACK', e);
                 await client.query('ROLLBACK');

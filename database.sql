@@ -83,7 +83,7 @@ CREATE TABLE "person_recipe" (
 	"person_id" serial NOT NULL,
 	"recipe_id" serial NOT NULL,
 	"favorite" BOOLEAN DEFAULT FALSE,
-	"last_viewed" DATE NOT NULL,
+	"last_viewed" DATE NOT NULL DEFAULT CURRENT_DATE,
 	CONSTRAINT person_recipe_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
