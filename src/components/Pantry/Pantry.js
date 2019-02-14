@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 import { connect } from 'react-redux';
-import PantryListItem from '../Pantry/PantryListItem';
+import PantryTable from './PantryTable';
 
 class Pantry extends Component {
 
-  buildPantryListItems = () => {
-    return this.props.pantry.map((foodObj, i) => {
-      return <PantryListItem key={i} foodObj={foodObj} />
-    })
-  }
+  
 
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_PANTRY" })
@@ -39,10 +35,7 @@ class Pantry extends Component {
               <br />
           <button type='submit'>Finalize Pantry</button>
         </form>
-        <p>Filterable lists</p>
-        <ul>
-          {this.buildPantryListItems()}
-        </ul>
+        <PantryTable />
       </div>
     )
   }
@@ -50,7 +43,6 @@ class Pantry extends Component {
 
 const mapRStoProps = (rs) => {
   return {
-    pantry: rs.food.pantry,
     pendingPantryItems: rs.food.pendingPantryItems
   }
 }

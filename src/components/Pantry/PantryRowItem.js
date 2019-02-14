@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class PantryListItem extends Component {
+class PantryRowItem extends Component {
 
     handleClick = async () => {
         let confirmGone = window.confirm('Have you run out of this item?');
@@ -11,20 +11,31 @@ class PantryListItem extends Component {
             this.props.dispatch({ type: 'REMOVE_FROM_PANTRY', payload: this.props.foodObj.pantry_id });
             if (confirmMore) {
                 this.props.dispatch({ type: 'ADD_FOOD_TO_GROCERY', payload: [this.props.foodObj.food_name] });
-            } 
+            }
         } else {
             alert('Removal canceled.');
         }
 
     }
 
-render() {
-    return (
-        <li onClick={this.handleClick}>
-            {this.props.foodObj.food_name}
-        </li>
-    )
-}
+    render() {
+        return (
+            <tr onClick={this.handleClick}>
+            <td>
+                checkbox
+            </td>
+                <td>
+                    {this.props.foodObj.food_name}
+                </td>
+                <td>
+                    {this.props.foodObj.pantry_tag_name}
+        </td>
+                <td>
+                    othershit
+        </td>
+            </tr>
+        )
+    }
 }
 
-export default connect()(PantryListItem);
+export default connect()(PantryRowItem);
