@@ -26,30 +26,29 @@ router.get('/groceries', (req, res) => {
 });
 
 //add items to user grocery list
-router.post('/', (req, res) => {
+router.post('/:name', (req, res) => {
     if (req.isAuthenticated()) {
         const foodToAddArr = req.body;
+        const listName = req.params.name;
         (async () => {
             const client = await pool.connect();
             try {
                 await client.query('BEGIN');
-                //determines listID
+                //determines listID from db
                 let queryText = `SELECT id FROM grocery_lists 
                                     WHERE person_id = ${req.user.id}
-                                    AND "list_name" = 'Shopping List';`;
-
-                //tries to grab food id from db
-                const response = await client.query(queryText);
-                // console.log(response.rows);
+                                    AND "list_name" = $1;`;
+                let values = [listName]
+                const response = await client.query(queryText, values);
+                
+                //assigns listID based on previous DB response
                 let listID;
-
-                //gets listID if one was not found and stores in insertRes
                 if (response.rows.length === 0) {
                     queryText = `INSERT INTO "grocery_lists" ("list_name", "person_id" ) 
-                                        VALUES ('Shopping List', ${req.user.id})
+                                        VALUES ( $1, ${req.user.id})
                                         RETURNING "id";`;
-                    const insertRes = await client.query(queryText);
-                    listID = insertRes.rows[0].id;
+                    response = await client.query(queryText, values);
+                    listID = response.rows[0].id;
                 } else {
                     listID = response.rows[0].id;
                 }
@@ -97,15 +96,15 @@ router.post('/', (req, res) => {
 });
 
 router.get('/list/names', (req, res) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         const queryText = `SELECT list_name, id FROM "grocery_lists" WHERE person_id = ${req.user.id};`;
         pool.query(queryText)
-        .then(response => {
-            res.send(response.rows)
-        }).catch(error => {
-            console.log('error getting list names', error);
-            res.sendStatus(500);
-        })
+            .then(response => {
+                res.send(response.rows)
+            }).catch(error => {
+                console.log('error getting list names', error);
+                res.sendStatus(500);
+            })
     } else {
         res.sendStatus(403);
     }
@@ -142,10 +141,10 @@ router.post('/new-list/:listName', (req, res) => {
 });
 
 router.delete('/list/:id', (req, res) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         const listID = req.params.id;
         // console.log(listID);
-        
+
         (async () => {
             const client = await pool.connect();
 

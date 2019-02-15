@@ -14,9 +14,10 @@ function* fetchGrocery() {
 
 function* addToList(action) {
     try {
-        yield axios.post(`/api/grocery`, action.payload);
+        yield axios.post(`/api/grocery/${action.payload.listName}`, action.payload.groceries);
         yield alert('Grocery list updated.');
-        yield put({ type: 'FETCH_GROCERY' })
+        yield put({ type: 'FETCH_GROCERY' });
+        yield put({ type: `CLEAR_PENDING_GROCERY` });
     } catch (err) {
         console.log('error in addToList saga:', err);
         yield alert('Unable to add to grocery list at this time.');

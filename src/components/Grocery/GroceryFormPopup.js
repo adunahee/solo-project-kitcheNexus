@@ -26,7 +26,14 @@ class GroceryFormPopup extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: 'ADD_FOOD_TO_GROCERY', payload: this.props.pendingGroceryItems });
+        const action = {
+            type: 'ADD_FOOD_TO_GROCERY',
+            payload: {
+                groceries: this.props.pendingGroceryItems,
+                listName: this.props.listName
+            }
+        }
+        this.props.dispatch(action);
         this.handleClose();
     }
 
@@ -45,7 +52,7 @@ class GroceryFormPopup extends Component {
     }
 
     handleClear = () => {
-        this.props.dispatch({ type: `CLEAR_PENDING_GROCERY` })
+        this.props.dispatch({ type: `CLEAR_PENDING_GROCERY` });
     }
 
     transition = (props) => {
