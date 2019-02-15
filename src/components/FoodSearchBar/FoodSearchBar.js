@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
+import './FoodSearchBar.css';
 
 // tells autosuggest how to read suggestions for user from redux store
 const getSuggestionValue = suggestion => suggestion.name;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-    <div>
+    <span>
         {suggestion.name}
-    </div>
+    </span>
 );
 
 class FoodSearchBar extends Component {
@@ -26,13 +27,13 @@ class FoodSearchBar extends Component {
     onChange = (event, { newValue }) => {
         // console.log(this.state);
         console.log(this.props.recipeSearchValue);
-        
-        if (this.state.pageView === 'GROCERY' || this.state.pageView === 'PANTRY'){
+
+        if (this.state.pageView === 'GROCERY' || this.state.pageView === 'PANTRY') {
             this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
         } else {
             this.props.dispatch({ type: 'RECIPE_SEARCH_VALUE', payload: newValue });
         }
-        
+
     };
 
     // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -71,9 +72,9 @@ class FoodSearchBar extends Component {
         // console.log(this.state);
         let value;
         //logic to determine what store value is connected to based on pantryView
-        this.state.pageView === 'RECIPE' ? 
-        value = this.props.recipeSearchValue: 
-        value = this.props.foodSearchValue;
+        this.state.pageView === 'RECIPE' ?
+            value = this.props.recipeSearchValue :
+            value = this.props.foodSearchValue;
         // Suggestions also need to be provided to the Autosuggest,
         // and they are initially empty because the Autosuggest is closed.
         const suggestions = this.props.suggestions.map(food => {
