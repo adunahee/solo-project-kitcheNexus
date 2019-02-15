@@ -8,9 +8,15 @@ import NewGroceryList from './NewGroceryList';
 
 class Grocery extends Component {
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_LIST_NAMES'});
+    this.props.dispatch({ type: 'FETCH_LIST_NAMES' });
   }
-  
+
+  buildGroceryLists = () => {
+    return this.props.listNames.map((list, i) => {
+      return <GroceryLists list={list} key={i} />
+    })
+  }
+
 
   render() {
     return (
@@ -18,10 +24,17 @@ class Grocery extends Component {
         <h1>Grocery</h1>
         <NewGroceryList />
         <GroceryForm />
-        <GroceryLists />
+        {this.props.listNames.length > 0 ? this.buildGroceryLists() : <p>You have no grocery lists yet!</p>
+
+        }
+
       </div>
     )
   }
 }
 
-export default connect()(Grocery);
+const mapRStoProps = (rs) => {
+  return { listNames: rs.grocery.groceryListNames }
+}
+
+export default connect(mapRStoProps)(Grocery);
