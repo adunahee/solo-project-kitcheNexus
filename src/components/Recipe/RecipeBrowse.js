@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import RecipeCard from './RecipeCard';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 class RecipeBrowse extends Component {
 
@@ -17,19 +18,25 @@ class RecipeBrowse extends Component {
         })
     }
 
-  render() {
-    return (
-      <div>
-            <form onSubmit={this.handleSubmit}>
-                <FoodSearchBar pageView='RECIPE' />
-                <button type='submit'>Find Recipes</button>
-            </form>
-            {this.props.recipeHits.length > 0 &&
-                this.buildRecipeCards()
-            }
-      </div>
-    )
-  }
+    handleClear = () => {
+        this.props.dispatch({type: "CLEAR_RECIPE_HITS"});
+    }
+
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <FoodSearchBar pageView='RECIPE' />
+                    <Button type='submit' color='primary'>Find Recipes</Button>
+                    <Button onClick={this.handleClear} color='secondary'> Clear Results </Button>
+                </form>
+
+                {this.props.recipeHits.length > 0 &&
+                    this.buildRecipeCards()
+                }
+            </div>
+        )
+    }
 }
 
 const mapRStoProps = (rs) => {

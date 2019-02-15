@@ -89,12 +89,12 @@ class FoodFormPopup extends Component {
                             </IconButton>
                             <Typography variant="h6" color="inherit" >
                                 {this.props.listName ? `${this.props.listName} List` : `Updating Pantry`}
-            </Typography>
+                            </Typography>
                         </Toolbar>
                     </AppBar>
                     <form onSubmit={this.handleSubmit}>
                         <DialogTitle>
-                            {this.props.pageView ==='GROCERY' ? 'Adding Groceries' : `What's in your pantry?`}
+                            {this.props.pageView === 'GROCERY' ? 'Adding Groceries' : `What's in your pantry?`}
                         </DialogTitle>
                         <div >
                             <DialogContentText>
@@ -105,22 +105,21 @@ class FoodFormPopup extends Component {
 
                         </div>
                         <DialogActions>
-                            {this.props.pageView === "RECIPE" ? null :
-                                <div>
-                                    <Button onClick={this.handleAdd} color='primary'>
-                                        Add
+                            <Button onClick={this.handleAdd} color='primary'>
+                                Add
                                 </Button>
-                                    <Button onClick={this.handleClear} color='secondary'>
-                                        Clear All
+                            <Button onClick={this.handleClear} color='secondary'>
+                                Clear All
                                 </Button>
-                                    <Button type='submit'>Finalize List</Button>
-                                </div>
-                            }
+                            <Button type='submit'>
+                            {this.props.pageView === 'GROCERY' && 'Finalize List'}
+                                {this.props.pageView === 'PANTRY' && 'Update Pantry'}
+                            </Button>
                         </DialogActions>
                     </form>
                     <DialogContent>
-                            <div>
-                                <DialogContentText>Items to Add</DialogContentText>
+                        <div>
+                            <DialogContentText>Items to Add</DialogContentText>
                             {this.props.pageView === 'GROCERY' && this.props.pendingGroceryItems.length > 0 &&
                                 <ul>
                                     {this.props.pendingGroceryItems.map((item, i) => {
@@ -133,7 +132,7 @@ class FoodFormPopup extends Component {
                                         return <li key={i}> {item} </li>
                                     })}
                                 </ul>}
-                            </div>
+                        </div>
                     </DialogContent>
                 </Dialog>
             </div>

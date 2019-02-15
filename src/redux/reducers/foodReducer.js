@@ -46,6 +46,8 @@ const recipeHits = ( state = [], action) => {
     switch(action.type) {
         case 'SET_RECIPE_HITS':
             return action.payload;
+        case 'CLEAR_RECIPE_HITS':
+            return [];
         default:
             return state;
     }
