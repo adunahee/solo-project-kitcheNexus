@@ -40,7 +40,7 @@ router.post('/:name', (req, res) => {
                                     AND "list_name" = $1;`;
                 let values = [listName]
                 const response = await client.query(queryText, values);
-                
+
                 //assigns listID based on previous DB response
                 let listID;
                 if (response.rows.length === 0) {
@@ -163,6 +163,42 @@ router.delete('/list/:id', (req, res) => {
                                  AND person_id = $2;`;
                 values = [listID, req.user.id];
                 response = await client.query(queryText, values);
+                await client.query('COMMIT');
+                res.sendStatus(200);
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+            }
+        })().catch((error) => {
+            console.log('CATCH', error);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+})
+
+router.delete('/item/:listId/:foodId', (req, res) => {
+    if (req.isAuthenticated()) {
+        const listId = req.params.listId;
+        const foodId = req.params.foodId;
+
+        (async () => {
+            const client = await pool.connect();
+
+            try {
+                await client.query('BEGIN');
+                //delete item from users grocery_list
+                //currently malicous user could pass other grocery list ids to delete other users stuff
+                let queryText = `DELETE FROM foods_grocery_lists 
+                                 WHERE grocery_list_id = $1
+                                 AND food_id = $2;`;
+                let values = [listId, foodId];
+                let response = await client.query(queryText, values);
+
                 await client.query('COMMIT');
                 res.sendStatus(200);
             } catch (e) {
