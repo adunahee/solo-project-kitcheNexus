@@ -18,10 +18,6 @@ class NewGroceryList extends Component {
         }
     }
 
-    componentDidMount() {
-        this.props.dispatch({ type: "FETCH_GROCERY" })
-    }
-
     handleCreateNewList = () => {
         this.props.dispatch({type: 'CREATE_NEW_GROCERY_LIST', payload: this.state.listName})
         this.handleClose();
@@ -65,7 +61,7 @@ class NewGroceryList extends Component {
                     <Button onClick={this.handleClose} color="primary">
                         Cancel
           </Button>
-                    <Button onClick={this.handleCreateNewList} color="primary">
+                    <Button onClick={this.handleCreateNewList} color="secondary">
                         Create
           </Button>
                 </DialogActions>

@@ -3,6 +3,8 @@ import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 import './FoodSearchBar.css';
 
+
+
 // tells autosuggest how to read suggestions for user from redux store
 const getSuggestionValue = suggestion => suggestion.name;
 
@@ -57,16 +59,6 @@ class FoodSearchBar extends Component {
         this.props.dispatch({ type: 'CLEAR_SUGGESTIONS' });
     };
 
-    //dispatches food item to pendingPantry reducer for storage until all items added
-    handleAdd = () => {
-        this.props.dispatch({ type: `ADD_TO_PENDING_${this.props.pageView}`, payload: this.props.foodSearchValue })
-        this.props.dispatch({ type: 'CLEAR_VALUE' });
-    }
-
-    handleClear = () => {
-        this.props.dispatch({ type: `CLEAR_PENDING_${this.props.pageView}` })
-    }
-
     render() {
         // console.log(this.props);
         // console.log(this.state);
@@ -90,25 +82,16 @@ class FoodSearchBar extends Component {
 
         // Finally, render it!
         return (
-
-            <div onSubmit={this.handleSubmit}>
-                <p>Type 2 letter and watch foods appear!</p>
-                <label htmlFor='foods-search-bar'>Foods Search</label>
-                <Autosuggest
-                    suggestions={suggestions}
-                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                    getSuggestionValue={getSuggestionValue}
-                    renderSuggestion={renderSuggestion}
-                    inputProps={inputProps}
-                    id='foods-search-bar'
-                />
-                {this.props.pantryView === "RECIPE" ? null :
-                    <div>
-                        <button type='button' onClick={this.handleAdd}>Add</button>
-                        <button type='button' onClick={this.handleClear}>Clear</button>
-                    </div>
-                }
+            <div>     
+                        <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={getSuggestionValue}
+                            renderSuggestion={renderSuggestion}
+                            inputProps={inputProps}
+                            id='foods-search-bar'
+                        />
             </div>
 
         );

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import GroceryForm from './GroceryForm';
+import GroceryForm from './GroceryFormPopup';
 import GroceryLists from './GroceryLists';
 import NewGroceryList from './NewGroceryList';
 
 
 class Grocery extends Component {
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_LIST_NAMES' });
+    this.props.dispatch({ type: 'FETCH_LIST_NAMES' })
+    this.props.dispatch({ type: "FETCH_GROCERY" });
   }
 
   buildGroceryLists = () => {
@@ -17,13 +18,11 @@ class Grocery extends Component {
     })
   }
 
-
   render() {
     return (
       <div>
         <h1>Grocery</h1>
         <NewGroceryList />
-        <GroceryForm />
         {this.props.listNames.length > 0 ? this.buildGroceryLists() : <p>You have no grocery lists yet!</p>
 
         }
