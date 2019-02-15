@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 import { connect } from 'react-redux';
+import GroceryListNameDropdown from './GroceryListNameDropdown';
 
 class GroceryForm extends Component {
+    
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -12,11 +15,8 @@ class GroceryForm extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label htmlFor='grocery_list'>Choose List</label>
-                <select>
-                    <option>Placeholder</option>
-                </select>
-                <FoodSearchBar pageView='GROCERY'/>
+            <GroceryListNameDropdown />
+                <FoodSearchBar pageView='GROCERY' />
                 {this.props.pendingGroceryItems.length > 0 &&
                     <div>
                         <h2>Items to Add</h2>
@@ -33,7 +33,9 @@ class GroceryForm extends Component {
 }
 
 const mapRStoProps = (rs) => {
-    return {pendingGroceryItems: rs.grocery.pendingGroceryItems}
+    return {
+        pendingGroceryItems: rs.grocery.pendingGroceryItems
+    }
 }
 
 export default connect(mapRStoProps)(GroceryForm);
