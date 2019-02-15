@@ -43,11 +43,22 @@ function* fetchListNames(){
     }
 }
 
+function* deleteList(action){ 
+    try{
+        yield axios.delete(`/api/grocery/list/${action.payload}`);
+        yield put({type: "FETCH_LIST_NAMES"});
+    }catch(e){
+        console.log('error in deleteList saga:', e);
+        yield alert('Unable to delete list at this time.');
+    }
+}
+
 function* grocerySaga() {
     yield takeEvery('FETCH_GROCERY', fetchGrocery);
     yield takeLatest('ADD_FOOD_TO_GROCERY', addToList);
     yield takeLatest('CREATE_NEW_GROCERY_LIST', createGroceryList);
-    yield takeLatest('FETCH_LIST_NAMES', fetchListNames)
+    yield takeLatest('FETCH_LIST_NAMES', fetchListNames);
+    yield takeLatest('DELETE_LIST', deleteList);
 }
 
 

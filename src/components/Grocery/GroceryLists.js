@@ -19,10 +19,22 @@ class GroceryLists extends Component {
         )
     }
 
+    handleDeleteList = () => {
+        let confirmation = window.confirm('This will delete the list and all of its contents. Do you want to continue?')
+        if(confirmation){
+            this.props.dispatch({type: 'DELETE_LIST', payload: this.props.list.id})
+        } else {
+            alert('Delete canceled.')
+        }
+    }
+
+
     render() {
         return (
             <div>
                 <h2>{this.props.list.list_name}</h2>
+                <button onClick={this.handleAddList}>Add Groceries</button>
+                <button onClick={this.handleDeleteList}>Delete List</button>
                 <ul>
                     {this.props.grocery.length > 0 ? this.buildList() : <li>You have no grocery lists or groceries at this time.</li>}
                 </ul>

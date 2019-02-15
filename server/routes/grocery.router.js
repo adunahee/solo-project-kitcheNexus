@@ -141,4 +141,45 @@ router.post('/new-list/:listName', (req, res) => {
     }
 });
 
+router.delete('/list/:id', (req, res) => {
+    if(req.isAuthenticated()){
+        const listID = req.params.id;
+        // console.log(listID);
+        
+        (async () => {
+            const client = await pool.connect();
+
+            try {
+                await client.query('BEGIN');
+                //delete items from grocery_list
+                //currently malicous user could pass other grocery list ids to delete other users stuff
+                let queryText = `DELETE FROM foods_grocery_lists 
+                                 WHERE grocery_list_id = $1;`;
+                let values = [listID];
+                let response = await client.query(queryText, values);
+
+                //delete users grocery list
+                queryText = `DELETE FROM grocery_lists 
+                                 WHERE id = $1
+                                 AND person_id = $2;`;
+                values = [listID, req.user.id];
+                response = await client.query(queryText, values);
+                await client.query('COMMIT');
+                res.sendStatus(200);
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+            }
+        })().catch((error) => {
+            console.log('CATCH', error);
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
+    }
+})
+
 module.exports = router;
