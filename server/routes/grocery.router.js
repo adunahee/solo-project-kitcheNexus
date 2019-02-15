@@ -29,7 +29,13 @@ router.get('/groceries', (req, res) => {
 router.post('/:name', (req, res) => {
     if (req.isAuthenticated()) {
         const foodToAddArr = req.body;
-        const listName = req.params.name;
+        let listName;
+        if (req.params.name === 'undefined') {
+            listName = 'Shopping List'
+        } else {
+            listName = req.params.name;
+        }
+
         (async () => {
             const client = await pool.connect();
             try {
@@ -39,7 +45,7 @@ router.post('/:name', (req, res) => {
                                     WHERE person_id = ${req.user.id}
                                     AND "list_name" = $1;`;
                 let values = [listName]
-                const response = await client.query(queryText, values);
+                let response = await client.query(queryText, values);
 
                 //assigns listID based on previous DB response
                 let listID;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
+import FoodFormPopup from '../FoodSearchBar/FoodFormPopup';
 import { connect } from 'react-redux';
 import PantryTable from './PantryTable';
 
@@ -20,21 +20,7 @@ class Pantry extends Component {
     return (
       <div>
         <h1>Pantry</h1>
-        <form onSubmit={this.handleSubmit}>
-          <p>Find Foods</p>
-          <FoodSearchBar pageView='PANTRY' />
-          {this.props.pendingPantryItems.length > 0 &&
-          <div>
-            <h2>Items to Add</h2>
-            <ul>
-              {this.props.pendingPantryItems.map((item, i) => {
-                return <li key={i}> {item} </li>
-              })}
-            </ul>
-          </div>}
-              <br />
-          <button type='submit'>Finalize Pantry</button>
-        </form>
+        <FoodFormPopup pageView='PANTRY'/>
         <PantryTable />
       </div>
     )

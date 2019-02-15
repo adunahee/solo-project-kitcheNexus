@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GroceryListItem from '../Grocery/GroceryListItem';
-import GroceryFormPopup from './GroceryFormPopup';
+import FoodFormPopup from '../FoodSearchBar/FoodFormPopup';
 
 class GroceryLists extends Component {
 
@@ -34,7 +34,7 @@ class GroceryLists extends Component {
         return (
             <div>
                 <h2>{this.props.list.list_name}</h2>
-                <GroceryFormPopup listName={this.props.list.list_name}/>
+                <FoodFormPopup listName={this.props.list.list_name} pageView='GROCERY'/>
                 <button onClick={this.handleDeleteList}>Delete List</button>
                 <ul>
                     {this.props.grocery.length > 0 ? this.buildList() : <li>You have no grocery lists or groceries at this time.</li>}
