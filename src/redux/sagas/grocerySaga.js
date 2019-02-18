@@ -14,6 +14,7 @@ function* fetchGrocery() {
 
 function* addToList(action) {
     try {
+        console.log(action.payload.groceries);
         yield axios.post(`/api/grocery/${action.payload.listName}`, action.payload.groceries);
         yield alert('Grocery list updated.');
         yield put({ type: 'FETCH_GROCERY' });
@@ -57,7 +58,7 @@ function* deleteList(action) {
 function* deleteGroceryItem(action) {
     try {
         const p = action.payload;
-        yield axios.delete(`/api/grocery/item/${p.grocery_list_id}/${p.food_id}`);
+        yield axios.delete(`/api/grocery/item/${p.grocery_list_id}/${p.id}`);
         yield put({ type: 'FETCH_GROCERY' })
     } catch (e) {
         console.log('error in deleteGroceryItem saga:', e);

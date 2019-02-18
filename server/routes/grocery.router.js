@@ -7,7 +7,16 @@ const router = express.Router();
  */
 router.get('/groceries', (req, res) => {
     if (req.isAuthenticated()) {
-        const queryText = `SELECT * FROM grocery_lists 
+        // food_id: 1
+        // grocery_list_id: 23
+        // id: 1
+        // list_name: "Shopping List"
+        // name: "apple"
+        // person_id: 2
+        const queryText = 
+        `SELECT foods_grocery_lists.food_id, foods_grocery_lists.grocery_list_id,
+        foods_grocery_lists.id, grocery_lists.list_name, food.name 
+        FROM grocery_lists 
 	    JOIN foods_grocery_lists ON foods_grocery_lists.grocery_list_id = grocery_lists.id
         JOIN food ON food.id = foods_grocery_lists.food_id
 	    WHERE grocery_lists.person_id = $1
@@ -146,6 +155,7 @@ router.post('/new-list/:listName', (req, res) => {
     }
 });
 
+//deletes entire grocery lists
 router.delete('/list/:id', (req, res) => {
     if (req.isAuthenticated()) {
         const listID = req.params.id;
@@ -187,10 +197,11 @@ router.delete('/list/:id', (req, res) => {
     }
 })
 
-router.delete('/item/:listId/:foodId', (req, res) => {
+//deletes an item from grocery list
+router.delete('/item/:listId/:foodListId', (req, res) => {
     if (req.isAuthenticated()) {
         const listId = req.params.listId;
-        const foodId = req.params.foodId;
+        const foodListId = req.params.foodListId;
 
         (async () => {
             const client = await pool.connect();
@@ -201,8 +212,8 @@ router.delete('/item/:listId/:foodId', (req, res) => {
                 //currently malicous user could pass other grocery list ids to delete other users stuff
                 let queryText = `DELETE FROM foods_grocery_lists 
                                  WHERE grocery_list_id = $1
-                                 AND food_id = $2;`;
-                let values = [listId, foodId];
+                                 AND id = $2;`;
+                let values = [listId, foodListId];
                 let response = await client.query(queryText, values);
 
                 await client.query('COMMIT');

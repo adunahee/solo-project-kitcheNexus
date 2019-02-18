@@ -23,6 +23,35 @@ class PantryTable extends Component {
         this.setState({ action: event.target.value });
     }
 
+    handleActionButton = () => {
+        if (this.props.batchItems.length === 0) {
+            return alert('You must select at least one item in the table below first.');
+        } else {
+            switch (this.state.action) {
+                case ('Buy More'):
+                    return this.props.dispatch({
+                        type: 'ADD_FOOD_TO_GROCERY',
+                        payload: {
+                            groceries: this.props.batchItems.map(food => {
+                                return food.food_name;
+                            })
+                        }
+                    })
+                case ('Used Up'):
+                    return this.props.dispatch({
+                        type: 'REMOVE_FROM_PANTRY',
+                    })
+                case ('Find Recipes'):
+                    return this.props.dispatch({
+                        type: 'FETCH_RECIPES',
+                    })
+                default:
+                    return null;
+            }
+        }
+
+    }
+
     render() {
         let actionButtonDescription;
         switch (this.state.action) {
@@ -57,7 +86,7 @@ class PantryTable extends Component {
                         Find Recipes
                     </option>
                 </select>
-                {this.state.action !== null && <button>{actionButtonDescription}</button>}
+                {this.state.action !== null && <button onClick={this.handleActionButton}>{actionButtonDescription}</button>}
                 <table>
                     <thead>
                         <tr>
@@ -83,7 +112,10 @@ class PantryTable extends Component {
 }
 
 const mapRStoProps = (rs) => {
-    return { pantry: rs.pantry.pantry }
+    return {
+        pantry: rs.pantry.pantry,
+        batchItems: rs.pantry.batchItems,
+    }
 }
 
 export default connect(mapRStoProps)(PantryTable);
