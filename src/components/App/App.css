@@ -1,21 +1,21 @@
-body {
+/* body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-}
+} */
 
 .alert {
     background-color: #ff4545;
     margin: 50px;
 }
 
-.login-form {
+/* .login-form {
     background-color: #dbd5d5;
     width: 30%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
     border-radius: 2px;
-}
+} */
 
 input {
     margin: 5px;

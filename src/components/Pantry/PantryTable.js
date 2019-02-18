@@ -10,7 +10,6 @@ class PantryTable extends Component {
         super(props);
         this.state = {
             action: '',
-
         }
     }
 

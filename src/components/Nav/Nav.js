@@ -3,43 +3,76 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const Nav = (props) => (
-  <div className="nav">
-    <Link to="/home">
-      <h2 className="nav-title">KitcheNexus</h2>
-    </Link>
-    <div className="nav-right">
-      <Link className="nav-link" to="/home">
-        {/* Show this link if they are logged in or not,
-        but call this link 'Home' if they are logged in,
-        and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
-      </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
-        <>
-          {/* <Link className="nav-link" to="/info">
-            Info Page
-          </Link> */}
-          <Link className="nav-link" to="/pantry">
-            Pantry
-          </Link>
-          <Link className="nav-link" to="/recipes/browse">
-            Recipes
-          </Link>
-          <Link className="nav-link" to="/grocery">
-            Grocery
-          </Link>
-          <LogOutButton className="nav-link"/>
-        </>
-      )}
-      {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
-      </Link>
-    </div>
-  </div>
+  <Grid container>
+    <Grid
+      container
+      direction='row'
+      justify='space-evenly'
+      alignItems='flex-start'
+      spacing={16}>
+      <Grid item
+        xs={8}
+        md={6}>
+        <Link to="/home" className="nav-link">
+          <Typography variant='h4' className='nav-link'>
+            KitcheNexus
+          </Typography>
+        </Link>
+      </Grid>
+      {/* renders either an about link for new users or logout for logged in users */}
+      {props.user.id ?
+        <Grid item
+          xs={2}
+          md={3}>
+          <LogOutButton className="nav-link" />
+        </Grid> :
+        <Grid item
+          xs={2}
+          md={3}>
+          <Typography align='center' type='h5'>
+            <Link className="nav-link" to="/about">
+              About</Link>
+          </Typography>
+        </Grid>}
+    </Grid>
+    {props.user.id &&
+      <Grid
+        container
+        direction='row'
+        justify='space-evenly'
+        alignItems='flex-start'
+        spacing={16}>
+        <Grid item
+          xs={4}>
+          <Typography align='center' type='h5'>
+            <Link className="nav-link"
+              to="/pantry">
+              Pantry</Link>
+          </Typography>
+        </Grid>
+        <Grid item
+          xs={4}>
+          <Typography align='center' type='h5'>
+            <Link className="nav-link"
+              to="/recipes/browse">
+              Recipes</Link>
+          </Typography>
+        </Grid>
+        <Grid item
+          xs={4}>
+          <Typography align='center' type='h5'>
+            <Link className="nav-link"
+              to="/grocery">
+              Grocery</Link>
+          </Typography>
+        </Grid>
+      </Grid >
+    }
+  </Grid>
 );
 
 // Instead of taking everything from state, we just want the user
