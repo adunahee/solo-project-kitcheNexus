@@ -21,7 +21,8 @@ const Footer = () => (
       <Tooltip title='Powered By Edamam'>
         <a href="https://www.edamam.com/"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+          id='edamamm-link'>
           <img src="https://www.edamam.com/assets/img/small-logo.png"
             alt='Edamam Logo' />
         </a>

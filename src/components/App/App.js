@@ -31,6 +31,8 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <Grid container
+          direciton='row'>
           <Grid container
             spacing={0}
             direction='column'
@@ -81,6 +83,7 @@ class App extends Component {
             </Switch>
             <Footer />
           </Grid>
+        </Grid>
       </Router>
     )
   }
