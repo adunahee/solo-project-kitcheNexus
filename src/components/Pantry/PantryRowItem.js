@@ -18,10 +18,13 @@ class PantryRowItem extends Component {
 
     }
 
-    handleCheckbox = () => {
-        console.log('box checked with this action:', this.props.action);
-        //add in logic to dispatch to batch action reducer to store object for corresponding action(post to grocery or delete from pantry)
-        //pantry delete likely needs to be updated to handle multiple deletes
+    handleCheckbox = (event) => {
+        console.log(this.props.foodObj);
+        if(event.target.checked){
+            this.props.dispatch({type: 'ADD_TO_BATCH', payload: this.props.foodObj});
+        } else {
+            this.props.dispatch({type: 'REMOVE_FROM_BATCH', payload: this.props.foodObj});
+        }
     }
 
     render() {
@@ -39,7 +42,8 @@ class PantryRowItem extends Component {
                 <td>
                     {this.props.action === '' ? 
                         null : 
-                        <input type='checkbox' onChange={this.handleCheckbox}/>}
+                        <input type='checkbox' 
+                        onChange={this.handleCheckbox}/>}
                 </td>
             </tr>
         )

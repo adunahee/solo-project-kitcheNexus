@@ -20,9 +20,21 @@ const pendingPantryItems = (state = [], action) => {
     }
 }
 
-
+const batchItems = (state = [], action ) => {
+    switch(action.type) {
+        case 'ADD_TO_BATCH':
+            return [...state, action.payload];
+        case 'REMOVE_FROM_BATCH':
+            return state.filter( (food, i) => {
+                return action.payload !== food;
+            });
+        default:
+            return state;
+    }
+}
 
 export default combineReducers({
     pantry,
     pendingPantryItems,
+    batchItems,
 });
