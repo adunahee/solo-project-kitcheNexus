@@ -79,36 +79,20 @@ router.post('/', (req, res) => {
     }
 });
 
-// router.delete('/:id', (req, res) => {
-//     if (req.isAuthenticated()) {
-//         const queryText = `DELETE FROM persons_food WHERE id = $1 AND persons_id = $2;`;
-//         pool.query(queryText, [req.params.id, req.user.id])
-//             .then(response => {
-//                 res.sendStatus(200);
-//             }).catch(error => {
-//                 console.log('error deleting from pantry:', error);
-//                 res.sendStatus(500);
-//             })
-//     } else {
-//         res.sendStatus(403);
-//     }
-// })
-
-router.delete('/', (req, res) => {
+ //tries deleting each food from pantry sent in array, put used for body access
+router.put('/delete', (req, res) => {
     console.log('in pantry delete',req.body);
     
     if (req.isAuthenticated()) {
         (async () => {
             const client = await pool.connect();
-            //tries deleting each food from pantry sent in array
             try {
-                const queryText = `DELETE FROM persons_food WHERE id = $1 AND persons_id = $2;`;
+                const queryText = `DELETE FROM persons_food WHERE persons_id = $1 AND id = $2;`;
                 const values = req.body;
                 let queryValue;
-                for (food of values) {
-                    queryValue = [req.user.id, food.persons_food_id]
+                for (obj of values) {
+                    queryValue = [req.user.id, obj.persons_food_id]
                     const response = await client.query(queryText, queryValue)
-
                 }
 
                 await client.query('COMMIT')
