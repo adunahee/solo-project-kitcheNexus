@@ -14,7 +14,9 @@ function* addToPantry(action) {
 
 function* removeFromPantry(action) {
     try {
-        yield axios.delete(`/api/pantry/${action.payload}`)
+        console.log(action.payload);
+        
+        yield axios.delete(`/api/pantry/`, action.payload)
         yield alert('Removed from pantry.');
         yield put({ type: 'FETCH_PANTRY' })
     } catch (err) {

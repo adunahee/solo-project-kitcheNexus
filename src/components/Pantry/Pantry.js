@@ -29,7 +29,7 @@ class Pantry extends Component {
 
 const mapRStoProps = (rs) => {
   return {
-    pendingPantryItems: rs.food.pendingPantryItems
+    pendingPantryItems: rs.pantry.pendingPantryItems
   }
 }
 

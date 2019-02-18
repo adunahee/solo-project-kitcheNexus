@@ -8,7 +8,7 @@ class PantryRowItem extends Component {
         if (confirmGone) {
 
             let confirmMore = await window.confirm('Do you want to order more?');
-            this.props.dispatch({ type: 'REMOVE_FROM_PANTRY', payload: this.props.foodObj.pantry_id });
+            this.props.dispatch({ type: 'REMOVE_FROM_PANTRY', payload: [this.props.foodObj] });
             if (confirmMore) {
                 this.props.dispatch({ type: 'ADD_FOOD_TO_GROCERY', payload: { groceries: [this.props.foodObj.food_name] } });
             }

@@ -144,7 +144,7 @@ class FoodFormPopup extends Component {
 const mapRStoProps = (rs) => {
     return {
         pendingGroceryItems: rs.grocery.pendingGroceryItems,
-        pendingPantryItems: rs.food.pendingPantryItems,
+        pendingPantryItems: rs.pantry.pendingPantryItems,
         foodSearchValue: rs.food.foodSearchValue,
     }
 }

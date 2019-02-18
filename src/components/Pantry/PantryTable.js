@@ -83,7 +83,7 @@ class PantryTable extends Component {
 }
 
 const mapRStoProps = (rs) => {
-    return { pantry: rs.food.pantry }
+    return { pantry: rs.pantry.pantry }
 }
 
 export default connect(mapRStoProps)(PantryTable);

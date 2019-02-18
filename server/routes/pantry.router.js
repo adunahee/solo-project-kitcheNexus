@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
         const queryText = `SELECT pantry_tags.name as pantry_tag_name, 
                             food.name as food_name,
                             food.id as food_id,
-                            persons_food.id as pantry_id FROM person 
+                            persons_food.id as persons_food_id FROM person 
                             JOIN persons_food ON person.id = persons_food.persons_id
                             JOIN pantry_tags ON pantry_tags.id = persons_food.pantry_tags_id
                             JOIN food ON food.id = persons_food.food_id
@@ -79,19 +79,54 @@ router.post('/', (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+// router.delete('/:id', (req, res) => {
+//     if (req.isAuthenticated()) {
+//         const queryText = `DELETE FROM persons_food WHERE id = $1 AND persons_id = $2;`;
+//         pool.query(queryText, [req.params.id, req.user.id])
+//             .then(response => {
+//                 res.sendStatus(200);
+//             }).catch(error => {
+//                 console.log('error deleting from pantry:', error);
+//                 res.sendStatus(500);
+//             })
+//     } else {
+//         res.sendStatus(403);
+//     }
+// })
+
+router.delete('/', (req, res) => {
+    console.log('in pantry delete',req.body);
+    
     if (req.isAuthenticated()) {
-        const queryText = `DELETE FROM persons_food WHERE id = $1 AND persons_id = $2;`;
-        pool.query(queryText, [req.params.id, req.user.id])
-            .then(response => {
+        (async () => {
+            const client = await pool.connect();
+            //tries deleting each food from pantry sent in array
+            try {
+                const queryText = `DELETE FROM persons_food WHERE id = $1 AND persons_id = $2;`;
+                const values = req.body;
+                let queryValue;
+                for (food of values) {
+                    queryValue = [req.user.id, food.persons_food_id]
+                    const response = await client.query(queryText, queryValue)
+
+                }
+
+                await client.query('COMMIT')
                 res.sendStatus(200);
-            }).catch(error => {
-                console.log('error deleting from pantry:', error);
-                res.sendStatus(500);
-            })
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+            }
+        })().catch( e => {
+            console.log('CATCH', e);
+            res.sendStatus(500);
+        })
     } else {
         res.sendStatus(403);
     }
-})
+});
 
 module.exports = router;
