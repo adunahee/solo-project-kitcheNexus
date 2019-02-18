@@ -115,7 +115,7 @@ router.get('/recent', (req, res) => {
 	                        WHERE person_recipe.person_id = $1
                             AND last_viewed >= '${oneWeekAgo}'::date
                             ORDER BY last_viewed DESC
-                            LIMIT 5;`
+                            LIMIT 5;`;
                 let value = [req.user.id];
                 let response = await pool.query(queryText, value);
 
@@ -139,6 +139,7 @@ router.get('/recent', (req, res) => {
                 }
                 // console.log(recentRecipes);
                 //sends finished recent recipe list to client
+                await client.query('COMMIT');
                 res.send(recentRecipes);
             } catch (e) {
                 console.log('ROLLBACK', e);
