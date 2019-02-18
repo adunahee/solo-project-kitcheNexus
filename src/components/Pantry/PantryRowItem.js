@@ -19,7 +19,7 @@ class PantryRowItem extends Component {
     }
 
     handleCheckbox = (event) => {
-        console.log(this.props.foodObj);
+        // console.log(this.props.foodObj);
         if(event.target.checked){
             this.props.dispatch({type: 'ADD_TO_BATCH', payload: this.props.foodObj});
         } else {

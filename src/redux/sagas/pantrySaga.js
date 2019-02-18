@@ -5,7 +5,7 @@ function* addToPantry(action) {
     try {
         yield axios.post(`/api/pantry`, action.payload);
         yield put({ type: 'FETCH_PANTRY' });
-        yield put({ type: "CLEAR_PENDING_PANTRY" })
+        yield put({ type: "CLEAR_PENDING_PANTRY" });
     } catch (err) {
         console.log('Error with addToPantry saga', err);
         yield alert('Unable to add food to pantry at this time.');
@@ -16,7 +16,8 @@ function* removeFromPantry(action) {
     try {
         yield axios.put(`/api/pantry/delete`, action.payload)
         yield alert('Removed from pantry.');
-        yield put({ type: 'FETCH_PANTRY' })
+        yield put({ type: 'FETCH_PANTRY' });
+        yield put({ type: 'CLEAR_BATCH_ITEMS' });
     } catch (err) {
         console.log('Error with removeFromPantry saga:', err);
         yield alert('Unable to remove from pantry.');

@@ -19,6 +19,7 @@ function* addToList(action) {
         yield alert('Grocery list updated.');
         yield put({ type: 'FETCH_GROCERY' });
         yield put({ type: `CLEAR_PENDING_GROCERY` });
+        yield put({ type: 'CLEAR_BATCH_ITEMS' });
     } catch (err) {
         console.log('error in addToList saga:', err);
         yield alert('Unable to add to grocery list at this time.');
@@ -59,7 +60,7 @@ function* deleteGroceryItem(action) {
     try {
         const p = action.payload;
         yield axios.delete(`/api/grocery/item/${p.grocery_list_id}/${p.id}`);
-        yield put({ type: 'FETCH_GROCERY' })
+        yield put({ type: 'FETCH_GROCERY' });
     } catch (e) {
         console.log('error in deleteGroceryItem saga:', e);
         yield alert('Unable to delete grocery item at this time.');

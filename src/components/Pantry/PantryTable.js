@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PantryRowItem from './PantryRowItem';
-
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router'
 
 
 class PantryTable extends Component {
@@ -11,6 +12,12 @@ class PantryTable extends Component {
             action: '',
 
         }
+    }
+
+    static propTypes = {
+        match: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
     }
 
     buildPantryTableRows = () => {
@@ -40,11 +47,16 @@ class PantryTable extends Component {
                 case ('Used Up'):
                     return this.props.dispatch({
                         type: 'REMOVE_FROM_PANTRY',
+                        payload: this.props.batchItems,
                     })
                 case ('Find Recipes'):
-                    return this.props.dispatch({
+                    this.props.dispatch({
                         type: 'FETCH_RECIPES',
+                        payload: this.props.batchItems.map(food => {
+                            return food.food_name
+                        }).join(' '),
                     })
+                    return this.props.history.push('/recipes/browse');
                 default:
                     return null;
             }
@@ -111,6 +123,8 @@ class PantryTable extends Component {
     }
 }
 
+const PantryTableWithRouter = withRouter(PantryTable);
+
 const mapRStoProps = (rs) => {
     return {
         pantry: rs.pantry.pantry,
@@ -118,4 +132,4 @@ const mapRStoProps = (rs) => {
     }
 }
 
-export default connect(mapRStoProps)(PantryTable);
+export default connect(mapRStoProps)(PantryTableWithRouter);

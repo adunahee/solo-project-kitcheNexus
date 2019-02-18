@@ -28,6 +28,8 @@ const batchItems = (state = [], action ) => {
             return state.filter( (food, i) => {
                 return action.payload !== food;
             });
+        case 'CLEAR_BATCH_ITEMS':
+            return [];
         default:
             return state;
     }
