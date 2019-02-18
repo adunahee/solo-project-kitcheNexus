@@ -43,7 +43,7 @@ class RecipeCard extends Component {
                 <Card>
                     <CardHeader
                         title={this.props.recipe.label}
-                        subheader={`Cook Time: ${this.props.recipe.totalTime}`} />
+                        subheader={`Cook Time ${ this.props.recipe.totalTime > 0 ? `: ${this.props.recipe.totalTime}` : `Unlisted`}`} />
                     <CardMedia
                         image={this.props.recipe.image}
                         className='recipe-image' />
