@@ -34,7 +34,7 @@ class App extends Component {
           <Grid container
             spacing={0}
             direction='column'
-            justify='flex-start'
+            justify='center'
             alignItems='center'
           >
             <Nav />

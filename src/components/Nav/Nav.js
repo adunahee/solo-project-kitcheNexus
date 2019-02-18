@@ -13,32 +13,22 @@ const Nav = (props) => (
       direction='row'
       justify='space-evenly'
       alignItems='flex-start'
-      spacing={16}>
-      <Grid item
-        xs={8}
-        md={6}>
+      spacing={0}>
         <Link to="/home" className="nav-link">
-          <Typography variant='h4' className='nav-link'>
+          <Typography variant='h3' className='nav-link'>
             KitcheNexus
           </Typography>
         </Link>
-      </Grid>
-      {/* renders either an about link for new users or logout for logged in users */}
-      {props.user.id ?
-        <Grid item
-          xs={2}
-          md={3}>
-          <LogOutButton className="nav-link" />
-        </Grid> :
-        <Grid item
-          xs={2}
-          md={3}>
+        {props.user.id ?
+        
+          <LogOutButton className="nav-link" /> :
           <Typography align='center' type='h5'>
             <Link className="nav-link" to="/about">
               About</Link>
-          </Typography>
-        </Grid>}
+          </Typography>}
+      {/* renders either an about link for new users or logout for logged in users */}
     </Grid>
+
     {props.user.id &&
       <Grid
         container

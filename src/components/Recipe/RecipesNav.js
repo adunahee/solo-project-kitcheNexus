@@ -19,25 +19,22 @@ class RecipesNav extends Component {
         return (
             <Grid container
                 direction='row'
-                justify='space-evenly'
+                justify='center'
                 alignItems='flex-start'
-                spacing={16}>
-                <Grid item
-                    xs={4}>
+                spacing={8}>
+                <Grid item>
                     <Typography align='center' type='h5'>
                         <Link to={`${this.props.match.url}/browse`}
                             className='nav-link'>Browse</Link>
                     </Typography>
                 </Grid>
-                <Grid item
-                    xs={4}>
+                <Grid item>
                     <Typography align='center' type='h5'>
                         <Link to={`${this.props.match.url}/favorites`}
                             className='nav-link'>Favorites</Link>
                     </Typography>
                 </Grid>
-                <Grid item
-                    xs={4}>
+                <Grid item>
                     <Typography align='center' type='h5'>
                         <Link to={`${this.props.match.url}/recent`}
                             className='nav-link'>Recent</Link>
