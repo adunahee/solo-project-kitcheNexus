@@ -3,3 +3,34 @@ a {
   text-align: center;
   text-decoration: none;
 }
+
+.header-div {
+  background-color: #aedd94;
+}
+
+.pantry-view-false {
+  background-color: #ffb4b0;
+}
+
+.pantry-view-true {
+  background-color: #ff5d55;
+  font-weight: bold;
+}
+
+.grocery-view-false {
+  background-color: #a8c6fa;
+}
+
+.grocery-view-true {
+  background-color: #3d8af7;
+  font-weight: bold;
+}
+
+.recipes-view-false {
+  background-color: #ffe3ae;
+}
+
+.recipes-view-true {
+  background-color: #ffc957;
+  font-weight: bold;
+}

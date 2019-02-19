@@ -1,24 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import { withStyles } from '@material-ui/core/styles';
 
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import PageNav from './PageNav';
 
 class Nav extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   }
 
   render() {
-    console.log(this.props);
-    
+
     return (
       <Grid container>
         <Grid
@@ -26,7 +27,8 @@ class Nav extends React.Component {
           direction='row'
           justify='space-evenly'
           alignItems='flex-start'
-          spacing={0}>
+          spacing={0}
+          className='header-div'>
           <Link to="/home" className="nav-link">
             <Typography variant='h3' className='nav-link'>
               KitcheNexus
@@ -43,47 +45,17 @@ class Nav extends React.Component {
         </Grid>
 
         {this.props.user.id &&
-          <Grid
-            container
-            direction='row'
-            justify='space-evenly'
-            alignItems='flex-start'
-            spacing={16}>
-            <Grid item
-              xs={4}>
-              <Typography align='center' type='h4'>
-                <Link className="nav-link"
-                  to="/pantry">
-                  Pantry</Link>
-              </Typography>
-            </Grid>
-            <Grid item
-              xs={4}>
-              <Typography align='center' type='h4'>
-                <Link className="nav-link"
-                  to="/recipes/browse">
-                  Recipes</Link>
-              </Typography>
-            </Grid>
-            <Grid item
-              xs={4}>
-              <Typography align='center' type='h4'>
-                <Link className="nav-link"
-                  to="/grocery">
-                  Grocery</Link>
-              </Typography>
-            </Grid>
-          </Grid >
+        <PageNav />
         }
       </Grid>
     )
   }
 }
 
-const NavWithRouter = withRouter(Nav)
-
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(NavWithRouter);
+//withRouter must wrap connect component thats created 
+//otherwise history changes not detected on props and nav does not rerender
+export default withRouter(connect(mapStateToProps)(Nav));
