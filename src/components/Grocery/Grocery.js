@@ -20,7 +20,6 @@ class Grocery extends Component {
   render() {
     return (
       <div>
-        <h1>Grocery</h1>
         <NewGroceryList />
         {this.props.listNames.length > 0 ? this.buildGroceryLists() : <p>You have no grocery lists yet!</p>
 

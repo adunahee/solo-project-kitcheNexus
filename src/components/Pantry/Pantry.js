@@ -19,7 +19,6 @@ class Pantry extends Component {
   render() {
     return (
       <div>
-        <h1>Pantry</h1>
         <FoodFormPopup pageView='PANTRY'/>
         <PantryTable />
       </div>

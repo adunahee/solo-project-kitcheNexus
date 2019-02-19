@@ -1,25 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { withStyles } from '@material-ui/core/styles';
 
-import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
-const styles = {
-    pantry: {
-
-    },
-    recipes: {
-
-    }, 
-    grocery: {
-
-    }
-}
 
 class PageNav extends React.Component {
     pantryClass = () => {
@@ -34,11 +19,10 @@ class PageNav extends React.Component {
 
     recipesClass = () => {
         const location = this.props.location.pathname;
-        switch (location) {
-            case ('/recipes'):
-                return 'recipes-view-true'
-            default:
-                return 'recipes-view-false';
+        if(location.indexOf( 'recipe') > -1 ){
+            return 'recipes-view-true';
+        } else {
+            return 'recipes-view-false';
         }
     }
 
@@ -94,4 +78,4 @@ class PageNav extends React.Component {
 
 const PageNavWithRouter = withRouter(PageNav);
 
-export default withStyles(styles)(PageNavWithRouter);
+export default PageNavWithRouter;

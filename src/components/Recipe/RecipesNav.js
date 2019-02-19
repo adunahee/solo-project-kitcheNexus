@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import '../Nav/Nav.css';
+
 
 class RecipesNav extends Component {
     static propTypes = {
@@ -13,33 +15,71 @@ class RecipesNav extends Component {
         history: PropTypes.object.isRequired
     }
 
-    render() {
-        // console.log(this.props);
+    browseClass = () => {
+        const location = this.props.location.pathname;
+        console.log(location);
+        switch (location) {
+            case ('/recipes/browse'):
+                return 'recipes-view-true';
+            default:
+                return 'recipes-view-false';
+        }
+    }
 
+    favoritesClass = () => {
+        const location = this.props.location.pathname;
+        console.log(location);
+        switch (location) {
+            case ('/recipes/favorites'):
+                return 'recipes-view-true';
+            default:
+                return 'recipes-view-false';
+        }
+    }
+
+    recentClass = () => {
+        const location = this.props.location.pathname;
+        console.log(location);
+        switch (location) {
+            case ('/recipes/recent'):
+                return 'recipes-view-true'
+            default:
+                return 'recipes-view-false';
+        }
+    }
+
+    render() {
         return (
             <Grid container
                 direction='row'
-                justify='center'
+                justify='space-evenly'
                 alignItems='flex-start'
-                spacing={8}>
-                <Grid item>
-                    <Typography align='center' type='h5'>
-                        <Link to={`${this.props.match.url}/browse`}
-                            className='nav-link'>Browse</Link>
-                    </Typography>
+                spacing={0}>
+
+                <Grid item
+                    xs={4}>
+                    <Link to={`${this.props.match.url}/browse`}
+                        className='nav-link'>
+                        <Typography align='center' type='h5' className={this.browseClass()}> Browse</Typography>
+                    </Link>
                 </Grid>
-                <Grid item>
-                    <Typography align='center' type='h5'>
-                        <Link to={`${this.props.match.url}/favorites`}
-                            className='nav-link'>Favorites</Link>
-                    </Typography>
+
+                <Grid item
+                    xs={4}>
+                    <Link to={`${this.props.match.url}/favorites`}
+                        className='nav-link'>
+                        <Typography align='center' type='h5' className={this.favoritesClass()}>Favorites</Typography>
+                    </Link>
                 </Grid>
-                <Grid item>
-                    <Typography align='center' type='h5'>
-                        <Link to={`${this.props.match.url}/recent`}
-                            className='nav-link'>Recent</Link>
-                    </Typography>
+
+                <Grid item
+                    xs={4}>
+                    <Link to={`${this.props.match.url}/recent`}
+                        className='nav-link'>
+                        <Typography align='center' type='h5' className={this.recentClass()}>Recent</Typography>
+                    </Link>
                 </Grid>
+
             </Grid>
         )
     }

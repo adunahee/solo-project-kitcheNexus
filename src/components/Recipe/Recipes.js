@@ -5,6 +5,7 @@ import RecipeRecent from './RecipeRecent';
 import RecipeFavorites from './RecipeFavorites';
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {Route} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 class Recipes extends Component {
 
@@ -12,9 +13,9 @@ class Recipes extends Component {
     // console.log(this.props);
 
     return (
-      <div>
+      <Grid container
+      direction='column'>
         <RecipesNav />
-        <h1>Recipes</h1>
         <Route exact path='/recipes/browse'
           component={RecipeBrowse}
         />
@@ -23,7 +24,7 @@ class Recipes extends Component {
         />
         <Route exact path='/recipes/favorites'
         component={RecipeFavorites}/>
-      </div>
+      </Grid>
     )
   }
 }

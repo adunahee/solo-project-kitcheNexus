@@ -14,7 +14,7 @@ a {
 
 .pantry-view-true {
   background-color: #ff5d55;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .grocery-view-false {
@@ -23,7 +23,7 @@ a {
 
 .grocery-view-true {
   background-color: #3d8af7;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .recipes-view-false {
@@ -32,5 +32,5 @@ a {
 
 .recipes-view-true {
   background-color: #ffc957;
-  font-weight: bold;
+  font-weight: bold !important;
 }
