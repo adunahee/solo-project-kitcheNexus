@@ -21,7 +21,6 @@ class RecipeFavorites extends Component {
   render() {
     return (
       <div>
-        <h2>Favorites</h2>
             {this.props.favorites.length > 0 ? 
             this.buildFavoritesCards():
         <Typography>You have no favorites at this time.  Click <FavoriteIcon /> Icon on recipes you want to easily access later!</Typography>}

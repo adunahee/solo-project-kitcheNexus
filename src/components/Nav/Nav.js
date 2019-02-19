@@ -25,7 +25,7 @@ class Nav extends React.Component {
           container
           direction='row'
           justify='space-evenly'
-          alignItems='flex-start'
+          alignItems='center'
           spacing={0}
           className='header-div'>
           <Link to="/home" className="nav-link">

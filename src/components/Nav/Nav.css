@@ -3,9 +3,21 @@ a {
   text-align: center;
   text-decoration: none;
 }
+a:active {
+  background-color:inherit;
+}
 
 .header-div {
   background-color: #aedd94;
+  height: 80px;
+}
+
+.page-nav-div {
+  height: 40px;
+
+}
+.page-nav-div:active {
+  background-color: ;
 }
 
 .pantry-view-false {

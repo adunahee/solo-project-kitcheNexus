@@ -39,6 +39,7 @@ function* addFavorite(action) {
     try{
         yield axios.post('/recipe/favorite', { uri: encodeURIComponent(action.payload)})
         yield alert('Favorite Status Updated!');
+        yield put({type: 'FETCH_FAVORITES'});
     } catch(err) {
         console.log('error in addFavorite saga:', err);
         yield alert('Unable to favorite recipe at this time.');

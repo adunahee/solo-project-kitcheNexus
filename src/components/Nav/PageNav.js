@@ -30,7 +30,7 @@ class PageNav extends React.Component {
         const location = this.props.location.pathname;
         switch (location) {
             case ('/grocery'):
-                return 'grocery-view-true'
+                return 'grocery-view-true';
             default:
                 return 'grocery-view-false';
         }
@@ -42,10 +42,12 @@ class PageNav extends React.Component {
             direction='row'
             justify='space-evenly'
             alignItems='flex-start'
-            spacing={0}>
+            spacing={0}
+            >
 
             <Grid item
-                xs={4}>
+                xs={4}
+                className={`page-nav-div ${this.pantryClass()}`}>
                 <Link className="nav-link"
                     to="/pantry">
                     <Typography align='center' type='h4' className={this.pantryClass()}>
@@ -54,7 +56,8 @@ class PageNav extends React.Component {
             </Grid>
 
             <Grid item
-                xs={4}>
+                xs={4}
+                className={`page-nav-div ${this.recipesClass()}`}>
                 <Link className="nav-link"
                     to="/recipes/browse">
                     <Typography align='center' type='h4' className={this.recipesClass()}>
@@ -63,7 +66,8 @@ class PageNav extends React.Component {
             </Grid>
 
             <Grid item
-                xs={4}>
+                xs={4}
+                className={`page-nav-div ${this.groceryClass()}`}>
                 <Link className="nav-link"
                     to="/grocery">
                     <Typography align='center' type='h4' className={this.groceryClass()}>
