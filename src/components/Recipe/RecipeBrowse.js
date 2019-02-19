@@ -3,6 +3,9 @@ import RecipeCard from './RecipeCard';
 import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import './Recipe.css';
+
+import Grid from '@material-ui/core/Grid';
 
 class RecipeBrowse extends Component {
 
@@ -13,9 +16,14 @@ class RecipeBrowse extends Component {
 
     buildRecipeCards = () => {
         // console.log(this.props.recipeHits);
-        return this.props.recipeHits.map((recipe, i) => {
-            return <RecipeCard recipe={recipe} key={i} />
-        })
+        return (
+            <Grid container
+                className='recipe-book'
+                direction='row'
+                spacing={16}>
+                { this.props.recipeHits.map((recipe, i) => {return <RecipeCard recipe={recipe} key={i} />})}
+            </Grid>
+            )
     }
 
     handleClear = () => {

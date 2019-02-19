@@ -6,3 +6,8 @@
 .expand-open {
     transform: rotate(180deg);
 }
+
+.recipe-book {
+    overflow-x: scroll;
+    height: 400px;
+}

@@ -57,7 +57,8 @@ class RecipesNav extends Component {
                 spacing={0}>
 
                 <Grid item
-                    xs={4}>
+                    xs={4}
+                    className={`recipe-nav-div ${this.browseClass()}`}>
                     <Link to={`${this.props.match.url}/browse`}
                         className='nav-link'>
                         <Typography align='center' type='h5' className={this.browseClass()}> Browse</Typography>
@@ -65,7 +66,8 @@ class RecipesNav extends Component {
                 </Grid>
 
                 <Grid item
-                    xs={4}>
+                    xs={4}
+                    className={`recipe-nav-div ${this.favoritesClass()}`}>
                     <Link to={`${this.props.match.url}/favorites`}
                         className='nav-link'>
                         <Typography align='center' type='h5' className={this.favoritesClass()}>Favorites</Typography>
@@ -73,7 +75,8 @@ class RecipesNav extends Component {
                 </Grid>
 
                 <Grid item
-                    xs={4}>
+                    xs={4}
+                    className={`recipe-nav-div ${this.recentClass()}`}>
                     <Link to={`${this.props.match.url}/recent`}
                         className='nav-link'>
                         <Typography align='center' type='h5' className={this.recentClass()}>Recent</Typography>

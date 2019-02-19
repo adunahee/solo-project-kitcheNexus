@@ -14,6 +14,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
 
 import './Recipe.css';
 
@@ -39,18 +40,18 @@ class RecipeCard extends Component {
 
     render() {
         return (
-            <div>
+            <Grid item >
                 <Card>
                     <CardHeader
                         title={this.props.recipe.label}
-                        subheader={`Cook Time ${ this.props.recipe.totalTime > 0 ? `: ~${this.props.recipe.totalTime} min` : `Unlisted`}`} />
+                        subheader={`Cook Time ${this.props.recipe.totalTime > 0 ? `: ~${this.props.recipe.totalTime} min` : `Unlisted`}`} />
                     <CardMedia
                         image={this.props.recipe.image}
                         className='recipe-image' />
                     <CardActions>
-                        <IconButton 
-                        onClick={this.handleFavorite}
-                        aria-label="Add to favorites">
+                        <IconButton
+                            onClick={this.handleFavorite}
+                            aria-label="Add to favorites">
                             <FavoriteIcon />
                         </IconButton>
                         <a href={this.props.recipe.url}
@@ -88,7 +89,7 @@ class RecipeCard extends Component {
                         </CardContent>
                     </Collapse>
                 </Card>
-            </div>
+            </Grid>
         )
     }
 }

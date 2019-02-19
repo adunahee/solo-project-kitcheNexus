@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import RecipeCard from './RecipeCard';
+import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
 
 class RecipeFavorites extends Component {
 
@@ -20,11 +22,15 @@ class RecipeFavorites extends Component {
 
   render() {
     return (
-      <div>
-            {this.props.favorites.length > 0 ? 
-            this.buildFavoritesCards():
-        <Typography>You have no favorites at this time.  Click <FavoriteIcon /> Icon on recipes you want to easily access later!</Typography>}
-      </div>
+      <Grid container>
+      {this.props.favorites.length > 0 ? 
+            this.buildFavoritesCards()
+            :
+        <Typography>
+          You have no favorites at this time.  
+          Click <FavoriteIcon /> Icon on recipes you want to easily access later!
+          </Typography>}
+      </Grid>   
     )
   }
 }
