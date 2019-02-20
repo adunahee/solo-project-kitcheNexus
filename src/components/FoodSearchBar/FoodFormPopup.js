@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import FoodSearchBar from './FoodSearchBar';
 import { connect } from 'react-redux';
+
+import FoodSearchBar from './FoodSearchBar';
+import FoodToAddList from './FoodToAddList';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -82,12 +84,16 @@ class FoodFormPopup extends Component {
         }
     }
 
-    checkForDuplicates = (pageView) => {
-        switch(pageView){
-            case('PANTRY'):
-                return 'in pantry';
-            case('GROCERY'):
-                return 'in grocery';
+    checkForDuplicates = (pageView, item) => {
+        switch (pageView) {
+            case ('PANTRY'):
+                if (this.props.pantry.filter(pantryItem => pantryItem.food_name === item).length > 0) {
+                    return 'already in pantry';
+                } else { return '' }
+            case ('GROCERY'):
+                if (this.props.grocery.filter(groceryItem => groceryItem.name === item).length > 0) {
+                    return 'already on a list';
+                } else { return '' }
             default:
                 return '';
         }
@@ -144,21 +150,7 @@ class FoodFormPopup extends Component {
                         </form>
                         <br />
                         <DialogContent>
-                            <div>
-                                <DialogContentText>Items to Add</DialogContentText>
-                                {this.props.pageView === 'GROCERY' && this.props.pendingGroceryItems.length > 0 &&
-                                    <ul>
-                                        {this.props.pendingGroceryItems.map((item, i) => {
-                                            return <li key={i}> {item} {this.checkForDuplicates()}</li>
-                                        })}
-                                    </ul>}
-                                {this.props.pageView === 'PANTRY' && this.props.pendingPantryItems.length > 0 &&
-                                    <ul>
-                                        {this.props.pendingPantryItems.map((item, i) => {
-                                            return <li key={i}> {item} {this.checkForDuplicates(this.props.pageView)}</li>
-                                        })}
-                                    </ul>}
-                            </div>
+                            <FoodToAddList pageView={this.props.pageView} />
                         </DialogContent>
 
                     </Grid>
