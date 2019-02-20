@@ -3,7 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 //gets food names and pantry tags for given user
-router.get('/', (req, res) => {
+router.get('/food', (req, res) => {
+    console.log('in pantry food get');
+    
     if (req.isAuthenticated()) {
         const queryText = `SELECT pantry_tags.name as pantry_tag_name, 
                             food.name as food_name,
@@ -113,5 +115,23 @@ router.put('/delete', (req, res) => {
         res.sendStatus(403);
     }
 });
+
+router.get('/tags', (req, res) => {
+    console.log('in pantry tags get');
+    if(req.isAuthenticated()){
+        const queryText = `SELECT * FROM pantry_tags
+                            WHERE id != 99999;`;
+        pool.query(queryText)
+            .then(response => {
+                // console.log(response.rows);
+                res.send(response.rows);
+            }).catch(error => {
+                res.sendStatus(500);
+                console.log('error getting pantry', error);
+            })
+    }else {
+        res.sendStatus(403);
+    }
+})
 
 module.exports = router;

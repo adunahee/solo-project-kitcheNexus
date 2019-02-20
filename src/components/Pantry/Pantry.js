@@ -12,7 +12,8 @@ class Pantry extends Component {
 
 
   componentDidMount() {
-    this.props.dispatch({ type: "FETCH_PANTRY" })
+    this.props.dispatch({ type: "FETCH_PANTRY" });
+    this.props.dispatch({ type: 'FETCH_PANTRY_TAGS'})
   }
 
   handleSubmit = (event) => {

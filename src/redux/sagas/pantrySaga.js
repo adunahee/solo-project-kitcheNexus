@@ -27,8 +27,19 @@ function* removeFromPantry(action) {
 
 function* fetchPantry() {
     try {
-        const response = yield axios.get('/api/pantry');
+        const response = yield axios.get('/api/pantry/food');
         yield put({ type: 'SET_PANTRY', payload: response.data })
+    }
+    catch (err) {
+        console.log('error with fetchPantry saga', err);
+        yield alert('Unable to fetch pantry at this time.');
+    }
+}
+
+function* fetchTags() {
+    try {
+        const response = yield axios.get('/api/pantry/tags');
+        yield put({ type: 'SET_PANTRY_TAGS', payload: response.data })
     }
     catch (err) {
         console.log('error with fetchPantry saga', err);
@@ -40,6 +51,7 @@ function* pantrySaga() {
     yield takeLatest('ADD_FOOD_TO_PANTRY', addToPantry);
     yield takeEvery('FETCH_PANTRY', fetchPantry);
     yield takeLatest('REMOVE_FROM_PANTRY', removeFromPantry);
+    yield takeLatest('FETCH_PANTRY_TAGS', fetchTags);
 }
 
 export default pantrySaga;
