@@ -65,6 +65,7 @@ CREATE TABLE "persons_food" (
 	"persons_id" integer NOT NULL,
 	"food_id" integer NOT NULL,
 	"pantry_tags_id" integer NOT NULL default 99999,
+	"date_added" DATE NOT NULL DEFAULT CURRENT_DATE,
 	CONSTRAINT persons_food_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

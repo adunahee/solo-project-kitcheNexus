@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
         const queryText = `SELECT pantry_tags.name as pantry_tag_name, 
                             food.name as food_name,
                             food.id as food_id,
-                            persons_food.id as persons_food_id FROM person 
+                            persons_food.id as persons_food_id,
+                            persons_food.date_added FROM person 
                             JOIN persons_food ON person.id = persons_food.persons_id
                             JOIN pantry_tags ON pantry_tags.id = persons_food.pantry_tags_id
                             JOIN food ON food.id = persons_food.food_id

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 class PantryRowItem extends Component {
 
@@ -48,7 +49,7 @@ class PantryRowItem extends Component {
                     {this.props.foodObj.pantry_tag_name}
                 </td>
                 <td>
-                    othershit
+                    {moment(this.props.foodObj.date_added).fromNow(true)}
                 </td>
                 <td>
                     {this.props.batchAction &&
