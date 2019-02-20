@@ -17,13 +17,13 @@ class PantryTagSelect extends Component {
         // this.props.dispatch({''})
         console.log('in handleTagChange');
         this.setState({value: event.target.value});
+        const newTagFoodObj = this.props.foodObj;
+        newTagFoodObj.tag_id = event.target.value;
         this.props.dispatch(
             {
                 type: 'ADD_TO_BATCH', 
-                payload: {
-                persons_food_id: this.props.foodObj.persons_food_id, 
-                tag_id: event.target.value,
-            }})
+                payload: newTagFoodObj,
+            })
     }
 
     buildOptions = () => {
