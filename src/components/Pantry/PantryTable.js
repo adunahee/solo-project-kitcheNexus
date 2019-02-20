@@ -25,10 +25,10 @@ class PantryTable extends Component {
                                     Food Name
                             </th>
                                 <th>
-                                    Pantry Tag
+                                    Tag
                             </th>
                                 <th>
-                                    Date Added
+                                    "Age"
                             </th>
                                 <th>{this.props.batchAction === '' ? null : 'Select'}</th>
                             </tr>
