@@ -81,6 +81,9 @@ class BatchActions extends Component {
                     <option value='Find Recipes'>
                         Find Recipes
                     </option>
+                    <option value='Update Tags'>
+                        Update Tags
+                    </option>
                 </select>
                 {this.props.batchAction !== '' && <button onClick={this.handleActionButton}>{actionButtonDescription}</button>}
             </Grid>

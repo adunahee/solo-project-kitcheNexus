@@ -11,7 +11,8 @@ router.get('/food', (req, res) => {
                             food.name as food_name,
                             food.id as food_id,
                             persons_food.id as persons_food_id,
-                            persons_food.date_added FROM person 
+                            persons_food.date_added,
+                            pantry_tags.id as tag_id FROM person 
                             JOIN persons_food ON person.id = persons_food.persons_id
                             JOIN pantry_tags ON pantry_tags.id = persons_food.pantry_tags_id
                             JOIN food ON food.id = persons_food.food_id
@@ -119,8 +120,7 @@ router.put('/delete', (req, res) => {
 router.get('/tags', (req, res) => {
     console.log('in pantry tags get');
     if(req.isAuthenticated()){
-        const queryText = `SELECT * FROM pantry_tags
-                            WHERE id != 99999;`;
+        const queryText = `SELECT * FROM pantry_tags;`;
         pool.query(queryText)
             .then(response => {
                 // console.log(response.rows);

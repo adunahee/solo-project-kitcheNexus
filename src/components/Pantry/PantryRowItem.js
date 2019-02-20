@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import PantryTagSelect from './PantryTagSelect';
+
 class PantryRowItem extends Component {
 
     handleClick = async () => {
@@ -46,7 +48,11 @@ class PantryRowItem extends Component {
                     {this.props.foodObj.food_name}
                 </td>
                 <td>
-                    {this.props.foodObj.pantry_tag_name}
+                    {this.props.batchAction === 'Update Tags' ? 
+                        <PantryTagSelect 
+                            tagValue={this.props.foodObj.tag_id}
+                            /> : 
+                        this.props.foodObj.pantry_tag_name}
                 </td>
                 <td>
                     {moment(this.props.foodObj.date_added).fromNow(true)}
