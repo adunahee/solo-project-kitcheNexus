@@ -30,13 +30,20 @@ class PantryRowItem extends Component {
         }
     }
 
-    checkBatchItems = () => {
+    //used so checked attribute present if foodObj is in batchItems 
+    buildCheckBox = () => {
         if (this.props.batchItems) {
             console.log('batchItems evaling true');
-
-            return this.props.batchItems.includes(this.props.foodObj)
+            if (this.props.batchItems.includes(this.props.foodObj)) {
+                return <input type='checkbox'
+                    onChange={this.handleCheckbox}
+                    checked
+                />
+            }
         } else {
-            return false;
+            return <input type='checkbox'
+                onChange={this.handleCheckbox}
+            />
         }
 
     }
@@ -48,10 +55,10 @@ class PantryRowItem extends Component {
                     {this.props.foodObj.food_name}
                 </td>
                 <td>
-                    {this.props.batchAction === 'Update Tags' ? 
-                        <PantryTagSelect 
-                            tagValue={this.props.foodObj.tag_id}
-                            /> : 
+                    {this.props.batchAction === 'Update Tags' ?
+                        <PantryTagSelect
+                            foodObj={this.props.foodObj}
+                        /> :
                         this.props.foodObj.pantry_tag_name}
                 </td>
                 <td>
@@ -59,8 +66,7 @@ class PantryRowItem extends Component {
                 </td>
                 <td>
                     {this.props.batchAction && this.props.batchAction !== 'Update Tags' &&
-                        <input type='checkbox'
-                            onChange={this.handleCheckbox} />}
+                        this.buildCheckBox()}
                 </td>
             </tr>
         )

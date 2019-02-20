@@ -4,11 +4,26 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
 class PantryTagSelect extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            value:  this.props.foodObj.tag_name === null ? 
+                '' : 
+                this.props.foodObj.tag_id,
+        }
+    }
 
-    handleTagChange = () => {
+    handleTagChange = (event) => {
         // this.props.dispatch({''})
         console.log('in handleTagChange');
-        
+        this.setState({value: event.target.value});
+        this.props.dispatch(
+            {
+                type: 'ADD_TO_BATCH', 
+                payload: {
+                persons_food_id: this.props.foodObj.persons_food_id, 
+                tag_id: event.target.value,
+            }})
     }
 
     buildOptions = () => {
@@ -25,7 +40,7 @@ class PantryTagSelect extends Component {
     render() {
         return (
             <Grid item>
-                <select value={this.props.tagValue === null ? '': this.props.tagValue} 
+                <select value={this.state.value}
                     onChange={this.handleTagChange}>
                     <option value='' disabled>
                     Choose One

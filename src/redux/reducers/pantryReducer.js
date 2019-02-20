@@ -57,10 +57,20 @@ const pantryTags = (state = [], action) => {
     }
 }
 
+const foodTagsToUpdate = (state = [], action) => {
+    switch(action.type){
+        case 'UPDATE_TAG':
+            return [...state, action.payload]
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     pantry,
     pendingPantryItems,
     batchItems,
     batchAction,
-    pantryTags
+    pantryTags,
+    foodTagsToUpdate,
 });

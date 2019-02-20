@@ -13,6 +13,7 @@ class BatchActions extends Component {
     }
 
     handleActionChange = (event) => {
+        this.props.dispatch({type: 'CLEAR_BATCH_ITEMS'});
         this.props.dispatch({type: 'SET_ACTION', payload: event.target.value });
     }
 
