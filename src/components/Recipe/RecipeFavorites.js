@@ -6,7 +6,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import RecipeCard from './RecipeCard';
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
 
 class RecipeFavorites extends Component {
 

@@ -35,8 +35,20 @@ const batchItems = (state = [], action ) => {
     }
 }
 
+const batchAction = (state = '', action) => {
+    switch(action.type) {
+        case 'SET_ACTION':
+            return action.payload;
+        case 'CLEAR_BATCH_ACTION':
+            return '';
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     pantry,
     pendingPantryItems,
     batchItems,
+    batchAction
 });

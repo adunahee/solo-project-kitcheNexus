@@ -20,6 +20,7 @@ function* addToList(action) {
         yield put({ type: 'FETCH_GROCERY' });
         yield put({ type: `CLEAR_PENDING_GROCERY` });
         yield put({ type: 'CLEAR_BATCH_ITEMS' });
+        yield put({type: 'CLEAR_BATCH_ACTION'});
     } catch (err) {
         console.log('error in addToList saga:', err);
         yield alert('Unable to add to grocery list at this time.');

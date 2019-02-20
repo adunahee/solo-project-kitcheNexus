@@ -8,6 +8,7 @@ function* fetchRecipes(action) {
         yield put({ type: 'SET_RECIPE_HITS', payload: response.data });
         yield put({ type: 'CLEAR_SEARCH_VALUE' });
         yield put({ type: 'CLEAR_BATCH_ITEMS' });
+        yield put({ type: 'CLEAR_BATCH_ACTION' });
     } catch (error) {
         console.log('Error with fetchRecipes saga:', error);
     }

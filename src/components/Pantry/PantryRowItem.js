@@ -20,16 +20,27 @@ class PantryRowItem extends Component {
 
     handleCheckbox = (event) => {
         // console.log(this.props.foodObj);
-        if(event.target.checked){
-            this.props.dispatch({type: 'ADD_TO_BATCH', payload: this.props.foodObj});
+        if (event.target.checked) {
+            this.props.dispatch({ type: 'ADD_TO_BATCH', payload: this.props.foodObj });
         } else {
-            this.props.dispatch({type: 'REMOVE_FROM_BATCH', payload: this.props.foodObj});
+            this.props.dispatch({ type: 'REMOVE_FROM_BATCH', payload: this.props.foodObj });
         }
+    }
+
+    checkBatchItems = () => {
+        if (this.props.batchItems) {
+            console.log('batchItems evaling true');
+
+            return this.props.batchItems.includes(this.props.foodObj)
+        } else {
+            return false;
+        }
+
     }
 
     render() {
         return (
-            <tr onClick={ this.props.action === '' ? this.handleClick : null}>
+            <tr onClick={this.props.batchAction === '' ? this.handleClick : null}>
                 <td>
                     {this.props.foodObj.food_name}
                 </td>
@@ -40,14 +51,20 @@ class PantryRowItem extends Component {
                     othershit
                 </td>
                 <td>
-                    {this.props.action === '' ? 
-                        null : 
-                        <input type='checkbox' 
-                        onChange={this.handleCheckbox}/>}
+                    {this.props.batchAction &&
+                        <input type='checkbox'
+                            onChange={this.handleCheckbox} />}
                 </td>
             </tr>
         )
     }
 }
 
-export default connect()(PantryRowItem);
+const mapRStoProps = (rs) => {
+    return {
+        batchItems: rs.food.batchItems,
+        batchAction: rs.pantry.batchAction,
+    }
+}
+
+export default connect(mapRStoProps)(PantryRowItem);

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import FoodFormPopup from '../FoodSearchBar/FoodFormPopup';
 import { connect } from 'react-redux';
+
+import FoodFormPopup from '../FoodSearchBar/FoodFormPopup';
 import PantryTable from './PantryTable';
+import BatchActions from './BatchActions';
+
+import Grid from '@material-ui/core/Grid';
 
 class Pantry extends Component {
 
-  
+
 
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_PANTRY" })
@@ -18,10 +22,15 @@ class Pantry extends Component {
 
   render() {
     return (
-      <div>
-        <FoodFormPopup pageView='PANTRY'/>
+      <Grid container>
+        <Grid container
+          alignItems='baseline'
+          justify='space-evenly'>
+          <FoodFormPopup pageView='PANTRY' />
+          <BatchActions />
+        </Grid>
         <PantryTable />
-      </div>
+      </Grid>
     )
   }
 }

@@ -3,9 +3,6 @@ a {
   text-align: center;
   text-decoration: none;
 }
-a:active {
-  background-color:inherit;
-}
 
 .header-div {
   background-color: #aedd94;

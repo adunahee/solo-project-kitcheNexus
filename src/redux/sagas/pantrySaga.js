@@ -18,6 +18,7 @@ function* removeFromPantry(action) {
         yield alert('Removed from pantry.');
         yield put({ type: 'FETCH_PANTRY' });
         yield put({ type: 'CLEAR_BATCH_ITEMS' });
+        yield put({ type: 'CLEAR_BATCH_ACTION' });
     } catch (err) {
         console.log('Error with removeFromPantry saga:', err);
         yield alert('Unable to remove from pantry.');
