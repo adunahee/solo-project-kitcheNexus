@@ -58,7 +58,7 @@ class PantryRowItem extends Component {
                     {moment(this.props.foodObj.date_added).fromNow(true)}
                 </td>
                 <td>
-                    {this.props.batchAction &&
+                    {this.props.batchAction && this.props.batchAction !== 'Update Tags' &&
                         <input type='checkbox'
                             onChange={this.handleCheckbox} />}
                 </td>

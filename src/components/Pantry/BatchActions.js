@@ -62,6 +62,9 @@ class BatchActions extends Component {
             case ('Find Recipes'):
                 actionButtonDescription = 'Begin Search';
                 break;
+            case ('Update Tags'):
+                actionButtonDescription = 'Set Tags';
+                break;
             default:
                 actionButtonDescription = '';
         }
