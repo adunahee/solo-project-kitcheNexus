@@ -15,6 +15,8 @@ const pendingGroceryItems = (state = [], action) => {
             return [...state, action.payload];
         case 'CLEAR_PENDING_GROCERY':
             return [];
+        case 'REMOVE_PENDING_GROCERY_ITEM':
+            return state.filter((c, i) => { return i !== action.payload });
         default:
             return state;
     }

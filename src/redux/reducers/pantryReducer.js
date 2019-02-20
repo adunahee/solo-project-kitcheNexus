@@ -15,6 +15,8 @@ const pendingPantryItems = (state = [], action) => {
             return [...state, action.payload];
         case 'CLEAR_PENDING_PANTRY':
             return [];
+        case 'REMOVE_PENDING_PANTRY_ITEM':
+            return state.filter( (c, i) => { return i !== action.payload });
         default:
             return state;
     }

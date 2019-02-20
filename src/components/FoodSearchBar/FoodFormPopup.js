@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import FoodSearchBar from './FoodSearchBar';
 import { connect } from 'react-redux';
+
+import FoodSearchBar from './FoodSearchBar';
+import FoodToAddList from './FoodToAddList';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -148,21 +150,7 @@ class FoodFormPopup extends Component {
                         </form>
                         <br />
                         <DialogContent>
-                            <div>
-                                <DialogContentText>Items to Add</DialogContentText>
-                                {this.props.pageView === 'GROCERY' && this.props.pendingGroceryItems.length > 0 &&
-                                    <ul>
-                                        {this.props.pendingGroceryItems.map((item, i) => {
-                                            return <li key={i}> {item} {this.checkForDuplicates(this.props.pageView, item)}</li>
-                                        })}
-                                    </ul>}
-                                {this.props.pageView === 'PANTRY' && this.props.pendingPantryItems.length > 0 &&
-                                    <ul>
-                                        {this.props.pendingPantryItems.map((item, i) => {
-                                            return <li key={i}> {item} {this.checkForDuplicates(this.props.pageView, item)}</li>
-                                        })}
-                                    </ul>}
-                            </div>
+                            <FoodToAddList pageView={this.props.pageView} />
                         </DialogContent>
 
                     </Grid>
@@ -178,8 +166,6 @@ const mapRStoProps = (rs) => {
         pendingGroceryItems: rs.grocery.pendingGroceryItems,
         pendingPantryItems: rs.pantry.pendingPantryItems,
         foodSearchValue: rs.food.foodSearchValue,
-        pantry: rs.pantry.pantry,
-        grocery: rs.grocery.grocery,
     }
 }
 

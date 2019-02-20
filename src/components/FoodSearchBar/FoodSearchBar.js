@@ -74,7 +74,7 @@ class FoodSearchBar extends Component {
         });
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
-            placeholder: `eg 'bac'`,
+            placeholder: `eg 'ap'`,
             value,
             onChange: this.onChange
         };
