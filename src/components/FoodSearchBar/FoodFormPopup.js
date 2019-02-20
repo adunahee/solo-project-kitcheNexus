@@ -14,6 +14,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
+import Grid from '@material-ui/core/Grid';
+
+import './FoodSearchBar.css';
 
 class FoodFormPopup extends Component {
     constructor(props) {
@@ -68,9 +71,32 @@ class FoodFormPopup extends Component {
         return <Slide direction="up" {...props} />;
     }
 
+    getClass = () => {
+        switch (this.props.pageView) {
+            case ('PANTRY'):
+                return 'food-popup-bar-pantry';
+            case ('GROCERY'):
+                return 'food-popup-bar-grocery';
+            default:
+                return '';
+        }
+    }
+
+    checkForDuplicates = (pageView) => {
+        switch(pageView){
+            case('PANTRY'):
+                return 'in pantry';
+            case('GROCERY'):
+                return 'in grocery';
+            default:
+                return '';
+        }
+    }
+
     render() {
+
         return (
-            <div>
+            <Grid item>
                 {this.props.pageView === 'PANTRY' &&
                     <Button onClick={this.handleOpen}> Add Food to Pantry </Button>
                 }
@@ -82,60 +108,62 @@ class FoodFormPopup extends Component {
                     aria-labelledby="form-dialog-title"
                     TransitionComponent={this.transition}
                     fullScreen>
-                    <AppBar position='relative'>
-                        <Toolbar>
+                    <AppBar position='relative' className={this.getClass()}>
+                        <Toolbar >
                             <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="h6" color="inherit" >
-                                {this.props.listName ? `${this.props.listName} List` : `Updating Pantry`}
+                                {this.props.pageView === 'GROCERY' ? 'Adding Food to Grocery List' : `Adding Food to Pantry`}
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <form onSubmit={this.handleSubmit}>
-                        <DialogTitle>
-                            {this.props.pageView === 'GROCERY' ? 'Adding Groceries' : `What's in your pantry?`}
-                        </DialogTitle>
-                        <div >
+                    <Grid container
+                        justify='center'>
+
+                        <form onSubmit={this.handleSubmit}>
+                            <DialogTitle>
+                                {this.props.listName !== undefined ? `${this.props.listName}` : `What's already in your pantry?`}
+                            </DialogTitle>
                             <DialogContentText>
                                 Type 2 letters and food will appear!
                             </DialogContentText>
                             <FoodSearchBar pageView={this.props.pageView} />
-
-
-                        </div>
-                        <DialogActions>
-                            <Button onClick={this.handleAdd} color='primary'>
-                                Add
+                            <DialogActions>
+                                <Button onClick={this.handleAdd} color='primary'>
+                                    Add
                                 </Button>
-                            <Button onClick={this.handleClear} color='secondary'>
-                                Clear All
+                                <Button onClick={this.handleClear} color='secondary'>
+                                    Clear All
                                 </Button>
-                            <Button type='submit'>
-                            {this.props.pageView === 'GROCERY' && 'Finalize List'}
-                                {this.props.pageView === 'PANTRY' && 'Update Pantry'}
-                            </Button>
-                        </DialogActions>
-                    </form>
-                    <DialogContent>
-                        <div>
-                            <DialogContentText>Items to Add</DialogContentText>
-                            {this.props.pageView === 'GROCERY' && this.props.pendingGroceryItems.length > 0 &&
-                                <ul>
-                                    {this.props.pendingGroceryItems.map((item, i) => {
-                                        return <li key={i}> {item} </li>
-                                    })}
-                                </ul>}
-                            {this.props.pageView === 'PANTRY' && this.props.pendingPantryItems.length > 0 &&
-                                <ul>
-                                    {this.props.pendingPantryItems.map((item, i) => {
-                                        return <li key={i}> {item} </li>
-                                    })}
-                                </ul>}
-                        </div>
-                    </DialogContent>
+                                <Button type='submit'>
+                                    {this.props.pageView === 'GROCERY' && 'Finalize List'}
+                                    {this.props.pageView === 'PANTRY' && 'Update Pantry'}
+                                </Button>
+                            </DialogActions>
+                        </form>
+                        <br />
+                        <DialogContent>
+                            <div>
+                                <DialogContentText>Items to Add</DialogContentText>
+                                {this.props.pageView === 'GROCERY' && this.props.pendingGroceryItems.length > 0 &&
+                                    <ul>
+                                        {this.props.pendingGroceryItems.map((item, i) => {
+                                            return <li key={i}> {item} {this.checkForDuplicates()}</li>
+                                        })}
+                                    </ul>}
+                                {this.props.pageView === 'PANTRY' && this.props.pendingPantryItems.length > 0 &&
+                                    <ul>
+                                        {this.props.pendingPantryItems.map((item, i) => {
+                                            return <li key={i}> {item} {this.checkForDuplicates(this.props.pageView)}</li>
+                                        })}
+                                    </ul>}
+                            </div>
+                        </DialogContent>
+
+                    </Grid>
                 </Dialog>
-            </div>
+            </Grid>
 
         )
     }

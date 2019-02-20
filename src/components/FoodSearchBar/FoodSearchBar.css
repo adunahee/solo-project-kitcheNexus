@@ -68,3 +68,11 @@ body {
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+
+.food-popup-bar-pantry {
+  background-color: #ff5d55 !important;
+}
+
+.food-popup-bar-grocery {
+  background-color: #3d8af7 !important;
+}
