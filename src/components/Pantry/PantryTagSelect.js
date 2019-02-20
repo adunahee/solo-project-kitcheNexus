@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 class PantryTagSelect extends Component {
 
     handleTagChange = () => {
-        console.log('inHandleChange');
+        // this.props.dispatch({''})
+        console.log('in handleTagChange');
         
     }
 

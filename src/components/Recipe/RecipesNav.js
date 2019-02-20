@@ -17,7 +17,6 @@ class RecipesNav extends Component {
 
     browseClass = () => {
         const location = this.props.location.pathname;
-        console.log(location);
         switch (location) {
             case ('/recipes/browse'):
                 return 'recipes-view-true';
@@ -28,7 +27,6 @@ class RecipesNav extends Component {
 
     favoritesClass = () => {
         const location = this.props.location.pathname;
-        console.log(location);
         switch (location) {
             case ('/recipes/favorites'):
                 return 'recipes-view-true';
@@ -39,7 +37,6 @@ class RecipesNav extends Component {
 
     recentClass = () => {
         const location = this.props.location.pathname;
-        console.log(location);
         switch (location) {
             case ('/recipes/recent'):
                 return 'recipes-view-true'
