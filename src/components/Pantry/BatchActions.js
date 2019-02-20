@@ -13,6 +13,7 @@ class BatchActions extends Component {
     }
 
     handleActionChange = (event) => {
+        this.props.dispatch({type: 'CLEAR_BATCH_ITEMS'});
         this.props.dispatch({type: 'SET_ACTION', payload: event.target.value });
     }
 
@@ -62,6 +63,9 @@ class BatchActions extends Component {
             case ('Find Recipes'):
                 actionButtonDescription = 'Begin Search';
                 break;
+            case ('Update Tags'):
+                actionButtonDescription = 'Set Tags';
+                break;
             default:
                 actionButtonDescription = '';
         }
@@ -80,6 +84,9 @@ class BatchActions extends Component {
                     </option>
                     <option value='Find Recipes'>
                         Find Recipes
+                    </option>
+                    <option value='Update Tags'>
+                        Update Tags
                     </option>
                 </select>
                 {this.props.batchAction !== '' && <button onClick={this.handleActionButton}>{actionButtonDescription}</button>}

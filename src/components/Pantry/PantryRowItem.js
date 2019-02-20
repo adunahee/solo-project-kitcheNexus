@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import PantryTagSelect from './PantryTagSelect';
+
 class PantryRowItem extends Component {
 
     handleClick = async () => {
@@ -28,13 +30,20 @@ class PantryRowItem extends Component {
         }
     }
 
-    checkBatchItems = () => {
+    //used so checked attribute present if foodObj is in batchItems 
+    buildCheckBox = () => {
         if (this.props.batchItems) {
             console.log('batchItems evaling true');
-
-            return this.props.batchItems.includes(this.props.foodObj)
+            if (this.props.batchItems.includes(this.props.foodObj)) {
+                return <input type='checkbox'
+                    onChange={this.handleCheckbox}
+                    checked
+                />
+            }
         } else {
-            return false;
+            return <input type='checkbox'
+                onChange={this.handleCheckbox}
+            />
         }
 
     }
@@ -46,15 +55,18 @@ class PantryRowItem extends Component {
                     {this.props.foodObj.food_name}
                 </td>
                 <td>
-                    {this.props.foodObj.pantry_tag_name}
+                    {this.props.batchAction === 'Update Tags' ?
+                        <PantryTagSelect
+                            foodObj={this.props.foodObj}
+                        /> :
+                        this.props.foodObj.pantry_tag_name}
                 </td>
                 <td>
                     {moment(this.props.foodObj.date_added).fromNow(true)}
                 </td>
                 <td>
-                    {this.props.batchAction &&
-                        <input type='checkbox'
-                            onChange={this.handleCheckbox} />}
+                    {this.props.batchAction && this.props.batchAction !== 'Update Tags' &&
+                        this.buildCheckBox()}
                 </td>
             </tr>
         )

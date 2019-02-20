@@ -30,7 +30,7 @@ class PantryTable extends Component {
                                 <th>
                                     "Age"
                             </th>
-                                <th>{this.props.batchAction === '' ? null : 'Select'}</th>
+                                <th>{this.props.batchAction && this.props.batchAction !== 'Update Tags' && 'Select'}</th>
                             </tr>
                         </thead>
                         <tbody>
