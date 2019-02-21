@@ -44,6 +44,11 @@ class BatchActions extends Component {
                         }).join(' '),
                     })
                     return this.props.history.push('/recipes/browse');
+                case ('Update Tags'):
+                    return this.props.dispatch({
+                        type: 'UPDATE_TAGS',
+                        payload: this.props.batchItems,
+                    })
                 default:
                     return null;
             }

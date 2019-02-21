@@ -6,6 +6,7 @@ thead {
 .table-header-cell {
     font-weight: bold !important;
     font-size: 1.1em !important;
+    color: black !important;
 }
 
 td {

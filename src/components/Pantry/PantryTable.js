@@ -28,7 +28,7 @@ class PantryTable extends Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell className='table-header-cell'>
-                                    Food Name
+                                    Food
                             </TableCell>
                                 <TableCell className='table-header-cell'>
                                     Tag

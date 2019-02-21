@@ -47,11 +47,24 @@ function* fetchTags() {
     }
 }
 
+function* updateTags(action) {
+    try{
+        yield axios.put('api/pantry/tags', action.payload);
+        yield put({type: 'FETCH_PANTRY'});
+        yield put({ type: 'CLEAR_BATCH_ITEMS' });
+        yield put({ type: 'CLEAR_BATCH_ACTION' });
+    } catch(e){
+        console.log('error in updateTags saga', e);
+        yield alert('Unable to update tags at this time.')
+    }
+}
+
 function* pantrySaga() {
     yield takeLatest('ADD_FOOD_TO_PANTRY', addToPantry);
     yield takeEvery('FETCH_PANTRY', fetchPantry);
     yield takeLatest('REMOVE_FROM_PANTRY', removeFromPantry);
     yield takeLatest('FETCH_PANTRY_TAGS', fetchTags);
+    yield takeLatest('UPDATE_TAGS', updateTags);
 }
 
 export default pantrySaga;

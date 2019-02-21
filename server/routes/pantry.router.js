@@ -117,6 +117,37 @@ router.put('/delete', (req, res) => {
     }
 });
 
+router.put('/tags', (req, res) => {
+    console.log('in pantry tags put');
+    if(req.isAuthenticated()){
+        const foodArr = req.body;
+        (async () => {
+            const client = await pool.connect();
+            try {
+                const queryText = `UPDATE persons_food SET pantry_tags_id = $1
+                                    WHERE persons_id = $2 AND id = $3;`;
+                for (obj of foodArr) {
+                    const values = [obj.tag_id, req.user.id, obj.persons_food_id];
+                    await client.query(queryText, values);
+                }
+                await client.query('COMMIT')
+                res.sendStatus(200);
+            } catch (e) {
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+                client.release();
+            }
+        })().catch(e => {
+            console.log('CATCH', e);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+})
+
 router.get('/tags', (req, res) => {
     console.log('in pantry tags get');
     if(req.isAuthenticated()){
