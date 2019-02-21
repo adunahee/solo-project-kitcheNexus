@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 import PantryTagSelect from './PantryTagSelect';
+
 
 class PantryRowItem extends Component {
 
@@ -32,12 +36,16 @@ class PantryRowItem extends Component {
 
     //used so checked attribute present if foodObj is in batchItems 
     buildCheckBox = () => {
-        if (this.props.batchItems) {
+        if (this.props.batchItems.length > 0 ) {
             console.log('batchItems evaling true');
             if (this.props.batchItems.includes(this.props.foodObj)) {
                 return <input type='checkbox'
                     onChange={this.handleCheckbox}
                     checked
+                />
+            } else {
+                return <input type='checkbox'
+                    onChange={this.handleCheckbox}
                 />
             }
         } else {
@@ -50,32 +58,32 @@ class PantryRowItem extends Component {
 
     render() {
         return (
-            <tr onClick={this.props.batchAction === '' ? this.handleClick : null}>
-                <td>
+            <TableRow onClick={this.props.batchAction === '' ? this.handleClick : null}>
+                <TableCell>
                     {this.props.foodObj.food_name}
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     {this.props.batchAction === 'Update Tags' ?
                         <PantryTagSelect
                             foodObj={this.props.foodObj}
                         /> :
                         this.props.foodObj.pantry_tag_name}
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     {moment(this.props.foodObj.date_added).fromNow(true)}
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     {this.props.batchAction && this.props.batchAction !== 'Update Tags' &&
                         this.buildCheckBox()}
-                </td>
-            </tr>
+                </TableCell>
+            </TableRow>
         )
     }
 }
 
 const mapRStoProps = (rs) => {
     return {
-        batchItems: rs.food.batchItems,
+        batchItems: rs.pantry.batchItems,
         batchAction: rs.pantry.batchAction,
     }
 }

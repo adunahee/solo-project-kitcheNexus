@@ -1,0 +1,17 @@
+thead {
+    background-color: #ffb4b0;
+    
+}
+
+.table-header-cell {
+    font-weight: bold !important;
+    font-size: 1.1em !important;
+}
+
+td {
+    padding: 4px 12px !important;
+}
+
+th {
+    padding: 4px 12px !important;
+}

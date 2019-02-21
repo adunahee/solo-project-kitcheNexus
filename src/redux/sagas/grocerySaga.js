@@ -14,7 +14,7 @@ function* fetchGrocery() {
 
 function* addToList(action) {
     try {
-        console.log(action.payload.groceries);
+        // console.log(action.payload.groceries);
         yield axios.post(`/api/grocery/${action.payload.listName}`, action.payload.groceries);
         yield alert('Grocery list updated.');
         yield put({ type: 'FETCH_GROCERY' });

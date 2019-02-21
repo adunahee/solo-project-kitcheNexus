@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import PantryRowItem from './PantryRowItem';
 
 import Grid from '@material-ui/core/Grid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+import './Pantry.css';
 
 class PantryTable extends Component {
     buildPantryTableRows = () => {
         return this.props.pantry.map((foodObj, i) => {
-            return <PantryRowItem key={i} foodObj={foodObj}/>
+            return <PantryRowItem key={i} foodObj={foodObj} />
         })
     }
 
@@ -16,28 +23,28 @@ class PantryTable extends Component {
             <Grid container
                 direction='row'
                 justify='center'>
-                
-                <Grid item >
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
+                <Grid item>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className='table-header-cell'>
                                     Food Name
-                            </th>
-                                <th>
+                            </TableCell>
+                                <TableCell className='table-header-cell'>
                                     Tag
-                            </th>
-                                <th>
+                            </TableCell>
+                                <TableCell className='table-header-cell'>
                                     "Age"
-                            </th>
-                                <th>{this.props.batchAction && this.props.batchAction !== 'Update Tags' && 'Select'}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                            </TableCell>
+                                <TableCell className='table-header-cell'>{this.props.batchAction && this.props.batchAction !== 'Update Tags' && 'Select'}</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                             {this.buildPantryTableRows()}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                 </Grid>
+
 
             </Grid>
         )
