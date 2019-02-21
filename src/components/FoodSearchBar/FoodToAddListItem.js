@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+
+import ListItem from '@material-ui/core/ListItem';
+
 class FoodToAddListItem extends Component {
 
     checkForDuplicates = () => {
@@ -31,10 +34,10 @@ class FoodToAddListItem extends Component {
 
     render() {
         return (
-            <li
+            <ListItem 
                 onClick={this.handleListItemClick}>
                 {this.props.item} {this.checkForDuplicates()}
-            </li>
+            </ListItem>
         )
     }
 }

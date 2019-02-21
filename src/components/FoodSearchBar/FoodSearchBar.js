@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
+
+import Typography from '@material-ui/core/Typography';
+
 import './FoodSearchBar.css';
 
 
@@ -83,6 +86,7 @@ class FoodSearchBar extends Component {
         // Finally, render it!
         return (
             <div>     
+                        <Typography>Type 2 letters and food will appear!</Typography>
                         <Autosuggest
                             suggestions={suggestions}
                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

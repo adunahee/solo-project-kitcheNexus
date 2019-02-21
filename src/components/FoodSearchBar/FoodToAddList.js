@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import FoodToAddListItem from './FoodToAddListItem';
 
 import DialogContentText from '@material-ui/core/DialogContentText';
-
+import List from '@material-ui/core/List';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 
 class FoodToAddList extends Component {
 
     buildList = () => {
-        console.log('in build list');
-
         let pendingArr;
         if (this.props.pageView === 'GROCERY') {
             pendingArr = this.props.pendingGroceryItems;
@@ -25,13 +25,20 @@ class FoodToAddList extends Component {
 
     render() {
         return (
-            <div>
-                <DialogContentText>Food to Add: Tap to Remove</DialogContentText>
-                {this.props.pendingGroceryItems.length > 0 && 
-                this.buildList()}
-                {this.props.pendingPantryItems.length > 0 &&
-                    this.buildList()}
-            </div>
+            <Grid container>
+                <Grid item>
+                    <DialogContentText>Food to Add: Tap to Remove</DialogContentText>
+                </Grid>
+                <Grid item>
+                    <List>
+                        {this.props.pendingGroceryItems.length > 0 &&
+                            this.buildList()}
+                        {this.props.pendingPantryItems.length > 0 &&
+                            this.buildList()}
+                    </List>
+                </Grid>
+
+            </Grid>
         )
     }
 }

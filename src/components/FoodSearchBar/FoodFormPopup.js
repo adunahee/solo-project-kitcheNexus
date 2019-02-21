@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import AppBar from '@material-ui/core/AppBar';
@@ -125,33 +124,48 @@ class FoodFormPopup extends Component {
                         </Toolbar>
                     </AppBar>
                     <Grid container
-                        justify='center'>
+                        alignItems='center'
+                        direction='column'>
 
-                        <form onSubmit={this.handleSubmit}>
-                            <DialogTitle>
-                                {this.props.listName !== undefined ? `${this.props.listName}` : `What's already in your pantry?`}
-                            </DialogTitle>
-                            <DialogContentText>
-                                Type 2 letters and food will appear!
-                            </DialogContentText>
-                            <FoodSearchBar pageView={this.props.pageView} />
-                            <DialogActions>
-                                <Button onClick={this.handleAdd} color='primary'>
-                                    Add
-                                </Button>
-                                <Button onClick={this.handleClear} color='secondary'>
-                                    Clear All
-                                </Button>
-                                <Button type='submit'>
-                                    {this.props.pageView === 'GROCERY' && 'Finalize List'}
-                                    {this.props.pageView === 'PANTRY' && 'Update Pantry'}
-                                </Button>
-                            </DialogActions>
-                        </form>
+                        <Grid item>
+                            <Grid container
+                                spacing={8}
+                                direction='column'
+                                justify="space-evenly"
+                                alignItems="center">
+                                <form onSubmit={this.handleSubmit}>
+                                    <Grid item>
+                                        <DialogTitle>
+                                            {this.props.listName !== undefined ? `${this.props.listName}` : `What's already in your pantry?`}
+                                        </DialogTitle>
+                                    </Grid>
+                                    <Grid item>
+                                        <FoodSearchBar pageView={this.props.pageView} />
+                                    </Grid>
+                                    <Grid item>
+                                        <DialogActions>
+                                            <Button onClick={this.handleAdd} color='primary' variant="outlined">
+                                                Add</Button>
+                                            <Button onClick={this.handleClear} color='secondary' variant="outlined">
+                                                Clear All</Button>
+                                            <Button type='submit' variant="outlined">
+                                                {this.props.pageView === 'GROCERY' && 'Finalize List'}
+                                                {this.props.pageView === 'PANTRY' && 'Update Pantry'}
+                                            </Button>
+                                        </DialogActions>
+                                    </Grid>
+
+                                </form>
+                            </Grid>
+
+                        </Grid>
                         <br />
-                        <DialogContent>
-                            <FoodToAddList pageView={this.props.pageView} />
-                        </DialogContent>
+                        <Grid item>
+                            <DialogContent>
+                                <FoodToAddList pageView={this.props.pageView} />
+                            </DialogContent>
+                        </Grid>
+
 
                     </Grid>
                 </Dialog>
