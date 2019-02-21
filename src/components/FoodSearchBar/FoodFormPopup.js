@@ -125,7 +125,8 @@ class FoodFormPopup extends Component {
                     </AppBar>
                     <Grid container
                         alignItems='center'
-                        direction='column'>
+                        direction='column'
+                        spacing={24}>
 
                         <Grid item>
                             <Grid container
@@ -133,6 +134,7 @@ class FoodFormPopup extends Component {
                                 direction='column'
                                 justify="space-evenly"
                                 alignItems="center">
+
                                 <form onSubmit={this.handleSubmit}>
                                     <Grid item>
                                         <DialogTitle>
@@ -154,16 +156,12 @@ class FoodFormPopup extends Component {
                                             </Button>
                                         </DialogActions>
                                     </Grid>
-
                                 </form>
                             </Grid>
-
                         </Grid>
-                        <br />
+
                         <Grid item>
-                            <DialogContent>
-                                <FoodToAddList pageView={this.props.pageView} />
-                            </DialogContent>
+                            <FoodToAddList pageView={this.props.pageView} />
                         </Grid>
 
 

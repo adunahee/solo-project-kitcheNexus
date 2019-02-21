@@ -19,7 +19,7 @@ class PageNav extends React.Component {
 
     recipesClass = () => {
         const location = this.props.location.pathname;
-        if(location.indexOf( 'recipe') > -1 ){
+        if (location.indexOf('recipe') > -1) {
             return 'recipes-view-true';
         } else {
             return 'recipes-view-false';
@@ -35,49 +35,48 @@ class PageNav extends React.Component {
                 return 'grocery-view-false';
         }
     }
-  render() {
-    return (
-        <Grid
-            container
-            direction='row'
-            justify='space-evenly'
-            alignItems='flex-start'
-            spacing={0}
-            >
+    render() {
+        return (
+            <Grid
+                container
+                direction='row'
+                justify='space-evenly'
+                alignItems='flex-start'
+                spacing={0}>
 
-            <Grid item
-                xs={4}
-                className={`page-nav-div ${this.pantryClass()}`}>
-                <Link className="nav-link"
-                    to="/pantry">
-                    <Typography align='center' type='h4' className={this.pantryClass()}>
-                        Pantry</Typography>
-                </Link>
-            </Grid>
+                <Grid item
+                    xs={4}
+                    className={`page-nav-div ${this.pantryClass()}`}>
+                    <Link className="nav-link"
+                        to="/pantry">
+                        <Typography align='center' className={this.pantryClass()} style={{padding: '14px'}}>
+                            Pantry</Typography>
+                    </Link>
+                </Grid>
 
-            <Grid item
-                xs={4}
-                className={`page-nav-div ${this.recipesClass()}`}>
-                <Link className="nav-link"
-                    to="/recipes/browse">
-                    <Typography align='center' type='h4' className={this.recipesClass()}>
-                        Recipes</Typography>
-                </Link>
-            </Grid>
+                <Grid item
+                    xs={4}
+                    className={`page-nav-div ${this.recipesClass()}`}>
+                    <Link className="nav-link"
+                        to="/recipes/browse">
+                        <Typography align='center' type='h4' className={this.recipesClass()} style={{ padding: '14px' }}>
+                            Recipes</Typography>
+                    </Link>
+                </Grid>
 
-            <Grid item
-                xs={4}
-                className={`page-nav-div ${this.groceryClass()}`}>
-                <Link className="nav-link"
-                    to="/grocery">
-                    <Typography align='center' type='h4' className={this.groceryClass()}>
-                        Grocery</Typography>
-                </Link>
-            </Grid>
+                <Grid item
+                    xs={4}
+                    className={`page-nav-div ${this.groceryClass()}`}>
+                    <Link className="nav-link"
+                        to="/grocery">
+                        <Typography align='center' type='h4' className={this.groceryClass()} style={{ padding: '14px' }}>
+                            Grocery</Typography>
+                    </Link>
+                </Grid>
 
-        </Grid >
-    )
-  }
+            </Grid >
+        )
+    }
 }
 
 const PageNavWithRouter = withRouter(PageNav);

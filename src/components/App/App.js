@@ -32,11 +32,14 @@ class App extends Component {
     return (
       <Router>
         <Grid container
-          direciton='column'
+          direction='column'
           justify='space-between'
           style={{height: '100vh'}}
           >
-          <Grid item >
+          <Grid item xs={12}
+                      s={10}
+                      m={8}
+                      lg={6}>
             <Grid container
               spacing={0}
               direction='column'
@@ -90,7 +93,12 @@ class App extends Component {
           </Grid>
 
           <Grid item
-          xs={12}>
+          xs={12}
+            s={10}
+            m={8}
+            lg={6}
+            style={{ backgroundColor: '#aedd94',
+                      height: '80px', }}>
             <Footer />
           </Grid>
 

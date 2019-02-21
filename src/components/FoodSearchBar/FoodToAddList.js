@@ -15,7 +15,7 @@ class FoodToAddList extends Component {
         let pendingArr;
         if (this.props.pageView === 'GROCERY') {
             pendingArr = this.props.pendingGroceryItems;
-        } else {
+        } else if (this.props.pageView === 'PANTRY'){
             pendingArr = this.props.pendingPantryItems;
         }
         return pendingArr.map((item, i) => {
@@ -25,7 +25,10 @@ class FoodToAddList extends Component {
 
     render() {
         return (
-            <Grid container>
+            <Grid container
+                direction='column'
+                alignItems='flex-start'
+                alignItems='flex-start'>
                 <Grid item>
                     <DialogContentText>Food to Add: Tap to Remove</DialogContentText>
                 </Grid>

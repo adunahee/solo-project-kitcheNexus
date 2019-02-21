@@ -11,9 +11,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const Footer = () => (
   <Grid container
-    alignItems='flex-end'
+    alignItems='center'
     direction="row"
-    justify="space-between">
+    justify="space-evenly"
+    style={{ height: '80px'}}>
     <Grid item>
       <Typography type='h3'>Created By Anthony Dunahee</Typography>
     </Grid>
@@ -23,8 +24,9 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           id='edamamm-link'>
-          <img src="https://www.edamam.com/assets/img/small-logo.png"
-            alt='Edamam Logo' />
+          <Typography>Powered by Edamam API</Typography>
+          {/* <img src="https://www.edamam.com/assets/img/small-logo.png"
+            alt='Edamam Logo'/> */}
         </a>
       </Tooltip>
     </Grid>

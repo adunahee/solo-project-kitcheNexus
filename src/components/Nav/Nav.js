@@ -24,27 +24,32 @@ class Nav extends React.Component {
         <Grid
           container
           direction='row'
-          justify='space-evenly'
+          justify='space-around'
           alignItems='center'
           spacing={0}
           className='header-div'>
-          <Link to="/home" className="nav-link">
-            <Typography variant='h3' className='nav-link'>
-              KitcheNexus
-          </Typography>
-          </Link>
-          {this.props.user.id ?
 
-            <LogOutButton className="nav-link" /> :
-            <Typography align='center' type='h5'>
-              <Link className="nav-link" to="/about">
-                About</Link>
-            </Typography>}
+          <Grid item xs={10}>
+            <Link to="/home" className="nav-link">
+              <Typography variant='h4' className='nav-link'>
+                KitcheNexus</Typography>
+            </Link>
+          </Grid>
+
           {/* renders either an about link for new users or logout for logged in users */}
+          <Grid item xs={2}>
+            {this.props.user.id ?
+              <LogOutButton className="nav-link" /> :
+              <Link className="nav-link" to="/about">
+                <Typography align='center' type='h5'>
+                  About</Typography>
+              </Link>}
+          </Grid>
+
         </Grid>
 
         {this.props.user.id &&
-        <PageNav />
+          <PageNav />
         }
       </Grid>
     )
