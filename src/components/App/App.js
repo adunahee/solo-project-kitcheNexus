@@ -46,8 +46,7 @@ class App extends Component {
               alignItems='stretch'
               style={{ height: '100vh' }}
             >
-              <Grid item
-                style={{ height: '15%'}}>
+              <Grid item>
                 <Nav location={this.props.location} />
               </Grid>
 

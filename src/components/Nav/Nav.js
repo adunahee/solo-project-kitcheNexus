@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
+import PageNavDrawer from './PageNavDrawer';
+
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import PageNav from './PageNav';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
-import PageNavDrawer from './PageNavDrawer';
+
 
 class Nav extends React.Component {
   constructor(props) {
@@ -37,15 +37,8 @@ class Nav extends React.Component {
   render() {
 
     return (
-      <Grid
-        container
-        direction='column'
-        justify='center'
-        alignItems='stretch'
-        style={{ height: '100%' }}
-        spacing={0}>
-        <Grid item
-          style={{ height: '60%' }}>
+      <Grid>
+        
           <AppBar position="static"
             style={{ backgroundColor: '#aedd94' }}>
             <Toolbar>
@@ -74,18 +67,8 @@ class Nav extends React.Component {
                 </Link>}
             </Toolbar>
           </AppBar>
-        </Grid>
 
-        <Grid item
-          style={{ height: '40%' }}>
-          {this.props.user.id &&
-            <PageNav />
-          }
-        </Grid>
       </Grid>
-
-
-
     )
   }
 }
