@@ -9,12 +9,6 @@ import PantryTagSelect from './PantryTagSelect';
 
 
 class PantryRowItem extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            checked: this.props.batchItems.includes(this.props.foodObj)
-        }
-    }
 
     handleClick = async () => {
         let confirmGone = window.confirm('Have you run out of this item?');
@@ -42,8 +36,6 @@ class PantryRowItem extends Component {
     }
 
     render() {
-        console.log(this.state);
-        
         return (
             <TableRow onClick={this.props.batchAction === '' ? this.handleClick : null}>
                 <TableCell>
@@ -63,7 +55,7 @@ class PantryRowItem extends Component {
                     {this.props.batchAction && this.props.batchAction !== 'Update Tags' &&
                         <input type='checkbox'
                             onChange={this.handleCheckbox}
-                            checked={this.state.checked}
+                            checked={this.props.batchItems.includes(this.props.foodObj)}
                         />}
                 </TableCell>
             </TableRow>
