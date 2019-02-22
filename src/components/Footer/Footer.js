@@ -1,38 +1,58 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './Footer.css';
-import Grid from '@material-ui/core/Grid';
+
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid'
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+const styles = theme => ({
+  appBar: {
+    top: 'auto',
+    bottom: 0,
+    backgroundColor: '#aedd94',
+  },
+  toolbar: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+});
 
-const Footer = () => (
-  <Grid container
-    alignItems='center'
-    direction="row"
-    justify="space-around"
-    style={{
-      height: '80px',
-    }}>
-    <Grid item md={8}>
-      <Typography type='h3'>Created By Anthony Dunahee</Typography>
-    </Grid>
-    <Grid item>
-      <Tooltip title='Powered By Edamam'>
-        <a href="https://www.edamam.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          id='edamamm-link'>
-          <Typography>Powered by Edamam API</Typography>
-          {/* <img src="https://www.edamam.com/assets/img/small-logo.png"
+const Footer = (props) => {
+  const { classes } = props;
+  return (
+    <Grid>
+
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar className={classes.toolbar}>
+
+          <Typography type='h3'>Created By Anthony Dunahee</Typography>
+
+          <Tooltip title='Powered By Edamam'>
+            <a href="https://www.edamam.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              id='edamamm-link'>
+              <Typography>Powered by Edamam API</Typography>
+              {/* <img src="https://www.edamam.com/assets/img/small-logo.png"
             alt='Edamam Logo'/> */}
-        </a>
-      </Tooltip>
-    </Grid>
-  </Grid>
-);
+            </a>
+          </Tooltip>
 
-export default Footer;
+        </Toolbar>
+      </AppBar>
+
+    </Grid>
+
+  )
+};
+
+Footer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Footer);

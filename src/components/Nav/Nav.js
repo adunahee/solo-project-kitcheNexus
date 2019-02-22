@@ -50,8 +50,7 @@ class Nav extends React.Component {
                   tabIndex={0}
                   role="button"
                   onClick={this.toggleNav}
-                  onKeyDown={this.toggleNav}
-                >
+                  onKeyDown={this.toggleNav}>
                   <PageNavDrawer />
                 </div>
               </Drawer>
