@@ -9,6 +9,12 @@ import PantryTagSelect from './PantryTagSelect';
 
 
 class PantryRowItem extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            checked: this.props.batchItems.includes(this.props.foodObj)
+        }
+    }
 
     handleClick = async () => {
         let confirmGone = window.confirm('Have you run out of this item?');
@@ -27,6 +33,7 @@ class PantryRowItem extends Component {
 
     handleCheckbox = (event) => {
         // console.log(this.props.foodObj);
+        this.setState({checked: event.target.checked})
         if (event.target.checked) {
             this.props.dispatch({ type: 'ADD_TO_BATCH', payload: this.props.foodObj });
         } else {
@@ -34,29 +41,9 @@ class PantryRowItem extends Component {
         }
     }
 
-    //used so checked attribute present if foodObj is in batchItems 
-    buildCheckBox = () => {
-        if (this.props.batchItems.length > 0 ) {
-            console.log('batchItems evaling true');
-            if (this.props.batchItems.includes(this.props.foodObj)) {
-                return <input type='checkbox'
-                    onChange={this.handleCheckbox}
-                    checked
-                />
-            } else {
-                return <input type='checkbox'
-                    onChange={this.handleCheckbox}
-                />
-            }
-        } else {
-            return <input type='checkbox'
-                onChange={this.handleCheckbox}
-            />
-        }
-
-    }
-
     render() {
+        console.log(this.state);
+        
         return (
             <TableRow onClick={this.props.batchAction === '' ? this.handleClick : null}>
                 <TableCell>
@@ -74,7 +61,10 @@ class PantryRowItem extends Component {
                 </TableCell>
                 <TableCell>
                     {this.props.batchAction && this.props.batchAction !== 'Update Tags' &&
-                        this.buildCheckBox()}
+                        <input type='checkbox'
+                            onChange={this.handleCheckbox}
+                            checked={this.state.checked}
+                        />}
                 </TableCell>
             </TableRow>
         )
