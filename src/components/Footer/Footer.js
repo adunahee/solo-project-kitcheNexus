@@ -13,9 +13,12 @@ const Footer = () => (
   <Grid container
     alignItems='center'
     direction="row"
-    justify="space-evenly"
-    style={{ height: '80px'}}>
-    <Grid item>
+    justify="space-around"
+    style={{
+      backgroundColor: '#aedd94',
+      height: '80px',
+    }}>
+    <Grid item md={8}>
       <Typography type='h3'>Created By Anthony Dunahee</Typography>
     </Grid>
     <Grid item>
