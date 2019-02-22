@@ -20,37 +20,41 @@ class Nav extends React.Component {
   render() {
 
     return (
-      <Grid container>
-        <Grid
-          container
-          direction='row'
-          justify='space-around'
-          alignItems='center'
-          spacing={0}
-          className='header-div'>
+      <Grid
+        container
+        direction='column'
+        justify='center'
+        alignItems='stretch'
+        spacing={0}>
+        <Grid item>
+          <Grid container
+            className='header-div'>
+            <Grid item xs={10}>
+              <Link to="/home" className="nav-link">
+                <Typography variant='h4' className='nav-link'>
+                  KitcheNexus</Typography>
+              </Link>
+            </Grid>
 
-          <Grid item xs={10}>
-            <Link to="/home" className="nav-link">
-              <Typography variant='h4' className='nav-link'>
-                KitcheNexus</Typography>
-            </Link>
+            {/* renders either an about link for new users or logout for logged in users */}
+            <Grid item xs={2}>
+              {this.props.user.id ?
+                <LogOutButton className="nav-link" /> :
+                <Link className="nav-link" to="/about">
+                  <Typography align='center' type='h5'>
+                    About</Typography>
+                </Link>}
+            </Grid>
           </Grid>
-
-          {/* renders either an about link for new users or logout for logged in users */}
-          <Grid item xs={2}>
-            {this.props.user.id ?
-              <LogOutButton className="nav-link" /> :
-              <Link className="nav-link" to="/about">
-                <Typography align='center' type='h5'>
-                  About</Typography>
-              </Link>}
-          </Grid>
-
         </Grid>
 
-        {this.props.user.id &&
-          <PageNav />
-        }
+
+        <Grid item>
+          {this.props.user.id &&
+            <PageNav />
+          }
+        </Grid>
+
       </Grid>
     )
   }

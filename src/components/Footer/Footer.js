@@ -15,7 +15,6 @@ const Footer = () => (
     direction="row"
     justify="space-around"
     style={{
-      backgroundColor: '#aedd94',
       height: '80px',
     }}>
     <Grid item md={8}>

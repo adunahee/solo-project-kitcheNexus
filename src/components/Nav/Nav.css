@@ -6,11 +6,11 @@ a {
 
 .header-div {
   background-color: #aedd94;
-  height: 80px;
+  height: 66%;
 }
 
 .page-nav-div {
-  height: 50px;
+  height: 33%;
 }
 .page-nav-div:active {
   background-color: ;
