@@ -47,7 +47,7 @@ class App extends Component {
               style={{ height: '100vh' }}
             >
               <Grid item
-                style={{ height: '15%' }}>
+                style={{ height: '15%'}}>
                 <Nav location={this.props.location} />
               </Grid>
 

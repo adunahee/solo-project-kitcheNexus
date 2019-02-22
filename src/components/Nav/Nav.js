@@ -10,11 +10,28 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import PageNav from './PageNav';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import PageNavDrawer from './PageNavDrawer';
+
 class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nav: false,
+    }
+  }
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+  }
+
+  toggleNav = () => {
+    this.setState({ nav: !this.state.nav })
   }
 
   render() {
@@ -25,37 +42,50 @@ class Nav extends React.Component {
         direction='column'
         justify='center'
         alignItems='stretch'
+        style={{ height: '100%' }}
         spacing={0}>
-        <Grid item>
-          <Grid container
-            className='header-div'>
-            <Grid item xs={10}>
+        <Grid item
+          style={{ height: '60%' }}>
+          <AppBar position="static"
+            style={{ backgroundColor: '#aedd94' }}>
+            <Toolbar>
+              <IconButton aria-label="Menu" onClick={this.toggleNav}>
+                <MenuIcon />
+              </IconButton>
+              <Drawer open={this.state.nav} onClose={this.toggleNav}>
+                <div
+                  tabIndex={0}
+                  role="button"
+                  onClick={this.toggleNav}
+                  onKeyDown={this.toggleNav}
+                >
+                  <PageNavDrawer />
+                </div>
+              </Drawer>
               <Link to="/home" className="nav-link">
                 <Typography variant='h4' className='nav-link'>
                   KitcheNexus</Typography>
               </Link>
-            </Grid>
-
-            {/* renders either an about link for new users or logout for logged in users */}
-            <Grid item xs={2}>
               {this.props.user.id ?
                 <LogOutButton className="nav-link" /> :
                 <Link className="nav-link" to="/about">
                   <Typography align='center' type='h5'>
                     About</Typography>
                 </Link>}
-            </Grid>
-          </Grid>
+            </Toolbar>
+          </AppBar>
         </Grid>
 
-
-        <Grid item>
+        <Grid item
+          style={{ height: '40%' }}>
           {this.props.user.id &&
             <PageNav />
           }
         </Grid>
-
       </Grid>
+
+
+
     )
   }
 }
