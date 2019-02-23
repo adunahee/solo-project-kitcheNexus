@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RecipeCard from './RecipeCard';
+
+import RecipeCardList from './RecipeCardList';
+
+import {Grid} from '@material-ui/core';
 
 class RecipeRecent extends Component {
-
-    componentDidMount() {
-        this.props.dispatch({type: 'FETCH_RECENT_RECIPES'});
-    }
-
-    buildRecent = () => {
-        // console.log(this.props.recipeHits);
-        return this.props.recentRecipes.map((recipe, i) => {
-            return <RecipeCard recipe={recipe} key={i} />
-        })
-    }
-
     render() {
         return (
-            <div>
-                <h2>Recent Recipes</h2>
+            <Grid container
+                direction='row'
+                spacing={16}
+                justify="center"
+                alignItems="baseline">
                 {this.props.recentRecipes.length > 0 &&
-                    this.buildRecent()}
-            </div>
+                <RecipeCardList recipes={this.props.recentRecipes} /> }
+            </Grid>
         )
     }
 }

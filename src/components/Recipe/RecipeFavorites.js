@@ -1,41 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import RecipeCardList from './RecipeCardList';
 
-import RecipeCard from './RecipeCard';
-import Grid from '@material-ui/core/Grid';
+import { FavoriteBorder } from '@material-ui/icons';
+import { Grid, Typography } from '@material-ui/core';
+
+
 
 class RecipeFavorites extends Component {
-
-    componentDidMount() {
-        this.props.dispatch({type: 'FETCH_FAVORITES'});
-    }
-
-    buildFavoritesCards = () => {
-        return this.props.favorites.map((recipe, i) => {
-            return <RecipeCard recipe={recipe} key={i} />
-        })
-    }
-
   render() {
     return (
-      <Grid container>
-      {this.props.favorites.length > 0 ? 
-            this.buildFavoritesCards()
+      <Grid container
+        direction='row'
+        spacing={16}
+        justify="center"
+        alignItems="baseline">
+
+        <Grid item>
+          {this.props.favorites.length > 0 ?
+            <Typography> You have
+              {this.props.favorites.length === 1 ? ' one recipe ' :
+                ` ${this.props.favorites.length} recipes `}
+              favorited so far.  Keep building your collection!
+            </Typography>
             :
-        <Typography>
-          You have no favorites at this time.  
-          Click <FavoriteIcon /> Icon on recipes you want to easily access later!
-          </Typography>}
-      </Grid>   
+            <Typography>
+              You have no favorites at this time.
+              Click <FavoriteBorder /> Icon on recipes
+              you want to easily access later!
+            </Typography>}
+        </Grid>
+        {this.props.favorites.length > 0 &&
+          <RecipeCardList recipes={this.props.favorites} />}
+      </Grid>
     )
   }
 }
 
 const mapRStoProps = (rs) => {
-    return {favorites: rs.food.recipeFavorites}
+  return { favorites: rs.food.recipeFavorites }
 }
 
 export default connect(mapRStoProps)(RecipeFavorites)

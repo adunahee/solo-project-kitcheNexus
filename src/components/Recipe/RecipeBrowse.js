@@ -1,37 +1,16 @@
 import React, { Component } from 'react';
-import RecipeCard from './RecipeCard';
-import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 import { connect } from 'react-redux';
+
+import RecipeCardList from './RecipeCardList';
+import FoodSearchBar from '../FoodSearchBar/FoodSearchBar';
 
 import { Grid, IconButton } from '@material-ui/core';
 import { Search, Clear, Delete, Cake } from '@material-ui/icons';
 
 class RecipeBrowse extends Component {
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = () => {
         this.props.dispatch({ type: 'FETCH_RECIPES', payload: this.props.recipeSearchValue })
-    }
-
-    buildRecipeCards = () => {
-        // console.log(this.props.recipeHits);
-        return (
-            <Grid container
-                className='recipe-book'
-                direction='row'
-                spacing={16}
-                justify="center"
-                alignItems="baseline"
-            >
-                {this.props.recipeHits.map((recipe, i) => {
-                    return (
-                        <Grid item> 
-                            <RecipeCard recipe={recipe} key={i} />
-                        </Grid>
-                    )
-                })}
-            </Grid>
-        )
     }
 
     handleClear = () => {
@@ -90,8 +69,7 @@ class RecipeBrowse extends Component {
 
                 <Grid item>
                     {this.props.recipeHits.length > 0 &&
-                        this.buildRecipeCards()
-                    }
+                        <RecipeCardList recipes={this.props.recipeHits}/>}
                 </Grid>
 
             </Grid>

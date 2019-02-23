@@ -6,13 +6,23 @@ import {
     Collapse, IconButton, Typography, List, ListItem } 
     from '@material-ui/core';
 
-import {Favorite, Link, ExpandMore, OpenInNew} from '@material-ui/icons';
+import {Favorite, FavoriteBorder, ExpandMore, OpenInNew} from '@material-ui/icons';
 
 class RecipeCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
             expanded: false,
+        }
+    }
+
+    checkFavoriteStatus = () => {
+        const FavoriteCheck = this.props.favorites.find((recipe) => { return recipe.uri === this.props.recipe.uri })
+        console.log(FavoriteCheck);
+        if(FavoriteCheck === undefined){
+            return <FavoriteBorder/>
+        } else {
+            return <Favorite style={{ color: '#ffe3ae'}} />
         }
     }
 
@@ -44,7 +54,7 @@ class RecipeCard extends Component {
                         <IconButton
                             onClick={this.handleFavorite}
                             aria-label="Add to favorites">
-                            <Favorite />
+                            {this.checkFavoriteStatus()}
                         </IconButton>
                         <a href={this.props.recipe.url}
                             target='_blank'
@@ -85,4 +95,8 @@ class RecipeCard extends Component {
     }
 }
 
-export default connect()(RecipeCard)
+const mapRStoProps = (rs) => {
+    return {favorites: rs.food.recipeFavorites}
+}
+
+export default connect(mapRStoProps)(RecipeCard)

@@ -30,9 +30,6 @@ class FoodSearchBar extends Component {
     }
 
     onChange = (event, { newValue }) => {
-        // console.log(this.state);
-        console.log(this.props.recipeSearchValue);
-
         if (this.state.pageView === 'GROCERY' || this.state.pageView === 'PANTRY') {
             this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
         } else {

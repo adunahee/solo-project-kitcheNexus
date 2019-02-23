@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import RecipesNav from './RecipesNav';
 import RecipeBrowse from './RecipeBrowse';
@@ -9,6 +10,11 @@ import RecipeFavorites from './RecipeFavorites';
 import {Grid, Typography, Paper} from '@material-ui/core';
 
 class Recipes extends Component {
+  componentDidMount(){
+    this.props.dispatch({type: 'FETCH_FAVORITES'});
+    this.props.dispatch({ type: 'FETCH_RECENT_RECIPES' });
+    this.props.dispatch({type: 'FETCH_RECENT_RECIPES'});
+  }
 
   render() {
     // console.log(this.props);
@@ -46,4 +52,4 @@ class Recipes extends Component {
   }
 }
 
-export default Recipes
+export default connect()(Recipes)

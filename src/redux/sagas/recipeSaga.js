@@ -30,6 +30,7 @@ function* addRecentRecipe(action) {
                 timeStamp: moment().format(),
                 url: encodeURIComponent(action.payload)
             });
+        yield put({type: 'FETCH_RECENT_RECIPES'})
     } catch (err) {
         console.log('error adding recent recipe:', err);
     }

@@ -18,6 +18,7 @@ router.get('/search/:str', (req, res) => {
                     delete hit.recipe.totalNutrients;
                     delete hit.recipe.totalDaily;
                     delete hit.recipe.digest;
+                    delete hit.recipe.cautions;
                     return hit.recipe
                 });
                 res.send(cleanedResponse);
@@ -133,6 +134,7 @@ router.get('/recent', (req, res) => {
                         delete recipe.totalNutrients;
                         delete recipe.totalDaily;
                         delete recipe.digest;
+                        delete recipe.cautions;
                         return recipe
                     });
                     recentRecipes = [...recentRecipes, ...cleanedResponse];
