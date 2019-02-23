@@ -11,9 +11,10 @@ class LoginPage extends Component {
     return (
       <Grid container
         direction='column'
-        justify='space-evenly'
+        justify='flex-start'
         alignItems='center'
-        style={{height: '300px'}}>
+        style={{ height: '300px' }}
+        spacing={16}>
         <Grid item>
           <Typography variant='h4' align='center'>Login</Typography>
           {this.props.errors.loginMessage && (
@@ -28,13 +29,6 @@ class LoginPage extends Component {
           <LoginForm />
         </Grid>
 
-        <Grid item>
-          <Button variant='contained'
-            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-          >
-            Register
-          </Button>
-        </Grid>
       </Grid>
     );
   }

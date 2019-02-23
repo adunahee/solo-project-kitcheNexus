@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 
 class LoginForm extends Component {
     state = {
@@ -32,43 +32,72 @@ class LoginForm extends Component {
     }
 
     render() {
+        const inputStyle = { margin: "5px" };
+
         return (
             <div>
                 <form className='login-form' onSubmit={this.login}>
                     <Grid container
-                        direction='row'
+                        direction='column'
                         justify='space-evenly'
-                        alignItems='baseline'>
-
+                        alignItems='center'
+                        spacing={16}>
                         <Grid item>
-                            <label htmlFor="username">
-                                Username:
-                                <input type="text"
-                                    name="username"
-                                    value={this.state.username}
-                                    onChange={this.handleInputChangeFor('username')} />
-                            </label>
+                            <Grid container
+                                direction='row'
+                                justify='space-evenly'
+                                spacing={8}>
+                                <Grid item>
+                                    <TextField
+                                        label="Username"
+                                        value={this.state.username}
+                                        onChange={this.handleInputChangeFor('username')}
+                                        margin="dense"
+                                        variant="filled"
+                                    />
+                                </Grid>
+
+                                <Grid item>
+                                    <TextField
+                                        label="Password"
+                                        type="password"
+                                        autoComplete="current-password"
+                                        margin="dense"
+                                        variant="filled"
+                                        value={this.state.password}
+                                        onChange={this.handleInputChangeFor('password')}
+                                    />
+                                </Grid>
+
+                            </Grid>
+
                         </Grid>
 
                         <Grid item>
-                            <label htmlFor="password">
-                                Password:
-                                <input type="password"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleInputChangeFor('password')} />
-                            </label>
+                            <Grid container
+                                direction='row'
+                                justify='space-evenly'
+                                spacing={8}>
+                                <Grid item>
+                                    <Button
+                                        variant='contained'
+                                        type='submit'
+                                        value='Log In'
+                                        name='submit'
+                                        style={{ backgroundColor: '#aedd94' }}>
+                                        Log In</Button>
+                                </Grid>
+
+                                <Grid item>
+                                    <Button variant='contained'
+                                        onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}>
+                                        Register</Button>
+                                </Grid>
+
+                            </Grid>
                         </Grid>
 
-                        <Grid item>
-                            <Button
-                                variant='contained'
-                                type='submit'
-                                value='Log In'
-                                name='submit'
-                                style={{ backgroundColor: '#aedd94'}}>
-                                Log In</Button>
-                        </Grid>
+
 
                     </Grid>
                 </form>
