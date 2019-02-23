@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import Footer from './Footer';
 
 import './Nav.css';
+
 import {
-    Typography, 
-    List, 
-    ListItem, 
+    Typography,
+    List,
+    ListItem,
     Grid,
+    Paper,
 } from '@material-ui/core';
 
 class PageNavDrawer extends React.Component {
@@ -63,54 +65,57 @@ class PageNavDrawer extends React.Component {
 
     render() {
         return (
-            <div style={{ width: '200px' }}>
-                <Grid container
-                    direction='column'
-                    justify="space-between"
-                    spacing={24}>
-                    <Grid item>
-                        <List>
+            <Grid container
+                direction='column'
+                justify="space-between"
+                spacing={24}
+                style={{ minWidth: '250px',
+                        minHeight: '85vh' }}>
+                <Grid item>
+                    <List>
 
-                            <ListItem button
-                                style={this.getLinkStyle('pantry')}>
+                        <ListItem>
+                            <Paper style={this.getLinkStyle('pantry')}>
                                 <Link className="nav-link"
                                     to="/pantry">
                                     <Typography align='center'
                                         style={this.linkStyle}>
                                         Pantry</Typography>
                                 </Link>
-                            </ListItem>
+                            </Paper>
+                        </ListItem>
 
-                            <ListItem button
-                                style={this.getLinkStyle('recipe')}>
+                        <ListItem>
+                            <Paper style={this.getLinkStyle('recipe')}>
                                 <Link className="nav-link"
                                     to="/recipes/browse">
                                     <Typography align='center'
                                         style={this.linkStyle}>
                                         Recipes</Typography>
                                 </Link>
-                            </ListItem>
+                            </Paper>
+                        </ListItem>
 
-                            <ListItem button
-                                style={this.getLinkStyle('grocery')}>
+                        <ListItem>
+                            <Paper style={this.getLinkStyle('grocery')}>
                                 <Link className="nav-link"
                                     to="/grocery">
                                     <Typography align='center'
                                         style={this.linkStyle}>
                                         Grocery</Typography>
                                 </Link>
-                            </ListItem>
-                        </List>
-                    </Grid>
-                    <Grid item>
-                        <Footer />
-                    </Grid>
+                            </Paper>
+                        </ListItem>
 
-
-
+                    </List>
+                </Grid>
+                <Grid item>
+                    <Footer />
                 </Grid>
 
-            </div>
+
+
+            </Grid>
         )
     }
 }

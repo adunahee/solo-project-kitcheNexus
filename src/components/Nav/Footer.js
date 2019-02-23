@@ -1,28 +1,41 @@
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import './Nav.css';
+
+import {Typography, List, ListItem, Paper} from '@material-ui/core'
+
 
 
 const Footer = () => {
+  const externalLink = {
+    padding: '14px',
+    fontSize: '1rem'}
+
   return (
-    <List style={{ backgroundColor: 'rgb(174, 221, 148)'}}>
-      <ListItem button>
-        <Typography type='h3'>Created By Anthony Dunahee</Typography>
-      </ListItem>
-      <ListItem button>
-        <Tooltip title='Powered By Edamam'>
-          <a href="https://www.edamam.com/"
+    <List>
+
+      <ListItem >
+        <Paper style={{backgroundColor: 'rgb(174, 221, 148)'}} >
+          <a href="https://github.com/adunahee"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ textDecoration: 'none' }}>
-            <Typography>Powered by Edamam API</Typography>
-            {/* <img src="https://www.edamam.com/assets/img/small-logo.png"
-            alt='Edamam Logo'/> */}
+            className='nav-link'>
+          <Typography style={externalLink}>Created By Anthony Dunahee</Typography>
           </a>
-        </Tooltip>
+        </Paper>
+      </ListItem>
+
+      <ListItem >
+          <Paper>
+            <a href="https://www.edamam.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className='nav-link'>
+            <Typography style={externalLink}>Powered by Edamam API</Typography>
+              {/* <img src="https://www.edamam.com/assets/img/small-logo.png"
+            alt='Edamam Logo'/> */}
+            </a>
+          </Paper>
       </ListItem>
     </List>
   )

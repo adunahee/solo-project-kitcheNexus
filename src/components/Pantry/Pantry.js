@@ -43,7 +43,7 @@ class Pantry extends Component {
                 xs={3}>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant='h4' align='center'>Your Pantry</Typography>
+                <Typography variant='h4' align='center'>Pantry</Typography>
               </Grid>
               <Grid item xs={3}>
                 <FoodFormPopup pageView='PANTRY' />
