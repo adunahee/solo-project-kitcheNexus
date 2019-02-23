@@ -8,6 +8,7 @@ import BatchActionButton from './BatchActionButton';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 class Pantry extends Component {
 
@@ -31,23 +32,25 @@ class Pantry extends Component {
         alignItems="stretch"
         spacing={16}>
 
-        <Grid item
-          style={{ backgroundColor: '#ffb4b0' }}>
-          <Grid container
-            direction="row"
-            justify="center"
-            alignItems="center"
+        <Grid item>
+          <Paper style={{ backgroundColor: '#ffb4b0' }}>
+            <Grid container
+              direction="row"
+              justify="center"
+              alignItems="center"
             >
-            <Grid item
-              xs={3}>
+              <Grid item
+                xs={3}>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant='h4' align='center'>Your Pantry</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <FoodFormPopup pageView='PANTRY' />
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-            <Typography variant='h4' align='center'>Your Pantry</Typography>
-            </Grid>
-            <Grid item xs={3}>
-            <FoodFormPopup pageView='PANTRY' />
-            </Grid>
-          </Grid>
+          </Paper>
+
 
         </Grid>
 

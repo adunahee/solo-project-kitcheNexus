@@ -34,7 +34,7 @@ class App extends Component {
         <Grid container
           direction="row"
           justify="center"
-          alignItems="flex-start">
+          alignItems="stretch">
           <Grid item
             xs={12}
             sm={10}
@@ -44,17 +44,13 @@ class App extends Component {
               direction='column'
               justify='space-between'
               alignItems='stretch'
-              style={{ height: '100vh' }}
+              spacing={16}
             >
               <Grid item>
                 <Nav location={this.props.location} />
               </Grid>
 
-              <Grid item
-                style={{
-                  height: '75%',
-                  overflow: 'auto',
-                }}>
+              <Grid item>
                 <Switch>
 
                   <Redirect exact from="/" to="/home" />
