@@ -4,19 +4,8 @@ import { connect } from 'react-redux';
 import FoodSearchBar from './FoodSearchBar';
 import FoodToAddList from './FoodToAddList';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import Grid from '@material-ui/core/Grid';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import {Button, Dialog, DialogActions, DialogTitle, Slide, AppBar, Toolbar, IconButton, Typography, Grid, Fab } from '@material-ui/core';
+import {Close as CloseIcon, Add as AddIcon, Fastfood as FoodIcon} from '@material-ui/icons';
 
 import './FoodSearchBar.css';
 
@@ -103,11 +92,11 @@ class FoodFormPopup extends Component {
 
         return (
             <Grid container
-                justify='flex-end'>
-                <Fab aria-label="Add"
-                    onClick={this.handleOpen} variant="extended">
+                justify='center'>
+                <Fab aria-label="Add Food"
+                    onClick={this.handleOpen} >
                     <AddIcon />
-                    Food
+                    <FoodIcon />
                 </Fab>
                 <Dialog open={this.state.open}
                     onClose={this.handleClose}
