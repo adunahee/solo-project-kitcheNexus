@@ -1,16 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { Grid, Typography } from '@material-ui/core';
+import { Menu, ExitToApp } from '@material-ui/icons';
+
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 const UserPage = (props) => (
-  <div>
-    <h1 id="welcome">
-      Welcome, { props.user.username }!
-    </h1>
-    <p>Your ID is: {props.user.id}</p>
-  </div>
+  <Grid container
+    direction='column'
+    spacing={24}
+    style={{minHeight: '300px'}}>
+    <Grid item>
+      <Typography variant='h4' align='center' id="welcome">
+        Welcome, {props.user.username}!
+    </Typography>
+    </Grid>
+    <Grid item>
+      <Typography variant='p' align='center' >Use the <Menu/> to explore the app.  You can log out any time using <ExitToApp /> in the upper right.</Typography>
+    </Grid>
+    <Grid item>
+      <Typography variant='p' align='center' >Stay tuned for upcoming features, like the ability to join a household, and food 'age' alerts.</Typography>
+      
+    </Grid>
+
+  </Grid>
 );
 
 // Instead of taking everything from state, we just want the user info.

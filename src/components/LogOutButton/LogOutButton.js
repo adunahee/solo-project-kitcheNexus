@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import IconButton from '@material-ui/core/IconButton';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Tooltip from '@material-ui/core/Tooltip';
+
+import {IconButton, Tooltip} from '@material-ui/core';
+import {ExitToApp} from '@material-ui/icons';
 
 
 const LogOutButton = props => (
@@ -13,7 +13,7 @@ const LogOutButton = props => (
     // is passed to it from it's parents through React props
     onClick={() => props.dispatch({ type: 'LOGOUT' })}
   >
-    <ExitToAppIcon />
+    <ExitToApp style={{color: 'black'}}/>
   </IconButton>
   </Tooltip>
 );

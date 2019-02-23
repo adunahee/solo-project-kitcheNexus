@@ -32,8 +32,6 @@ class LoginForm extends Component {
     }
 
     render() {
-        const inputStyle = { margin: "5px" };
-
         return (
             <div>
                 <form className='login-form' onSubmit={this.login}>

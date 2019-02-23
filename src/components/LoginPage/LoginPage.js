@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-import { Grid, Button, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 class LoginPage extends Component {
 
@@ -13,7 +13,7 @@ class LoginPage extends Component {
         direction='column'
         justify='flex-start'
         alignItems='center'
-        style={{ height: '300px' }}
+        style={{ minHeight: '300px' }}
         spacing={16}>
         <Grid item>
           <Typography variant='h4' align='center'>Login</Typography>
