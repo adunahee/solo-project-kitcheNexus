@@ -7,7 +7,6 @@ import FoodToAddList from './FoodToAddList';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import AppBar from '@material-ui/core/AppBar';
@@ -101,12 +100,12 @@ class FoodFormPopup extends Component {
     render() {
 
         return (
-            <Grid item>
+            <Grid>
                 {this.props.pageView === 'PANTRY' &&
-                    <Button onClick={this.handleOpen}> Add Food to Pantry </Button>
+                    <Button onClick={this.handleOpen} variant="outlined"> Add Food to Pantry </Button>
                 }
                 {this.props.pageView === 'GROCERY' &&
-                    <Button onClick={this.handleOpen}> Add Groceries </Button>
+                    <Button onClick={this.handleOpen} variant="outlined"> Add Groceries </Button>
                 }
                 <Dialog open={this.state.open}
                     onClose={this.handleClose}

@@ -42,7 +42,7 @@ class App extends Component {
             lg={6}>
             <Grid container
               direction='column'
-              justify='flex-start'
+              justify='space-between'
               alignItems='stretch'
               style={{ height: '100vh' }}
             >
@@ -86,9 +86,13 @@ class App extends Component {
                 </Switch>
               </Grid>
 
-              <Grid item>
+              <Grid item
+                style={{
+                  height: '64px', 
+                  backgroundColor: '#aedd94'}}>
                 <Footer />
               </Grid>
+
 
             </Grid>
           </Grid>
