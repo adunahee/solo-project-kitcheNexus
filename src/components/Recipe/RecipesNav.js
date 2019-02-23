@@ -14,37 +14,44 @@ class RecipesNav extends Component {
         history: PropTypes.object.isRequired
     }
 
-    browseClass = () => {
+    getStyle = (linkName) => {
         const location = this.props.location.pathname;
-        switch (location) {
-            case ('/recipes/browse'):
-                return 'recipes-view-true';
+        console.log(linkName);
+        console.log(location);
+        
+        
+        const style = { backgroundColor: '#ffe3ae' };
+        switch (linkName) {
+            case ('browse'):
+                if (location === '/recipes/browse') {
+                    style.backgroundColor = '#ffc957';
+                    style.fontWeight = 'bold';
+                } 
+                return style;
+            case ('favorites'):
+                if (location === '/recipes/favorites') {
+                    style.backgroundColor = '#ffc957';
+                    style.fontWeight = 'bold';
+                }
+                return style;
+            case ('recent'):
+                if (location === '/recipes/recent') {
+                    style.backgroundColor = '#ffc957';
+                    style.fontWeight = 'bold';
+                }
+                return style;
             default:
-                return 'recipes-view-false';
-        }
-    }
-
-    favoritesClass = () => {
-        const location = this.props.location.pathname;
-        switch (location) {
-            case ('/recipes/favorites'):
-                return 'recipes-view-true';
-            default:
-                return 'recipes-view-false';
-        }
-    }
-
-    recentClass = () => {
-        const location = this.props.location.pathname;
-        switch (location) {
-            case ('/recipes/recent'):
-                return 'recipes-view-true'
-            default:
-                return 'recipes-view-false';
+                break;
         }
     }
 
     render() {
+        const linkStyle = {
+            padding: '14px',
+            fontWeight: 'inherit',
+            fontSize: 'inherit',
+        }
+
         return (
             <Grid container
                 direction='row'
@@ -52,30 +59,37 @@ class RecipesNav extends Component {
                 alignItems='center'
                 spacing={16}>
 
-                <Grid item
-                    className={`recipe-nav-div ${this.browseClass()}`}>
-                    <Paper>
+                <Grid item>
+                    <Paper style={this.getStyle('browse')}>
                         <Link to={`${this.props.match.url}/browse`}
                             className='nav-link'>
-                            <Typography align='center' type='h5' className={this.browseClass()}> Browse</Typography>
+                            <Typography align='center' 
+                            style={linkStyle}> 
+                            Browse</Typography>
                         </Link>
                     </Paper>
                 </Grid>
 
-                <Grid item
-                    className={`recipe-nav-div ${this.favoritesClass()}`}>
+                <Grid item>
+                    <Paper style={this.getStyle('favorites')}>
                     <Link to={`${this.props.match.url}/favorites`}
                         className='nav-link'>
-                        <Typography align='center' type='h5' className={this.favoritesClass()}>Favorites</Typography>
+                        <Typography align='center' 
+                        style={linkStyle}>
+                        Favorites</Typography>
                     </Link>
+                    </Paper>
                 </Grid>
 
-                <Grid item
-                    className={`recipe-nav-div ${this.recentClass()}`}>
+                <Grid item>
+                    <Paper style={this.getStyle('recent')}>
                     <Link to={`${this.props.match.url}/recent`}
                         className='nav-link'>
-                        <Typography align='center' type='h5' className={this.recentClass()}>Recent</Typography>
+                        <Typography align='center' 
+                        style={linkStyle}>
+                        Recent</Typography>
                     </Link>
+                    </Paper>
                 </Grid>
 
             </Grid>
