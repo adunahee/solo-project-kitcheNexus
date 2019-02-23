@@ -16,9 +16,6 @@ class RecipesNav extends Component {
 
     getStyle = (linkName) => {
         const location = this.props.location.pathname;
-        console.log(linkName);
-        console.log(location);
-        
         
         const style = { backgroundColor: '#ffe3ae' };
         switch (linkName) {
