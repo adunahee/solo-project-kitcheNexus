@@ -9,7 +9,6 @@ import {
 import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
@@ -81,14 +80,6 @@ class App extends Component {
 
                 </Switch>
               </Grid>
-
-              <Grid item
-                style={{
-                  height: '64px', 
-                  backgroundColor: '#aedd94'}}>
-                <Footer />
-              </Grid>
-
 
             </Grid>
           </Grid>
