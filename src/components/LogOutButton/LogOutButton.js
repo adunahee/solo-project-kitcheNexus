@@ -16,7 +16,6 @@ const LogOutButton = props => (
     <ExitToAppIcon />
   </IconButton>
   </Tooltip>
-  
 );
 
 // This component doesn't need 'mapStateToProps'

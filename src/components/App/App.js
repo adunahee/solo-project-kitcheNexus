@@ -18,7 +18,7 @@ import Recipes from '../Recipe/Recipes';
 import Pantry from '../Pantry/Pantry';
 import Grocery from '../Grocery/Grocery';
 
-import Grid from '@material-ui/core/Grid';
+import { Grid, Paper } from '@material-ui/core';
 
 import './App.css';
 
@@ -50,35 +50,36 @@ class App extends Component {
               </Grid>
 
               <Grid item>
-                <Switch>
+                <Paper>
+                  <Switch>
 
-                  <Redirect exact from="/" to="/home" />
+                    <Redirect exact from="/" to="/home" />
 
-                  <Route
-                    exact
-                    path="/about"
-                    component={AboutPage} />
+                    <Route
+                      exact
+                      path="/about"
+                      component={AboutPage} />
 
-                  <ProtectedRoute
-                    exact
-                    path="/home"
-                    component={UserPage} />
+                    <ProtectedRoute
+                      exact
+                      path="/home"
+                      component={UserPage} />
 
-                  <ProtectedRoute
-                    path="/pantry"
-                    component={Pantry} />
+                    <ProtectedRoute
+                      path="/pantry"
+                      component={Pantry} />
 
-                  <ProtectedRoute
-                    path="/recipes"
-                    component={Recipes} />
+                    <ProtectedRoute
+                      path="/recipes"
+                      component={Recipes} />
 
-                  <ProtectedRoute
-                    path="/grocery"
-                    component={Grocery} />
+                    <ProtectedRoute
+                      path="/grocery"
+                      component={Grocery} />
 
-                  <Route render={() => <h1>404</h1>} />
-
-                </Switch>
+                    <Route render={() => <h1>404</h1>} />
+                  </Switch>
+                </Paper>
               </Grid>
 
             </Grid>

@@ -12,12 +12,6 @@ import {
     ListItem, 
     Grid,
 } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 class PageNavDrawer extends React.Component {
     static propTypes = {
@@ -28,7 +22,6 @@ class PageNavDrawer extends React.Component {
 
     //conditionally styles nav links based on nav link type and history location
     getLinkStyle = (linkName) => {
-        console.log(linkName);
         const location = this.props.location.pathname;
 
         const style = {};

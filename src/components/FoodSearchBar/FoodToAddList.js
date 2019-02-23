@@ -6,7 +6,6 @@ import FoodToAddListItem from './FoodToAddListItem';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import List from '@material-ui/core/List';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 
 class FoodToAddList extends Component {
@@ -27,7 +26,6 @@ class FoodToAddList extends Component {
         return (
             <Grid container
                 direction='column'
-                alignItems='flex-start'
                 alignItems='flex-start'>
                 <Grid item>
                     <DialogContentText>Food to Add: Tap to Remove</DialogContentText>

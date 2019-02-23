@@ -38,7 +38,7 @@ class BatchActions extends Component {
                         fontSize: '1rem',
                         backgroundColor: this.checkColor(),
                     }}
-                        autoWidth={true}>
+                        autowidth='true'>
                         <option value=''>
                     Many Item Update?</option>
                 <option value='Buy More'>

@@ -102,7 +102,8 @@ class FoodFormPopup extends Component {
     render() {
 
         return (
-            <Grid justify='flex-end'>
+            <Grid container
+                justify='flex-end'>
                 <Fab aria-label="Add"
                     onClick={this.handleOpen} variant="extended">
                     <AddIcon />
