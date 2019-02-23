@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
 import RecipesNav from './RecipesNav';
 import RecipeBrowse from './RecipeBrowse';
 import RecipeRecent from './RecipeRecent';
 import RecipeFavorites from './RecipeFavorites';
-// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import {Route} from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
+
+import {Grid, Typography, Paper} from '@material-ui/core';
 
 class Recipes extends Component {
 
@@ -14,16 +15,32 @@ class Recipes extends Component {
 
     return (
       <Grid container
-      direction='column'>
-        <RecipesNav />
-        <Route exact path='/recipes/browse'
-          component={RecipeBrowse}
-        />
-        <Route exact path='/recipes/recent'
-        component={RecipeRecent}
-        />
-        <Route exact path='/recipes/favorites'
-        component={RecipeFavorites}/>
+        direction='column'
+        spacing={24}
+        style={{
+          minHeight: '85vh'
+        }}>
+        <Grid item>
+          <Paper style={{ backgroundColor: '#ffc957', minHeight: '56px' }}>
+            <Typography variant='h4' align='center' style={{padding: '8px'}}>Recipes</Typography>
+          </Paper>
+        </Grid>
+
+        <Grid item>
+          <RecipesNav />
+        </Grid>
+
+        <Grid item>
+          <Route exact path='/recipes/browse'
+            component={RecipeBrowse}
+          />
+          <Route exact path='/recipes/recent'
+            component={RecipeRecent}
+          />
+          <Route exact path='/recipes/favorites'
+            component={RecipeFavorites} />
+        </Grid>
+
       </Grid>
     )
   }

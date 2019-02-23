@@ -33,7 +33,7 @@ class Pantry extends Component {
         spacing={16}>
 
         <Grid item>
-          <Paper style={{ backgroundColor: '#ffb4b0' }}>
+          <Paper style={{ backgroundColor: '#ff5d55' }}>
             <Grid container
               direction="row"
               justify="center"

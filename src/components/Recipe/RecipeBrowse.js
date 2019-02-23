@@ -28,6 +28,7 @@ class RecipeBrowse extends Component {
 
     handleClear = () => {
         this.props.dispatch({type: "CLEAR_RECIPE_HITS"});
+        this.props.dispatch({type: 'CLEAR_SEARCH_VALUE'});
     }
 
     render() {

@@ -18,10 +18,10 @@ const UserPage = (props) => (
     </Typography>
     </Grid>
     <Grid item>
-      <Typography variant='p' align='center' >Use the <Menu/> to explore the app.  You can log out any time using <ExitToApp /> in the upper right.</Typography>
+      <Typography align='center' >Use the <Menu/> to explore the app.  You can log out any time using <ExitToApp /> in the upper right.</Typography>
     </Grid>
     <Grid item>
-      <Typography variant='p' align='center' >Stay tuned for upcoming features, like the ability to join a household, and food 'age' alerts.</Typography>
+      <Typography align='center' >Stay tuned for upcoming features, like the ability to join a household, and food 'age' alerts.</Typography>
       
     </Grid>
 

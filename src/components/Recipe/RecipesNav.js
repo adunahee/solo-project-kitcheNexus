@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+
+import {Grid, Paper, Typography} from '@material-ui/core';
 
 import '../Nav/Nav.css';
-
 
 class RecipesNav extends Component {
     static propTypes = {
@@ -50,20 +49,20 @@ class RecipesNav extends Component {
             <Grid container
                 direction='row'
                 justify='space-evenly'
-                alignItems='flex-start'
-                spacing={0}>
+                alignItems='center'
+                spacing={16}>
 
                 <Grid item
-                    xs={4}
                     className={`recipe-nav-div ${this.browseClass()}`}>
-                    <Link to={`${this.props.match.url}/browse`}
-                        className='nav-link'>
-                        <Typography align='center' type='h5' className={this.browseClass()}> Browse</Typography>
-                    </Link>
+                    <Paper>
+                        <Link to={`${this.props.match.url}/browse`}
+                            className='nav-link'>
+                            <Typography align='center' type='h5' className={this.browseClass()}> Browse</Typography>
+                        </Link>
+                    </Paper>
                 </Grid>
 
                 <Grid item
-                    xs={4}
                     className={`recipe-nav-div ${this.favoritesClass()}`}>
                     <Link to={`${this.props.match.url}/favorites`}
                         className='nav-link'>
@@ -72,7 +71,6 @@ class RecipesNav extends Component {
                 </Grid>
 
                 <Grid item
-                    xs={4}
                     className={`recipe-nav-div ${this.recentClass()}`}>
                     <Link to={`${this.props.match.url}/recent`}
                         className='nav-link'>

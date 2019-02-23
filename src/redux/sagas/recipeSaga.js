@@ -6,7 +6,6 @@ function* fetchRecipes(action) {
     try {
         let response = yield axios.get(`/api/recipe/search/${action.payload}`);
         yield put({ type: 'SET_RECIPE_HITS', payload: response.data });
-        yield put({ type: 'CLEAR_SEARCH_VALUE' });
         yield put({ type: 'CLEAR_BATCH_ITEMS' });
         yield put({ type: 'CLEAR_BATCH_ACTION' });
     } catch (error) {
