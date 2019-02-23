@@ -29,14 +29,24 @@ class Pantry extends Component {
         direction='column'
         justify="space-between"
         alignItems="stretch"
-        spacing={8}>
+        spacing={16}>
 
-        <Grid item>
+        <Grid item
+          style={{ backgroundColor: '#ffb4b0' }}>
           <Grid container
+            direction="row"
             justify="center"
-            alignItems="flex-start"
-            style={{ backgroundColor: '#ffb4b0'}}>
-            <Typography variant='h4'>Your Pantry</Typography>
+            alignItems="center"
+            >
+            <Grid item
+              xs={3}>
+            </Grid>
+            <Grid item xs={6}>
+            <Typography variant='h4' align='center'>Your Pantry</Typography>
+            </Grid>
+            <Grid item xs={3}>
+            <FoodFormPopup pageView='PANTRY' />
+            </Grid>
           </Grid>
 
         </Grid>
@@ -46,11 +56,6 @@ class Pantry extends Component {
             direction="row"
             justify="space-between"
             alignItems="center">
-
-            <Grid item
-              xs={3} >
-              <FoodFormPopup pageView='PANTRY' />
-            </Grid>
 
             <Grid item
               xs={3}>

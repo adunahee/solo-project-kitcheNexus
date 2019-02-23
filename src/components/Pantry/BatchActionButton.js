@@ -65,8 +65,11 @@ class BatchActionButton extends Component {
         }
 
         return (
-            <Grid >
-                {this.props.batchAction !== '' &&
+            <Grid>
+                {this.props.batchAction === '' ? 
+                    <Button style={{visibility: 'hidden'}}>
+                        Placeholder text to stop page jumping
+                    </Button> :
                     <Button onClick={this.handleActionButton}
                         variant="outlined">
                         {actionButtonDescription}</Button>}

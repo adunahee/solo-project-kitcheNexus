@@ -15,6 +15,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 import './FoodSearchBar.css';
 
@@ -100,13 +102,12 @@ class FoodFormPopup extends Component {
     render() {
 
         return (
-            <Grid>
-                {this.props.pageView === 'PANTRY' &&
-                    <Button onClick={this.handleOpen} variant="outlined"> Add Food to Pantry </Button>
-                }
-                {this.props.pageView === 'GROCERY' &&
-                    <Button onClick={this.handleOpen} variant="outlined"> Add Groceries </Button>
-                }
+            <Grid justify='flex-end'>
+                <Fab aria-label="Add"
+                    onClick={this.handleOpen} variant="extended">
+                    <AddIcon />
+                    Food
+                </Fab>
                 <Dialog open={this.state.open}
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
