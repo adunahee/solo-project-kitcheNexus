@@ -94,9 +94,10 @@ class FoodFormPopup extends Component {
             <Grid container
                 justify='center'>
                 <Fab aria-label="Add Food"
-                    onClick={this.handleOpen} >
-                    <AddIcon />
-                    <FoodIcon />
+                    onClick={this.handleOpen} 
+                    size='medium'>
+                    <AddIcon fontSize='small'/>
+                    <FoodIcon fontSize='small'/>
                 </Fab>
                 <Dialog open={this.state.open}
                     onClose={this.handleClose}

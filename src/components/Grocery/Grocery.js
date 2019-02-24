@@ -23,11 +23,12 @@ class Grocery extends Component {
         spacing={16}>
 
         <Grid item>
-          <Paper style={{ backgroundColor: '#3d8af7' }}>
+          <Paper style={{ backgroundColor: '#3d8af7', minHeight: '56px' }}>
             <Grid container
               direction="row"
               justify="center"
-              alignItems="center">
+              alignItems="center"
+              spacing={8}>
               <Grid item
                 xs={3}>
               </Grid>

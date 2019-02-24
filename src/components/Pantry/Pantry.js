@@ -26,12 +26,12 @@ class Pantry extends Component {
         spacing={16}>
 
         <Grid item>
-          <Paper style={{ backgroundColor: '#ff5d55' }}>
+          <Paper style={{ backgroundColor: '#ff5d55', minHeight: '56px' }}>
             <Grid container
               direction="row"
               justify="center"
               alignItems="center"
-            >
+              spacing={8}>
               <Grid item
                 xs={3}>
               </Grid>
@@ -48,7 +48,7 @@ class Pantry extends Component {
         <Grid item>
           <Grid container
             direction="row"
-            justify="space-between"
+            justify="space-evenly"
             alignItems="center">
 
             <Grid item
