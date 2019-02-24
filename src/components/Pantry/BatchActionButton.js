@@ -76,7 +76,8 @@ class BatchActionButton extends Component {
         }
 
         return (
-            <Grid>
+            <Grid container
+                justify='center'>
                 {this.props.batchAction === '' ? 
                     <IconButton style={{visibility: 'hidden'}}>
                         <Cake />
