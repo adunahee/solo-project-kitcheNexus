@@ -40,7 +40,7 @@ class BatchActions extends Component {
                     }}
                         autowidth='true'>
                         <option value=''>
-                    Many Item Update?</option>
+                    Update Existing Pantry?</option>
                 <option value='Buy More'>
                     Buy More</option>
                 <option value='Used Up'>
