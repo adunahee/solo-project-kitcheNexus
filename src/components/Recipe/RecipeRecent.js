@@ -3,25 +3,31 @@ import { connect } from 'react-redux';
 
 import RecipeCardList from './RecipeCardList';
 
-import {Grid} from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 class RecipeRecent extends Component {
     render() {
         return (
             <Grid container
-                direction='row'
-                spacing={16}
-                justify="center"
-                alignItems="baseline">
-                {this.props.recentRecipes.length > 0 &&
-                <RecipeCardList recipes={this.props.recentRecipes} /> }
+                direction='column'
+                justify="flex-start"
+                alignItems="center"
+                spacing={16}>
+                <Grid item>
+                    <Typography align='center'>Recent recipes are up to the last 5 recipes you have viewed in the past week!  Use this tab to favorite recipes you have tried and liked!</Typography>
+                </Grid>
+                <Grid item>
+                    {this.props.recentRecipes.length > 0 &&
+                        <RecipeCardList recipes={this.props.recentRecipes} />}
+                </Grid>
+
             </Grid>
         )
     }
 }
 
 const mapRStoProps = (rs) => {
-    return {recentRecipes: rs.food.recentRecipes}
+    return { recentRecipes: rs.food.recentRecipes }
 }
 
 export default connect(mapRStoProps)(RecipeRecent);

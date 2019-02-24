@@ -6,10 +6,6 @@ import NewGroceryList from './NewGroceryList';
 
 
 class Grocery extends Component {
-  componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_LIST_NAMES' })
-    this.props.dispatch({ type: "FETCH_GROCERY" });
-  }
 
   buildGroceryLists = () => {
     return this.props.listNames.map((list, i) => {

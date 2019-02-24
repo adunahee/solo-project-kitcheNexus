@@ -12,13 +12,6 @@ import Paper from '@material-ui/core/Paper';
 
 class Pantry extends Component {
 
-
-
-  componentDidMount() {
-    this.props.dispatch({ type: "FETCH_PANTRY" });
-    this.props.dispatch({ type: 'FETCH_PANTRY_TAGS' })
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch({ type: 'ADD_FOOD_TO_PANTRY', payload: this.props.pendingPantryItems })

@@ -17,8 +17,8 @@ class RecipeCard extends Component {
     }
 
     checkFavoriteStatus = () => {
-        const FavoriteCheck = this.props.favorites.find((recipe) => { return recipe.uri === this.props.recipe.uri })
-        console.log(FavoriteCheck);
+        const FavoriteCheck = this.props.favorites.find(
+            (recipe) => { return recipe.uri === this.props.recipe.uri })
         if(FavoriteCheck === undefined){
             return <FavoriteBorder/>
         } else {

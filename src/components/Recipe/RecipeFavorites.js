@@ -12,10 +12,10 @@ class RecipeFavorites extends Component {
   render() {
     return (
       <Grid container
-        direction='row'
-        spacing={16}
-        justify="center"
-        alignItems="baseline">
+        direction='column'
+        justify="flex-start"
+        alignItems="center"
+        spacing={16}>
 
         <Grid item>
           {this.props.favorites.length > 0 ?
@@ -31,8 +31,12 @@ class RecipeFavorites extends Component {
               you want to easily access later!
             </Typography>}
         </Grid>
-        {this.props.favorites.length > 0 &&
-          <RecipeCardList recipes={this.props.favorites} />}
+
+        <Grid item>
+          {this.props.favorites.length > 0 &&
+            <RecipeCardList recipes={this.props.favorites} />}
+        </Grid>
+
       </Grid>
     )
   }

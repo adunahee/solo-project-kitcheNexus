@@ -10,11 +10,6 @@ import RecipeFavorites from './RecipeFavorites';
 import {Grid, Typography, Paper} from '@material-ui/core';
 
 class Recipes extends Component {
-  componentDidMount(){
-    this.props.dispatch({type: 'FETCH_FAVORITES'});
-    this.props.dispatch({ type: 'FETCH_RECENT_RECIPES' });
-    this.props.dispatch({type: 'FETCH_RECENT_RECIPES'});
-  }
 
   render() {
     // console.log(this.props);
