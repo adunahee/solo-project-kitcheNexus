@@ -1,22 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {IconButton, Tooltip} from '@material-ui/core';
-import {ExitToApp} from '@material-ui/icons';
+import { IconButton, Tooltip } from '@material-ui/core';
+import { ExitToApp } from '@material-ui/icons';
 
-
-const LogOutButton = props => (
-  <Tooltip title='Log Out'>
-    <IconButton
-    // This IconButton shows up in multiple locations and is styled differently
-    // because it's styled differently depending on where it is used, the className
-    // is passed to it from it's parents through React props
-    onClick={() => props.dispatch({ type: 'LOGOUT' })}
-  >
-    <ExitToApp style={{color: 'black'}}/>
-  </IconButton>
-  </Tooltip>
-);
+class LogOutButton extends React.Component {
+  componentDidMount() {
+    //for grocery view
+    this.props.dispatch({ type: 'FETCH_LIST_NAMES' })
+    this.props.dispatch({ type: "FETCH_GROCERY" });
+    //for pantry view
+    this.props.dispatch({ type: "FETCH_PANTRY" });
+    this.props.dispatch({ type: 'FETCH_PANTRY_TAGS' })
+    //for favorite view
+    this.props.dispatch({ type: 'FETCH_FAVORITES' });
+    this.props.dispatch({ type: 'FETCH_RECENT_RECIPES' });
+  }
+  
+  render() {
+    return (
+      <Tooltip title='Log Out'>
+        <IconButton
+          // This IconButton shows up in multiple locations and is styled differently
+          // because it's styled differently depending on where it is used, the className
+          // is passed to it from it's parents through React props
+          onClick={() => this.props.dispatch({ type: 'LOGOUT' })}
+        >
+          <ExitToApp style={{ color: 'black' }} />
+        </IconButton>
+      </Tooltip>
+    )
+  }
+}
 
 // This component doesn't need 'mapStateToProps'
 // because it doesn't care what the current state is.

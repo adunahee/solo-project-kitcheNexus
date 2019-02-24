@@ -43,8 +43,6 @@ class Pantry extends Component {
               </Grid>
             </Grid>
           </Paper>
-
-
         </Grid>
 
         <Grid item>

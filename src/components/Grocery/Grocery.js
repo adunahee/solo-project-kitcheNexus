@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import GroceryLists from './GroceryLists';
 import NewGroceryList from './NewGroceryList';
 
+import { Grid, Paper, Typography } from '@material-ui/core';
 
 class Grocery extends Component {
 
@@ -15,13 +16,40 @@ class Grocery extends Component {
 
   render() {
     return (
-      <div>
-        <NewGroceryList />
+      <Grid container
+        direction='column'
+        justify="space-between"
+        alignItems="stretch"
+        spacing={16}>
+
+        <Grid item>
+          <Paper style={{ backgroundColor: '#3d8af7' }}>
+            <Grid container
+              direction="row"
+              justify="center"
+              alignItems="center">
+              <Grid item
+                xs={3}>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant='h4' align='center'>Grocery</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <NewGroceryList />
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+
+        <Grid item>
+
+        </Grid>
+        
         {this.props.listNames.length > 0 ? this.buildGroceryLists() : <p>You have no grocery lists yet!</p>
 
         }
 
-      </div>
+      </Grid>
     )
   }
 }

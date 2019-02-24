@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {Button, TextField, Dialog, DialogActions, 
+    DialogContent, DialogContentText, DialogTitle, 
+    IconButton, Grid} from '@material-ui/core/';
+
+import {PlaylistAdd} from '@material-ui/icons';
 
 class NewGroceryList extends Component {
     constructor(props) {
@@ -38,8 +36,10 @@ class NewGroceryList extends Component {
 
   render() {
     return (
-      <div>
-            <Button onClick={this.handleOpen}>Create New List</Button>
+      <Grid container
+        justify='center'>
+            <IconButton onClick={this.handleOpen} style={{ backgroundColor: '#e0e0e0'}}> 
+            <PlaylistAdd /> </IconButton>
             <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Creating New Grocery List</DialogTitle>
                 <DialogContent>
@@ -66,7 +66,7 @@ class NewGroceryList extends Component {
           </Button>
                 </DialogActions>
             </Dialog>
-      </div>
+      </Grid>
     )
   }
 }

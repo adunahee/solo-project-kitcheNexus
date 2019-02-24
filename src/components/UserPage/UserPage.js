@@ -5,17 +5,6 @@ import { Grid, Typography } from '@material-ui/core';
 import { Menu, ExitToApp } from '@material-ui/icons';
 
 class UserPage extends React.Component {
-  componentDidMount() {
-    //for grocery view
-    this.props.dispatch({ type: 'FETCH_LIST_NAMES' })
-    this.props.dispatch({ type: "FETCH_GROCERY" });
-    //for pantry view
-    this.props.dispatch({ type: "FETCH_PANTRY" });
-    this.props.dispatch({ type: 'FETCH_PANTRY_TAGS' })
-    //for favorite view
-    this.props.dispatch({ type: 'FETCH_FAVORITES' });
-    this.props.dispatch({ type: 'FETCH_RECENT_RECIPES' });
-  }
 
   render() {
 
