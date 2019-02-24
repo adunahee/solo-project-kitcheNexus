@@ -18,7 +18,7 @@ class FoodToAddList extends Component {
             pendingArr = this.props.pendingPantryItems;
         }
         return pendingArr.map((item, i) => {
-            return <FoodToAddListItem item={item} key={i} index={i} pageView={this.props.pageView} />
+            return <FoodToAddListItem item={item} key={i} index={i} pageView={this.props.pageView}/>
         })
     }
 

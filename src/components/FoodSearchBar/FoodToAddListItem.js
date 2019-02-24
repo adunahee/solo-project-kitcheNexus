@@ -5,17 +5,34 @@ import { connect } from 'react-redux';
 import ListItem from '@material-ui/core/ListItem';
 
 class FoodToAddListItem extends Component {
-
+    //warns user if item duplicated elsewhere
     checkForDuplicates = () => {
+        const warning = ['( food is already'];
         switch (this.props.pageView) {
             case ('PANTRY'):
                 if (this.props.pantry.filter(pantryItem => pantryItem.food_name === this.props.item).length > 0) {
-                    return '(already in pantry)';
+                    warning.push('in your pantry )');
+                    return warning.join(' ');
                 } else { return '' }
             case ('GROCERY'):
-                if (this.props.grocery.filter(groceryItem => groceryItem.name === this.props.item).length > 0) {
-                    return '(already on a list)';
-                } else { return '' }
+                warning.push('on list:');
+                //check to see if food is already on a give list and update warning
+                this.props.grocery.forEach((groceryObj) => {
+                    this.props.listNames.forEach((listObj) => {
+                        const listCheck = groceryObj.list_name === listObj.list_name
+                        const foodCheck = groceryObj.name === this.props.item
+                        if (listCheck && foodCheck) {
+                            warning.push(`"${listObj.list_name}"`);
+                        }
+                    })
+                })
+                //checks to see if item on any lists
+                if (warning.length > 2) {
+                    warning.push(')');
+                    return warning.join(' ')
+                } else {
+                    return ''
+                }
             default:
                 return '';
         }
@@ -34,7 +51,7 @@ class FoodToAddListItem extends Component {
 
     render() {
         return (
-            <ListItem 
+            <ListItem
                 onClick={this.handleListItemClick}>
                 {this.props.item} {this.checkForDuplicates()}
             </ListItem>
@@ -48,6 +65,7 @@ const mapRStoProps = (rs) => {
         pendingPantryItems: rs.pantry.pendingPantryItems,
         pantry: rs.pantry.pantry,
         grocery: rs.grocery.grocery,
+        listNames: rs.grocery.groceryListNames,
     }
 }
 
