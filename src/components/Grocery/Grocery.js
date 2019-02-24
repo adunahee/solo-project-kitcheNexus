@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import GroceryLists from './GroceryLists';
-import NewGroceryList from './NewGroceryList';
+import CreateListPopup from './CreateListPopup';
 
 import { Grid, Paper, Typography } from '@material-ui/core';
 
@@ -36,7 +36,7 @@ class Grocery extends Component {
                 <Typography variant='h4' align='center'>Grocery</Typography>
               </Grid>
               <Grid item xs={3}>
-                <NewGroceryList />
+                <CreateListPopup />
               </Grid>
             </Grid>
           </Paper>

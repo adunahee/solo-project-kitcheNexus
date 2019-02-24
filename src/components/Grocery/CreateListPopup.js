@@ -7,7 +7,7 @@ import {Button, TextField, Dialog, DialogActions,
 
 import {PlaylistAdd} from '@material-ui/icons';
 
-class NewGroceryList extends Component {
+class CreateListPopup extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +44,7 @@ class NewGroceryList extends Component {
                 <DialogTitle id="form-dialog-title">Creating New Grocery List</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Name your list.
+                        What's your list's name?
           </DialogContentText>
                     <TextField
                         autoFocus
@@ -58,10 +58,10 @@ class NewGroceryList extends Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={this.handleClose} color="default" variant='contained'>
                         Cancel
           </Button>
-                    <Button onClick={this.handleCreateNewList} color="secondary">
+                    <Button onClick={this.handleCreateNewList} style={{ backgroundColor: '#a8c6fa'}} variant='contained'>
                         Create
           </Button>
                 </DialogActions>
@@ -71,4 +71,4 @@ class NewGroceryList extends Component {
   }
 }
 
-export default connect()(NewGroceryList)
+export default connect()(CreateListPopup)
