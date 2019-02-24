@@ -16,7 +16,8 @@ router.get('/food', (req, res) => {
                             JOIN persons_food ON person.id = persons_food.persons_id
                             JOIN pantry_tags ON pantry_tags.id = persons_food.pantry_tags_id
                             JOIN food ON food.id = persons_food.food_id
-                            WHERE person.id = $1;`;
+                            WHERE person.id = $1
+                            ORDER BY persons_food.date_added;`;
         pool.query(queryText, [req.user.id])
             .then(response => {
                 // console.log(response.rows);
