@@ -18,9 +18,7 @@ class Recipes extends Component {
       <Grid container
         direction='column'
         spacing={24}
-        style={{
-          minHeight: '85vh'
-        }}>
+        style={{ minHeight: '450px' }}>
         <Grid item>
           <Paper style={{ backgroundColor: '#ffc957', minHeight: '56px' }}>
             <Typography variant='h4' align='center' style={{padding: '8px'}}>Recipes</Typography>

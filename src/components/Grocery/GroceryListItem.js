@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
+import {ListItem} from '@material-ui/core';
+
 class GroceryListItem extends Component {
 
   handleClick = () => {
@@ -24,9 +26,9 @@ class GroceryListItem extends Component {
 
   render() {
     return (
-      <li onClick={this.handleClick}>
+      <ListItem onClick={this.handleClick}>
         {this.props.groceryItem.name}
-      </li>
+      </ListItem>
     )
   }
 }

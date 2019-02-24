@@ -23,7 +23,8 @@ class Pantry extends Component {
         direction='column'
         justify="space-between"
         alignItems="stretch"
-        spacing={16}>
+        spacing={16}
+        style={{ minHeight: '450px' }}>
 
         <Grid item>
           <Paper style={{ backgroundColor: '#ff5d55', minHeight: '56px' }}>
