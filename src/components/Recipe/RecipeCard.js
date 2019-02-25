@@ -23,7 +23,7 @@ class RecipeCard extends Component {
         if (FavoriteCheck === undefined) {
             return <FavoriteBorder />
         } else {
-            return <Favorite style={{ color: '#ffe3ae' }} />
+            return <Favorite style={{ color: 'rgb(255, 201, 87)' }} />
         }
     }
 
