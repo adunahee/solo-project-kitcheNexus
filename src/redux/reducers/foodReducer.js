@@ -12,7 +12,7 @@ const searchResults = (state = [], action) => {
 };
 
 const foodSearchValue = (state = '', action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SET_VALUE':
             return action.payload;
         case 'CLEAR_VALUE':
@@ -22,8 +22,8 @@ const foodSearchValue = (state = '', action) => {
     }
 }
 
-const recipeHits = ( state = [], action) => {
-    switch(action.type) {
+const recipeHits = (state = [], action) => {
+    switch (action.type) {
         case 'SET_RECIPE_HITS':
             return action.payload;
         case 'CLEAR_RECIPE_HITS':
@@ -33,8 +33,8 @@ const recipeHits = ( state = [], action) => {
     }
 }
 
-const recipeSearchValue = (state = '', action ) => {
-    switch(action.type) {
+const recipeSearchValue = (state = '', action) => {
+    switch (action.type) {
         case 'RECIPE_SEARCH_VALUE':
             return action.payload;
         case 'CLEAR_SEARCH_VALUE':
@@ -45,7 +45,7 @@ const recipeSearchValue = (state = '', action ) => {
 }
 
 const recentRecipes = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SET_RECENT_RECIPES':
             return action.payload;
         default:
@@ -53,8 +53,8 @@ const recentRecipes = (state = [], action) => {
     }
 }
 
-const recipeFavorites = (state=[], action) => {
-    switch(action.type) {
+const recipeFavorites = (state = [], action) => {
+    switch (action.type) {
         case 'SET_FAVORITES':
             return action.payload;
         default:
@@ -70,3 +70,12 @@ export default combineReducers({
     recentRecipes,
     recipeFavorites
 });
+
+export {
+    searchResults,
+    foodSearchValue,
+    recipeHits,
+    recipeSearchValue,
+    recentRecipes,
+    recipeFavorites
+}
