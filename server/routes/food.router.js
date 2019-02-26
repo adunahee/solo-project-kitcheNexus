@@ -6,7 +6,11 @@ const axios = require('axios');
 //gets autocomplete suggestions from food API
 router.get('/:str', (req, res) => {
     if (req.isAuthenticated()) {
-        const queryURL = `${AUTOCOMPLETE_FOOD_URL}?q=${req.params.str}&limit=10&app_id=${process.env.FOOD_APP_ID}&app_key=${process.env.FOOD_APP_KEY}`;
+        const queryURL = `${AUTOCOMPLETE_FOOD_URL}
+        ?q=${req.params.str}
+        &limit=10
+        &app_id=${process.env.FOOD_APP_ID}
+        &app_key=${process.env.FOOD_APP_KEY}`;
         axios.get(queryURL)
             .then(response => {
                 // console.log(`food api response:`, response.data);
