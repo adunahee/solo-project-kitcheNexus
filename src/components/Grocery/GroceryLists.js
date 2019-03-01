@@ -5,9 +5,8 @@ import GroceryListItem from '../Grocery/GroceryListItem';
 import FoodFormPopup from '../FoodSearchBar/FoodFormPopup';
 
 import {
-    Grid, Typography, Chip, IconButton, Divider, List, ListItem,
+    Grid, Typography, IconButton, List, ListItem,
     ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary,
-    ExpansionPanelActions
 } from '@material-ui/core'
 
 import { ExpandMore, DeleteForever } from '@material-ui/icons';

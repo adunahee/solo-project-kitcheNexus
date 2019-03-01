@@ -38,8 +38,7 @@
   },
   "devDependencies": {
     "nodemon": "^1.17.2",
-    "supertest": "^3.4.2",
-    "jest": "^24.1.0"
+    "supertest": "^3.4.2"
   },
   "browserslist": [
     ">0.2%",

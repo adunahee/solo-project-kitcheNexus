@@ -9,21 +9,32 @@ class LoginForm extends Component {
         password: '',
     };
 
-    login = (event) => {
+    submitUser = (event) => {
         event.preventDefault();
-
         if (this.state.username && this.state.password) {
             this.props.dispatch({
-                type: 'LOGIN',
+                type: this.props.mode,
                 payload: {
                     username: this.state.username,
                     password: this.state.password,
                 },
             });
         } else {
-            this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+            if (this.props.mode === 'LOGIN') {
+                this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+            } else if (this.props.mode === 'REGISTER') {
+                this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+            } 
         }
     } // end login
+
+    handleRegister = () => {
+        if(this.props.mode === 'REGISTER' && (this.state.username === '' || this.state.password === '') ){
+            return this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+        }
+        this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' })
+        this.props.dispatch({ type: 'CLEAR_LOGIN_ERROR' })
+    }
 
     handleInputChangeFor = propertyName => (event) => {
         this.setState({
@@ -34,7 +45,7 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                <form className='login-form' onSubmit={this.login}>
+                <form className='login-form' onSubmit={this.submitUser}>
                     <Grid container
                         direction='column'
                         justify='space-evenly'
@@ -76,26 +87,26 @@ class LoginForm extends Component {
                                 direction='row'
                                 justify='space-evenly'
                                 spacing={8}>
-                                <Grid item>
-                                    <Button
-                                        variant='contained'
-                                        type='submit'
-                                        value='Log In'
-                                        name='submit'
-                                        style={{ backgroundColor: '#aedd94' }}>
-                                        Log In</Button>
-                                </Grid>
+                                {this.props.mode === 'LOGIN' &&
+                                    <Grid item>
+                                        <Button
+                                            variant='contained'
+                                            type='submit'
+                                            style={{ backgroundColor: '#aedd94' }}>
+                                            Log In</Button>
+                                    </Grid>
+                                }
+
 
                                 <Grid item>
                                     <Button variant='contained'
-                                        onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}>
+                                        type='submit'
+                                        onClick={this.handleRegister}>
                                         Register</Button>
                                 </Grid>
 
                             </Grid>
                         </Grid>
-
-
 
                     </Grid>
                 </form>
@@ -106,4 +117,8 @@ class LoginForm extends Component {
     }
 }
 
-export default connect()(LoginForm);
+const mapRStoProps = (rs) => {
+    return { mode: rs.loginMode }
+}
+
+export default connect(mapRStoProps)(LoginForm);

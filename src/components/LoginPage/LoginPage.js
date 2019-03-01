@@ -8,6 +8,11 @@ import { Grid, Typography } from '@material-ui/core';
 class LoginPage extends Component {
 
   render() {
+    let formName = 'Register';
+    if(this.props.loginMode === 'LOGIN'){
+      formName = 'Login';
+    }
+
     return (
       <Grid container
         direction='column'
@@ -16,12 +21,14 @@ class LoginPage extends Component {
         style={{ minHeight: '300px' }}
         spacing={16}>
         <Grid item>
-          <Typography variant='h4' align='center'>Login</Typography>
-          {this.props.errors.loginMessage && (
+          <Typography variant='h4' align='center'>
+          {formName}</Typography>
+          {(this.props.errors.loginMessage || this.props.errors.registrationMessage) && (
             <Typography variant='h5' align='center'
               className="alert"
               role="alert">
-              {this.props.errors.loginMessage}</Typography>
+              {this.props.errors.loginMessage}
+              {this.props.errors.registrationMessage}</Typography>
           )}
         </Grid>
 
@@ -38,6 +45,7 @@ class LoginPage extends Component {
 // const mapStateToProps = ({errors}) => ({errors});
 const mapStateToProps = state => ({
   errors: state.errors,
+  loginMode: state.loginMode
 });
 
 export default connect(mapStateToProps)(LoginPage);
