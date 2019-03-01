@@ -32,7 +32,6 @@
     "oldstart": "node server/server.js",
     "dev": "react-scripts start",
     "start": "serve -s build",
-    "heroku-postbuild": "npm run build",
     "client": "react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
@@ -49,5 +48,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "heroku-run-build-script" : true
 }
