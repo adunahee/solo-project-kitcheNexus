@@ -29,9 +29,8 @@
     "serve": "^10.1.2"
   },
   "scripts": {
-    "oldstart": "node server/server.js",
+    "start": "node server/server.js",
     "dev": "react-scripts start",
-    "start": "serve -s build",
     "client": "react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
