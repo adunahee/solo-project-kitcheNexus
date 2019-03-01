@@ -30,11 +30,18 @@ class LoginForm extends Component {
     }
 
     handleRegister = () => {
-        if (this.props.mode === 'REGISTER' && (this.state.username === '' || this.state.password === '')) {
-            return this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+        if (this.props.mode === 'REGISTER' && this.state.username !== '' && this.state.password !== '') {
+            this.props.dispatch({
+                type: this.props.mode,
+                payload: {
+                    username: this.state.username,
+                    password: this.state.password,
+                }
+            })
+        } else {
+            this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' })
+            this.props.dispatch({ type: 'CLEAR_LOGIN_ERROR' })
         }
-        this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' })
-        this.props.dispatch({ type: 'CLEAR_LOGIN_ERROR' })
     }
 
     handleLoginReturn = () => {
@@ -50,6 +57,11 @@ class LoginForm extends Component {
     }
 
     render() {
+        let registerBtnStyle;
+        if(this.props.mode === 'REGISTER'){
+            registerBtnStyle = { backgroundColor: '#aedd94' };
+        }
+        
         return (
             <div>
                 <form className='login-form' onSubmit={this.submitUser}>
@@ -106,8 +118,7 @@ class LoginForm extends Component {
                                     <Grid item>
                                         <Button
                                             variant='contained'
-                                            onClick={this.handleLoginReturn}
-                                            style={{ backgroundColor: '#aedd94' }}>
+                                            onClick={this.handleLoginReturn}>
                                             Return to Login</Button>
                                     </Grid>
                                 }
@@ -116,7 +127,8 @@ class LoginForm extends Component {
                                 <Grid item>
                                     <Button variant='contained'
                                         type='submit'
-                                        onClick={this.handleRegister}>
+                                        onClick={this.handleRegister}
+                                        style={registerBtnStyle}>
                                         Register</Button>
                                 </Grid>
 
