@@ -9,6 +9,9 @@ import { Grid, Typography } from '@material-ui/core';
 
 
 class RecipeFavorites extends Component {
+  componentDidMount(){
+    this.props.dispatch({ type: 'FETCH_FAVORITES' });
+  }
   render() {
     return (
       <Grid container

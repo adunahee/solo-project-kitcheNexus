@@ -37,7 +37,7 @@ router.post('/recent', (req, res) => {
     if (req.isAuthenticated()) {
         const recipeUri = req.body.url;
         const dateViewed = req.body.timeStamp;
-        console.log('in recent post:', dateViewed);
+        // console.log('in recent post:', dateViewed);
 
         (async () => {
             const client = await pool.connect();
@@ -162,7 +162,7 @@ router.get('/recent', (req, res) => {
 
 router.post('/favorite', (req, res) => {
     if (req.isAuthenticated()) {
-        console.log('in favorite post');
+        // console.log('in favorite post');
 
         (async () => {
             const client = await pool.connect();
@@ -216,7 +216,7 @@ router.post('/favorite', (req, res) => {
 })
 
 router.get('/favorites', (req, res) => {
-    console.log('in recipe/favorites get');
+    // console.log('in recipe/favorites get');
     if (req.isAuthenticated()) {
         //begin checking db favorites, then getting recipes from api, then sending back to client
         (async () => {

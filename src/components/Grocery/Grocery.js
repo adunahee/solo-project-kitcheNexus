@@ -21,7 +21,7 @@ class Grocery extends Component {
         justify="flex-start"
         alignItems="stretch"
         spacing={16}
-        style={{minHeight: '450px'}}>
+        style={{ minHeight: '450px' }}>
 
         <Grid item>
           <Paper style={{ backgroundColor: '#3d8af7', minHeight: '56px' }}>
@@ -43,8 +43,9 @@ class Grocery extends Component {
           </Paper>
         </Grid>
 
-        <Grid item>
-          {this.props.listNames.length > 0 ?
+
+        {this.props.listNames.length > 0 ?
+          <Grid item>
             <Grid
               container
               direction="row"
@@ -53,9 +54,12 @@ class Grocery extends Component {
               spacing={8}>
               {this.buildGroceryLists()}
             </Grid>
-            :
-            <Typography>You have no grocery lists yet!</Typography>}
-        </Grid>
+          </Grid>
+          :
+          <Grid item>
+            <Typography align='center'>You have no grocery lists yet! Create one using  </Typography>
+            <CreateListPopup />
+          </Grid>}
 
       </Grid>
     )

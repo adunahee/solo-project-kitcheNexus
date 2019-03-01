@@ -6,6 +6,9 @@ import RecipeCardList from './RecipeCardList';
 import { Grid, Typography } from '@material-ui/core';
 
 class RecipeRecent extends Component {
+    componentDidMount(){
+        this.props.dispatch({ type: 'FETCH_RECENT_RECIPES' });
+    }
     render() {
         return (
             <Grid container

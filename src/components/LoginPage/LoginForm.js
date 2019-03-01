@@ -11,29 +11,36 @@ class LoginForm extends Component {
 
     submitUser = (event) => {
         event.preventDefault();
-        if (this.state.username && this.state.password) {
-            this.props.dispatch({
-                type: this.props.mode,
-                payload: {
-                    username: this.state.username,
-                    password: this.state.password,
-                },
-            });
-        } else {
-            if (this.props.mode === 'LOGIN') {
+        if (this.props.mode === 'LOGIN') {
+            if (this.state.username && this.state.password) {
+                this.props.dispatch({
+                    type: this.props.mode,
+                    payload: {
+                        username: this.state.username,
+                        password: this.state.password,
+                    },
+                });
+            } else {
                 this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-            } else if (this.props.mode === 'REGISTER') {
-                this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
-            } 
+            }
         }
-    } // end login
+        else if (this.props.mode === 'REGISTER') {
+            this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+        }
+    }
 
     handleRegister = () => {
-        if(this.props.mode === 'REGISTER' && (this.state.username === '' || this.state.password === '') ){
-            return this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+        if (this.props.mode === 'REGISTER' && (this.state.username === '' || this.state.password === '')) {
+            return this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
         }
         this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' })
         this.props.dispatch({ type: 'CLEAR_LOGIN_ERROR' })
+    }
+
+    handleLoginReturn = () => {
+        this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' })
+        this.props.dispatch({ type: 'CLEAR_LOGIN_ERROR' })
+        this.props.dispatch({ type: 'CLEAR_REGISTRATION_ERROR' })
     }
 
     handleInputChangeFor = propertyName => (event) => {
@@ -87,13 +94,21 @@ class LoginForm extends Component {
                                 direction='row'
                                 justify='space-evenly'
                                 spacing={8}>
-                                {this.props.mode === 'LOGIN' &&
+                                {this.props.mode === 'LOGIN' ?
                                     <Grid item>
                                         <Button
                                             variant='contained'
                                             type='submit'
                                             style={{ backgroundColor: '#aedd94' }}>
-                                            Log In</Button>
+                                            Login</Button>
+                                    </Grid>
+                                    :
+                                    <Grid item>
+                                        <Button
+                                            variant='contained'
+                                            onClick={this.handleLoginReturn}
+                                            style={{ backgroundColor: '#aedd94' }}>
+                                            Return to Login</Button>
                                     </Grid>
                                 }
 
@@ -111,7 +126,6 @@ class LoginForm extends Component {
                     </Grid>
                 </form>
             </div>
-
 
         )
     }

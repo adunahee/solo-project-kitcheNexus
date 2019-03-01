@@ -21,9 +21,8 @@ class Pantry extends Component {
     return (
       <Grid container
         direction='column'
-        justify="space-between"
         alignItems="stretch"
-        spacing={16}
+        spacing={24}
         style={{ minHeight: '450px' }}>
 
         <Grid item>
@@ -46,28 +45,37 @@ class Pantry extends Component {
           </Paper>
         </Grid>
 
-        <Grid item>
-          <Grid container
-            direction="row"
-            justify="space-evenly"
-            alignItems="center">
-
-            <Grid item
-              xs={3}>
-              <BatchActions />
-            </Grid>
-
-            <Grid item
-              xs={3}>
-              <BatchActionButton />
-            </Grid>
-
+        {this.props.pantry.length === 0 ?
+          <Grid item>
+            <Typography align='center'>You have no items in your pantry yet! Begin adding them by using </Typography>
+            <FoodFormPopup pageView='PANTRY' />
           </Grid>
-        </Grid>
+          :
+          <Grid item>
+            <Grid container
+              direction="row"
+              justify="space-evenly"
+              alignItems="center">
 
-        <Grid item>
-          <PantryTable />
-        </Grid>
+              <Grid item
+                xs={3}>
+                <BatchActions />
+              </Grid>
+
+              <Grid item
+                xs={3}>
+                <BatchActionButton />
+              </Grid>
+
+            </Grid>
+          </Grid>
+        }
+        {this.props.pantry.length > 0 &&
+          <Grid item>
+            <PantryTable />
+          </Grid>
+        }
+
 
       </Grid >
     )
@@ -76,7 +84,8 @@ class Pantry extends Component {
 
 const mapRStoProps = (rs) => {
   return {
-    pendingPantryItems: rs.pantry.pendingPantryItems
+    pendingPantryItems: rs.pantry.pendingPantryItems,
+    pantry: rs.pantry.pantry
   }
 }
 
