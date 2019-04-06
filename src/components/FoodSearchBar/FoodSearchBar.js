@@ -18,6 +18,8 @@ const renderSuggestion = suggestion => (
     </span>
 );
 
+const setValue = (value) => ({ type: 'SET_VALUE', payload: value });
+
 class FoodSearchBar extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +33,7 @@ class FoodSearchBar extends Component {
 
     onChange = (event, { newValue }) => {
         if (this.state.pageView === 'GROCERY' || this.state.pageView === 'PANTRY') {
-            this.props.dispatch({ type: 'SET_VALUE', payload: newValue });
+            this.props.setValue(newValue);
         } else {
             this.props.dispatch({ type: 'RECIPE_SEARCH_VALUE', payload: newValue });
         }
@@ -107,4 +109,8 @@ const mapRStoProps = (rs) => {
     })
 }
 
-export default connect(mapRStoProps)(FoodSearchBar);
+const mapDispatchToProps = {
+    setValue: value => setValue(value)
+}
+
+export default connect(mapRStoProps, mapDispatchToProps)(FoodSearchBar);
