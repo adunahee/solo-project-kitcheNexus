@@ -17,10 +17,11 @@ function* addToList(action) {
         // console.log(action.payload.groceries);
         yield axios.post(`/api/grocery/${action.payload.listName}`, action.payload.groceries);
         yield alert('Grocery list updated.');
+        // these could be replaced with a single action "AFTER_ADD" and another case added to each reducer 
         yield put({ type: 'FETCH_GROCERY' });
         yield put({ type: `CLEAR_PENDING_GROCERY` });
         yield put({ type: 'CLEAR_BATCH_ITEMS' });
-        yield put({type: 'CLEAR_BATCH_ACTION'});
+        yield put({ type: 'CLEAR_BATCH_ACTION' });
     } catch (err) {
         console.log('error in addToList saga:', err);
         yield alert('Unable to add to grocery list at this time.');

@@ -13,6 +13,7 @@ const pendingGroceryItems = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TO_PENDING_GROCERY':
             return [...state, action.payload];
+        // case 'CLEAR_PENDING_GROCERY2':
         case 'CLEAR_PENDING_GROCERY':
             return [];
         case 'REMOVE_PENDING_GROCERY_ITEM':

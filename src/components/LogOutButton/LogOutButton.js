@@ -12,7 +12,6 @@ class LogOutButton extends React.Component {
     //for pantry view
     this.props.dispatch({ type: "FETCH_PANTRY" });
     this.props.dispatch({ type: 'FETCH_PANTRY_TAGS' })
-    
   }
   
   render() {
