@@ -18,7 +18,11 @@ const renderSuggestion = suggestion => (
     </span>
 );
 
+// collections of redux actions that could be broken out and reused elsewhere
 const setValue = (value) => ({ type: 'SET_VALUE', payload: value });
+const clearSuggestions = () => ({ type: 'CLEAR_SUGGESTIONS' });
+const fetchFoods = value => ({ type: 'FETCH_FOODS', payload: value });
+const setRecipeSearchValue = (value) => ({ type: 'RECIPE_SEARCH_VALUE', payload: value });
 
 class FoodSearchBar extends Component {
     constructor(props) {
@@ -32,33 +36,31 @@ class FoodSearchBar extends Component {
     }
 
     onChange = (event, { newValue }) => {
+        const { setValue, setRecipeSearchValue } = this.props;
         if (this.state.pageView === 'GROCERY' || this.state.pageView === 'PANTRY') {
-            this.props.setValue(newValue);
+            setValue(newValue);
         } else {
-            this.props.dispatch({ type: 'RECIPE_SEARCH_VALUE', payload: newValue });
+            setRecipeSearchValue(newValue);
         }
-
     };
 
+    // Autosuggest will call this function every time you need to clear suggestions.
+    onSuggestionsClearRequested = () => {
+        this.props.clearSuggestions();
+    };
     // Teach Autosuggest how to calculate suggestions for any given input value.
     getSuggestions = value => {
         //removes white space and capitals
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
         if (inputLength > 1) {
-            this.props.dispatch({ type: 'FETCH_FOODS', payload: inputValue })
-        };
+            this.props.fetchFoods(inputValue);
+        }
     }
-
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({ value }) => {
         this.getSuggestions(value)
-    };
-
-    // Autosuggest will call this function every time you need to clear suggestions.
-    onSuggestionsClearRequested = () => {
-        this.props.dispatch({ type: 'CLEAR_SUGGESTIONS' });
     };
 
     render() {
@@ -83,18 +85,19 @@ class FoodSearchBar extends Component {
 
 
         // Finally, render it!
+        console.log(this);
         return (
-            <div>     
-                        <Typography>Type 2 letters and food will appear!</Typography>
-                        <Autosuggest
-                            suggestions={suggestions}
-                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                            getSuggestionValue={getSuggestionValue}
-                            renderSuggestion={renderSuggestion}
-                            inputProps={inputProps}
-                            id='foods-search-bar'
-                        />
+            <div>
+                <Typography>Type 2 letters and food will appear!</Typography>
+                <Autosuggest
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
+                    id='foods-search-bar'
+                />
             </div>
 
         );
@@ -110,7 +113,10 @@ const mapRStoProps = (rs) => {
 }
 
 const mapDispatchToProps = {
-    setValue: value => setValue(value)
+    setValue: value => setValue(value),
+    clearSuggestions: () => clearSuggestions(),
+    fetchFoods: value => fetchFoods(value),
+    setRecipeSearchValue: value => setRecipeSearchValue(value),
 }
 
 export default connect(mapRStoProps, mapDispatchToProps)(FoodSearchBar);
