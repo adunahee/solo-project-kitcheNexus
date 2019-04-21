@@ -19,7 +19,6 @@ function* fetchRecentRecipes() {
         yield put({type: 'SET_RECENT_RECIPES', payload: response.data});
     } catch(err) {
         console.log('Error with fetchRecentRecipes:', err);
-        
     }
 }
 
