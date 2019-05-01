@@ -13,7 +13,7 @@ class RecipesNav extends Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired
     }
-
+    // conditional styling based on location
     getStyle = (linkName) => {
         const location = this.props.location.pathname;
         

@@ -23,7 +23,7 @@ Before you get started, make sure you have the following software installed on y
     * Create a new database called `kitcheNexus` using [Postico](https://eggerapps.at/postico/docs/v1.5.6/)
     * Run the database.sql file to set up tables 
 
-3. Create a .env file at the root of the project and paste this line into the file. 
+3. Create a `.env` file at the root of the project and paste this line into the file. 
     ```
     SERVER_SESSION_SECRET=superSecretSession
     FOOD_APP_ID=foodAppId

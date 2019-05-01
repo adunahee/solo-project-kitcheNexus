@@ -45,7 +45,7 @@ router.post('/recent', (req, res) => {
             try {
                 await client.query('BEGIN');
 
-                //tries to grab food id from db
+                //tries to grab recipe id from db
                 let queryText = 'SELECT id FROM "recipe" WHERE encoded_uri ILIKE $1;';
                 let value = [recipeUri];
                 let recipeToAddID = 0;
@@ -79,7 +79,7 @@ router.post('/recent', (req, res) => {
                     value = [dateViewed, req.user.id];
                     response = await client.query(queryText, value);
                 }
-                //after determining food id, inserts into persons food
+                //after determining recipe id, inserts into persons food
 
 
                 await client.query('COMMIT');

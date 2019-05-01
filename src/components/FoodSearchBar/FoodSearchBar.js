@@ -85,7 +85,6 @@ class FoodSearchBar extends Component {
 
 
         // Finally, render it!
-        console.log(this);
         return (
             <div>
                 <Typography>Type 2 letters and food will appear!</Typography>
